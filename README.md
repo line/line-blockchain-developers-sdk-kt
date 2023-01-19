@@ -1,6 +1,6 @@
 # LINE Blockchain Developers SDK for Kotlin
 
-[![License](https://img.shields.io/github/license/line/developers-tx-result)](https://github.com/line/line-blockchain-developers-sdk-kt)
+[![License](https://img.shields.io/github/license/line/line-blockchain-developers-sdk-kt)](https://github.com/line/line-blockchain-developers-sdk-kt)
 
 ## Introduction
 LINE Blockchain Developers SDK for Kotlin makes it easy to develop a LINE Blockchain service(dApp) by providing useful domain models and adapters that convert [LINE Blockchain Developers API](https://docs-blockchain.line.biz/api-guide/) response to them.
