@@ -16,6 +16,8 @@ object Versions {
     const val mockito = "3.3.3"
     const val mockK = "1.12.4"
     const val mockitoKotlin = "2.2.0"
+    const val retrofit2 = "2.9.0"
+    const val okhttp = "4.9.1"
 }
 
 object Libs {
@@ -33,6 +35,13 @@ object Libs {
     const val log4jCore = "org.apache.logging.log4j:log4j-core:2.17.1"
     const val log4jApi = "org.apache.logging.log4j:log4j-api:2.17.1"
     const val kotlinLogging = "io.github.microutils:kotlin-logging:1.7.10"
+
+    const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
+    const val retrofit2ConverterJackson = "com.squareup.retrofit2:converter-jackson:${Versions.retrofit2}"
+    const val retrofit2ConverterScalas = "com.squareup.retrofit2:converter-scalars:${Versions.retrofit2}"
+    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
+    const val okhttpLoggingInterceptor ="com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+    const val guava ="com.google.guava:guava:31.1-jre"
 }
 
 fun PluginDependenciesSpec.kotlin() {

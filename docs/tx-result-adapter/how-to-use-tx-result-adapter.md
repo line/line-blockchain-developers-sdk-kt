@@ -2,7 +2,7 @@
 
 We
 have [`RawTransactionResult`](../../libs/developers-tx-result-adapter/src/main/kotlin/com/linecorp/link/developers/txresult/v1/raw/model/raw-tx-result-models.kt#L27)
-and it is compatible with `responseData` of each response from below APIs.
+and it iscompatible with `responseData` of each response from below APIs.
 
 * [Retrieve transaction information](https://docs-blockchain.line.biz/api-guide/category-transactions#v1-transactions-txHash-get)
 * [Retrieve service wallet transaction history](https://docs-blockchain.line.biz/api-guide/category-service-wallets/retrieve#v1-wallets-walletAddress-transactions-get)

@@ -9,6 +9,7 @@ rootProject.name = "line-blockchain-developers-sdk-kt"
 listOf(
     "developers-tx-result-adapter",
     "developers-tx-result-adapter-spring-support",
+    "developers-api-client",
 ).forEach {
     include(it)
     project(":$it").projectDir = File("$rootDir/libs/$it")
