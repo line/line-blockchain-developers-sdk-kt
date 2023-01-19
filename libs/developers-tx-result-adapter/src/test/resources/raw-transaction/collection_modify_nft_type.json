@@ -1,0 +1,98 @@
+{
+  "height": 170470,
+  "txhash": "0035A44F647F5B99A7B92790D6D0A0E146CC2E12C81BB1304800331553A55FFD",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"
+            },
+            {
+              "key": "action",
+              "value": "modify_token"
+            }
+          ]
+        },
+        {
+          "type": "modify_token_type",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "61e14383"
+            },
+            {
+              "key": "token_type",
+              "value": "10000001"
+            },
+            {
+              "key": "name",
+              "value": "NFT Name"
+            },
+            {
+              "key": "meta",
+              "value": "NFT meta"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 100000000,
+  "gasUsed": 17292,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgModify",
+          "value": {
+            "owner": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq",
+            "contractId": "61e14383",
+            "tokenType": "10000001",
+            "tokenIndex": "",
+            "changes": [
+              {
+                "field": "name",
+                "value": "NFT Name"
+              },
+              {
+                "field": "meta",
+                "value": "NFT meta"
+              }
+            ]
+          }
+        }
+      ],
+      "fee": {
+        "gas": 100000000,
+        "amount": []
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A41pCdZ71Vw66K5er5JrzVqYffiZsjoLBDB2szrNIJjy"
+          },
+          "signature": "4G0Qi4ZqZhfAn0oHrumdZ+oGwj66ferK+6DgA+h/v6k8cHLdU9FbgnrT+8oncVZpaxsMwYQBkSzo69DvSB97og=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1606885179000
+}

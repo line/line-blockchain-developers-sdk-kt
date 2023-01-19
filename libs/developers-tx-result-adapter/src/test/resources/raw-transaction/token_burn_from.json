@@ -1,0 +1,88 @@
+{
+  "height": "435956",
+  "txhash": "B81C3B9E918F8A30A0192F4186414C5CF3BEEC06D4BCD252C513C954BA69B524",
+  "codespace": "",
+  "code": 0,
+  "index": 4,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "burn_from",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "678c146a"
+            },
+            {
+              "key": "proxy",
+              "value": "link17gx76scz3pe7gtqq8rmf46favtmxn3sgs6qa49"
+            },
+            {
+              "key": "from",
+              "value": "link16mk739rd3r3q8a8dw7zr3h50xunxcq0wp80gtu"
+            },
+            {
+              "key": "amount",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "burn_from"
+            },
+            {
+              "key": "module",
+              "value": "token"
+            },
+            {
+              "key": "sender",
+              "value": "link17gx76scz3pe7gtqq8rmf46favtmxn3sgs6qa49"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": "62796",
+  "gasUsed": "51117",
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "token/MsgBurnFrom",
+          "value": {
+            "proxy": "link17gx76scz3pe7gtqq8rmf46favtmxn3sgs6qa49",
+            "contract_id": "678c146a",
+            "from": "link16mk739rd3r3q8a8dw7zr3h50xunxcq0wp80gtu",
+            "amount": "1"
+          }
+        }
+      ],
+      "fee": {
+        "gas": "62796",
+        "amount": []
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "AgIyPPXQ/mT6vVSCmsCmTCr9dwP5ccm32OUhro1ooPSG"
+          },
+          "signature": "gMQ0nYHaDexG2gQUXVypKUmJJGXU3VbXs8b9O3XKSXJm9PuR/1K1J/Y/yrBT6t1a83iN1Xt9iw4wULY+ydl+JA=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1616575171000
+}

@@ -1,0 +1,68 @@
+{
+  "height": 433326,
+  "txhash": "186C4DAAA74EC4A20D503AC9E22A5BB1F65071C366E5FBE81A2A6B38D0929AD5",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "empty"
+            },
+            {
+              "key": "sender",
+              "value": "link17rl4xjtewhqf38kgvfrj07cgeh0y09w6ensuaj"
+            },
+            {
+              "key": "module",
+              "value": "account"
+            },
+            {
+              "key": "action",
+              "value": "empty"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 51530,
+  "gasUsed": 41848,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "account/MsgEmpty",
+          "value": {
+            "from": "link17rl4xjtewhqf38kgvfrj07cgeh0y09w6ensuaj"
+          }
+        }
+      ],
+      "fee": {
+        "gas": 51530,
+        "amount": []
+      },
+      "memo": "ohdtozxagnxwicq9yzhtrfyib6hi8pn04hy1ghtl6w89k337ylnm31erjbup7nj7397pfrm1tymwcs3zd3upn39q6n43jqcn3qzr3ipg2orcwg4zu9rkenaepji2oxa7c21hl7is8unlsccxdvgejsvhbyzz7frtj63qc76iyoxukv5lwt7za6vk65e6ydfe95pqhcn42b9fzvy6qhvgpgyxe2jn7htzk4wb8bt3tu7i4cq8vo5zhpaugbpvvowk09tmu1mrr1mgmlnswkz8jzyw0mctty6bq33k1br2jmwcp7aujnmoqixo4ujwhl9u8n91jnsfviiicv1idujs739hzcgerldorlql6kspn5xan28d0l9vo5j5hsg8aabxytyecg25a47ut0vb7u7z71jdxw4oa3j47os7e8ukxzq4p0x96rl90aj0g4f1qfsykru1707rytze6cpiu1htq3k74qijmnfshyrmmkwe5eu8jpeh40cnf",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A/jdgsVoIDHHjw7TYDCo+BONsmEOCfP/P709jXMM2lBS"
+          },
+          "signature": "XrEYIAD4cyLrAcA8LolZOQuWPSm0PEgVJR0T1plI/dZFoFKhI5kCvZCSlFIEndDAipZrFGnPOr0LzFKPgqPH5A=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1616569086000
+}

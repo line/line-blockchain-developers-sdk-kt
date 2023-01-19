@@ -1,0 +1,93 @@
+{
+  "height": "22201094",
+  "txhash": "A7E742E2032F227257C06F7A565A2A247F48DB418EAD2AF149FD6D97C28779AF",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": null,
+  "logs": [
+    {
+      "msg_index": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "transfer_ft"
+            },
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt"
+            }
+          ]
+        },
+        {
+          "type": "transfer_ft",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "d036ce60"
+            },
+            {
+              "key": "from",
+              "value": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt"
+            },
+            {
+              "key": "to",
+              "value": "link1rrjua8zktmqnr6hlsqz7qyx5gxm5z96yt8f5ae"
+            },
+            {
+              "key": "amount",
+              "value": "10:0000000100000000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": null,
+  "gas_wanted": "68329",
+  "gas_used": "55728",
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgTransferFT",
+          "value": {
+            "from": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt",
+            "contract_id": "d036ce60",
+            "to": "link1rrjua8zktmqnr6hlsqz7qyx5gxm5z96yt8f5ae",
+            "amount": [
+              {
+                "token_id": "0000000100000000",
+                "amount": "10"
+              }
+            ]
+          }
+        }
+      ],
+      "fee": {
+        "gas": "68329",
+        "amount": []
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "Ak//IgHcXAiEvUbd+7PXU246+UM9VkSRwXa+butzPXdL"
+          },
+          "signature": "LaYhl7q/+KkW8Af5NvTbH2FEkVai8YeKQRThur51254pw4Ek5wyuP4xBnRo/1SrccD+28BM+YU1dpY48E1i9RA=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1669083524000
+}

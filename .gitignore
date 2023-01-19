@@ -1,0 +1,45 @@
+HELP.md
+.gradle
+build/
+target/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### ETC ###
+.DS_Store
+
+### SVN ###
+.svn/
+
+### nodeJs ###
+node_modules
+
+### redis ###
+resources/dump.rdb

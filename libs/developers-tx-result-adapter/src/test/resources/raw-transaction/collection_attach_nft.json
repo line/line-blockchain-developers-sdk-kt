@@ -1,0 +1,105 @@
+{
+  "height": "22201784",
+  "txhash": "9B12ED2AD973518E7AE50EC0816AE3F27B1AD24D282938A9DE3E7974544E839F",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": null,
+  "logs": [
+    {
+      "msg_index": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "attach",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "d036ce60"
+            },
+            {
+              "key": "from",
+              "value": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt"
+            },
+            {
+              "key": "to_token_id",
+              "value": "1000000100000002"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000003"
+            },
+            {
+              "key": "old_root_token_id",
+              "value": "1000000100000003"
+            },
+            {
+              "key": "new_root_token_id",
+              "value": "1000000100000002"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "attach"
+            },
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt"
+            }
+          ]
+        },
+        {
+          "type": "operation_root_changed",
+          "attributes": [
+            {
+              "key": "token_id",
+              "value": "1000000100000003"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": null,
+  "gas_wanted": "66868",
+  "gas_used": "54511",
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgAttach",
+          "value": {
+            "from": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt",
+            "contract_id": "d036ce60",
+            "to_token_id": "1000000100000002",
+            "token_id": "1000000100000003"
+          }
+        }
+      ],
+      "fee": {
+        "gas": "66868",
+        "amount": []
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "Ak//IgHcXAiEvUbd+7PXU246+UM9VkSRwXa+butzPXdL"
+          },
+          "signature": "dm+W3vQDXV4LIpo+zkVAk2/7y24Co1u22oxtcMeGly1Dq8WxcNT48WfKmOB0Biyq9bRSkG6oIX5U9GBkDQocHQ=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1669085162000
+}

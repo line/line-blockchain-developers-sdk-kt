@@ -1,0 +1,93 @@
+{
+  "height": 22606205,
+  "txhash": "3DE3E082E36753D527FF7CF25BBAF775AE9A27855BDF9A3AB62AFA8A9B6A9D9F",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "burn_ft_from",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "2d8be688"
+            },
+            {
+              "key": "proxy",
+              "value": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4"
+            },
+            {
+              "key": "from",
+              "value": "link1yhjrm7zxn97eu5tnz76j32r76sfq02mtmjttuq"
+            },
+            {
+              "key": "amount",
+              "value": "500:0000000100000000"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "burn_ft_from"
+            },
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 69282,
+  "gasUsed": 56519,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgBurnFTFrom",
+          "value": {
+            "proxy": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4",
+            "contractId": "2d8be688",
+            "from": "link1yhjrm7zxn97eu5tnz76j32r76sfq02mtmjttuq",
+            "amount": [
+              {
+                "tokenId": "0000000100000000",
+                "amount": 500
+              }
+            ]
+          }
+        }
+      ],
+      "fee": {
+        "gas": 69282,
+        "amount": [ ]
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A1mdoBg0PGWui1MmSCmbw7t07IpY5haRjlpOvHT8RMz1"
+          },
+          "signature": "P7GJcXgY2maNYsIXliQu6Ow7M9G+QrJKvNtAYAUUUqQrci9KXDFF9Lo7HvDAqf81GcCV736Lue0k1sI+hNShog=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1670465353000
+}

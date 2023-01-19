@@ -1,0 +1,45 @@
+{
+  "height": 23531108,
+  "txhash": "3C918B09486572A127E310DEC060F4727955DEAB8058B0667642EBB4B95800E7",
+  "codespace": "collection",
+  "code": 23,
+  "index": 0,
+  "data": "",
+  "logs": [ ],
+  "info": "",
+  "gasWanted": 840000,
+  "gasUsed": 37567,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgTransferNFT",
+          "value": {
+            "from": "tlink1r8447vh0tqpfjrwpexqp4pqsqkrhaz2tfuan6p",
+            "contractId": "5c36729c",
+            "to": "tlink1jrchz60cghm4lv2qu0wxr069ymqzrlvzmds0zg",
+            "tokenIds": [
+              "1000000100000303"
+            ]
+          }
+        }
+      ],
+      "fee": {
+        "gas": 840000,
+        "amount": [ ]
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A8LxzBQVhc3UCXBQMtdpnqdbYwpW4KQbQSQ399EaSl6A"
+          },
+          "signature": "EeeA/dDxuD5p1Hn2ZlNkQpTd9GLOz+vp2JKlqnJTQhRagI8x6v2TKWUuitFz/nwFtFQ73NP/vBklGplzg1C53g=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1671086838000
+}

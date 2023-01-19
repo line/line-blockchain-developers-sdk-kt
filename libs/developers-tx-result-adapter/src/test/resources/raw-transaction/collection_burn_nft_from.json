@@ -1,0 +1,100 @@
+{
+  "height": 199298,
+  "txhash": "5B4205FF4D039695053DDBA026AB007E20F62747C22C3A5F2A79A80BC993A91E",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "burn_nft_from",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "61e14383"
+            },
+            {
+              "key": "proxy",
+              "value": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"
+            },
+            {
+              "key": "from",
+              "value": "tlink17dz3hqn6nd5j6euymaw3ft9phgspmuhfjqazph"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000005"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"
+            },
+            {
+              "key": "action",
+              "value": "burn_nft_from"
+            }
+          ]
+        },
+        {
+          "type": "operation_burn_nft",
+          "attributes": [
+            {
+              "key": "token_id",
+              "value": "1000000100000005"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 100000000,
+  "gasUsed": 357429,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgBurnNFTFrom",
+          "value": {
+            "proxy": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq",
+            "contractId": "61e14383",
+            "from": "tlink17dz3hqn6nd5j6euymaw3ft9phgspmuhfjqazph",
+            "tokenIds": [
+              "1000000100000005"
+            ]
+          }
+        }
+      ],
+      "fee": {
+        "gas": 100000000,
+        "amount": [
+        ]
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A41pCdZ71Vw66K5er5JrzVqYffiZsjoLBDB2szrNIJjy"
+          },
+          "signature": "Fd71AF+PmRWdGVg6Kgbdhnnyz0th/rKahzP0Yv9vrqVEtWD1WlCngrjRA23LVMVfEmULtGlKSy7Sac9Ni6+P6g=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1618370726000
+}
