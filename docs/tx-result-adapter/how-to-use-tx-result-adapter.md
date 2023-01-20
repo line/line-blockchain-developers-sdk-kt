@@ -10,9 +10,7 @@ and it is compatible with `responseData` of each response from below APIs.
 
 #### Sample code
 
-Even though you're new
-to [`WebClient` of spring-framework](https://docs.spring.io/spring-framework/docs/5.3.x/javadoc-api/), we believe you
-can figure out the below codes.
+Even though you're new to [`WebClient` of spring-framework](https://docs.spring.io/spring-framework/docs/5.3.x/javadoc-api/), we believe you can figure out the below codes.
 
 ```kotlin
 val webClient = WebClient.create("http://localhost:29999")
