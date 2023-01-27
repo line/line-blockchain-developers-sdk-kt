@@ -67,17 +67,34 @@ val javadocJar by tasks.creating(Jar::class) {
     from(javadoc)
 }
 
+
+fun checkEnvironmentAndThrow() {
+    requiredEnvironments.forEach {
+        System.getenv(it) ?: throw GradleException("Environment need to be set : $it")
+    }
+}
+
+checkEnvironmentAndThrow()
+
+
 publishing {
     repositories {
         maven {
             name = "ossRelease"
-            url = uri(releasesRepoUrl)
+
+            if (System.getenv(DEPLOY_VERSION).endsWith("-SNAPSHOT")) {
+                url = uri(snapshotRepoUrl)
+            } else {
+                url = uri(releasesRepoUrl)
+            }
+
             credentials {
-                username = System.getenv(MAVEN_USERNAME)
-                password = System.getenv(MAVEN_PASSWORD)
+                username = System.getenv(SONATYPE_USERNAME)
+                password = System.getenv(SONATYPE_PASSWORD)
             }
         }
     }
+
 
     publications {
         create<MavenPublication>(project.name) {
@@ -88,7 +105,7 @@ publishing {
 
             groupId = publishGroupId
             artifactId = "developers-tx-result-adapter"
-            version = System.getenv("DEPLOY_VERSION")
+            version = System.getenv(DEPLOY_VERSION)
 
             pom {
                 packaging = "jar"
