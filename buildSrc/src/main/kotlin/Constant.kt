@@ -22,7 +22,10 @@ const val publishLicenseUrl = "https://github.com/line/line-blockchain-developer
 const val scmConnectionUrl = "https://github.com/line/line-blockchain-developers-sdk-kt"
 const val developerConnectionUrl = "https://github.com/line/line-blockchain-developers-sdk-kt"
 const val gitRepositoryUrl = "https://github.com/line/line-blockchain-developers-sdk-kt"
+
+const val releaseRepoName = "ossRelease"
 const val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+const val snapshotRepoName = "ossSnapshot"
 const val snapshotRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
 
 const val developerId = "line"
