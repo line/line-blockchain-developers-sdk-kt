@@ -22,7 +22,11 @@ const val publishLicenseUrl = "https://github.com/line/line-blockchain-developer
 const val scmConnectionUrl = "https://github.com/line/line-blockchain-developers-sdk-kt"
 const val developerConnectionUrl = "https://github.com/line/line-blockchain-developers-sdk-kt"
 const val gitRepositoryUrl = "https://github.com/line/line-blockchain-developers-sdk-kt"
-const val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+
+const val releaseRepoName = "ossRelease"
+const val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+const val snapshotRepoName = "ossSnapshot"
+const val snapshotRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
 
 const val developerId = "line"
 const val developerName = "line-blockchain-developers"
@@ -30,5 +34,9 @@ const val developerEmail = "dl_line_blockchain_developers_oss@linecorp.com"
 
 const val GPG_PRIVATE_KEY = "GPG_PRIVATE_KEY"
 const val GPG_PASSPHRASE = "GPG_PASSPHRASE"
-const val MAVEN_PASSWORD = "MAVEN_PASSWORD"
-const val MAVEN_USERNAME = "MAVEN_USERNAME"
+const val SONATYPE_USERNAME = "SONATYPE_USERNAME"
+const val SONATYPE_PASSWORD = "SONATYPE_PASSWORD"
+const val DEPLOY_VERSION = "DEPLOY_VERSION"
+
+val requiredEnvironments =
+    listOf(GPG_PRIVATE_KEY, GPG_PASSPHRASE, SONATYPE_PASSWORD, SONATYPE_USERNAME, DEPLOY_VERSION)
