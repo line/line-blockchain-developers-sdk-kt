@@ -1,27 +1,26 @@
 name: GitHub Actions Demo
 run-name: new tag "${{ github.ref_name }}" triggered maven-central publishing 🚀
 on:
- push:
-  tags:
-   - '**'
+  release:
+    types: [ created ]
 
 jobs:
- build:
-  runs-on: ubuntu-latest
-  env:
-   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-   SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-   SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-   DEPLOY_VERSION: ${{  github.ref_name }}"
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+      SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+      DEPLOY_VERSION: ${{  github.ref_name }}"
 
-  steps:
-   - uses: actions/checkout@v3
-   - name: Set up JDK 1.8
-     uses: actions/setup-java@v2
-     with:
-      java-version: 8
-      distribution: adopt
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: adopt
 
-   - name: Publish to maven central repository
-     run: gradle publish
+      - name: Publish to maven central repository
+        run: gradle publish
