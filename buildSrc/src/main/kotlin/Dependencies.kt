@@ -12,16 +12,21 @@ import org.gradle.plugin.use.PluginDependenciesSpec
 
 object Versions {
     const val kotlin = "1.6.21"
+    const val kotlinCoroutines = "1.6.4"
     const val mockito = "3.3.3"
     const val mockK = "1.12.4"
     const val mockitoKotlin = "2.2.0"
 }
 
 object Libs {
+    const val projectTxResultAdapter = ":developers-tx-result-adapter"
 
     // kotlin
     const val kotlinStdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect"
+
+    // coroutines
+    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
 
     // log
     const val slf4jApi = "org.slf4j:slf4j-api:1.7.30"

@@ -46,11 +46,11 @@ class DomainTxEventsAdapterV1 : TxResultAdapter<RawTransactionResult, Set<Transa
                 val event = log.findEvent(eventType!!)
 
                 if (event == null) {
-                    setOf(unknownTransactionEvent(eventType?.name))
+                    setOf(unknownTransactionEvent(eventType.name))
                 } else {
                     resolveTransactionEvent(log, event, eventType)
                 }
-            }?.toSet()
+            }.toSet()
         }
     }
 
