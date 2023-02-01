@@ -14,8 +14,8 @@
  * under the License.
  */
 
-const val projectGroupId = "com.linecorp.blockchain.developers"
-const val publishGroupId = "com.linecorp.blockchain.developers"
+const val projectGroupId = "com.linecorp.lbd"
+const val publishGroupId = "com.linecorp.lbd"
 const val publishLicense = "The Apache Software License, Version 2.0"
 
 const val publishLicenseUrl = "https://github.com/line/line-blockchain-developers-sdk-kt/blob/develop/LICENSE"
