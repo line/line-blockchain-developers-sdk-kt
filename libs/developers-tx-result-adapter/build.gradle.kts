@@ -103,7 +103,7 @@ fun setPublishingContext() {
                 artifact(javadocJar)
 
                 groupId = publishGroupId
-                artifactId = "developers-tx-result-adapter"
+                artifactId = "tx-result-adapter"
                 version = System.getenv(DEPLOY_VERSION)
 
                 pom {
