@@ -120,8 +120,8 @@ fun setPublishingContext() {
 
                 pom {
                     packaging = "jar"
-                    name.set("pom: nexus-deploy-test-name")
-                    description.set("pom: nexus-deploy-test-desc")
+                    name.set("line-blockchain-developers-tx-result-adapter-spring-support")
+                    description.set("A module to support spring configuration")
                     url.set(gitRepositoryUrl)
 
                     licenses {
