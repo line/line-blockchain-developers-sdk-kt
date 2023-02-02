@@ -69,83 +69,102 @@ repositories {
     mavenCentral()
 }
 
-val sourcesJar by tasks.creating(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.map { it.allSource })
-}
-
-val javadocJar by tasks.creating(Jar::class) {
-    val javadoc = tasks.named("javadoc")
-    dependsOn(javadoc)
-    archiveClassifier.set("javadoc")
-    from(javadoc)
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "ossRelease"
-            url = uri(releasesRepoUrl)
-            credentials {
-                username = System.getenv(MAVEN_USERNAME)
-                password = System.getenv(MAVEN_PASSWORD)
-            }
+fun setPublishingContext() {
+    fun checkEnvironmentAndThrow() {
+        requiredEnvironments.forEach {
+            System.getenv(it) ?: throw GradleException("Environment need to be set : $it")
         }
     }
+    checkEnvironmentAndThrow()
 
-    publications {
-        create<MavenPublication>(project.name) {
-            from(components["kotlin"])
+    val sourcesJar by tasks.creating(Jar::class) {
+        archiveClassifier.set("sources")
+        from(sourceSets.main.map { it.allSource })
+    }
 
-            artifact(sourcesJar)
-            artifact(javadocJar)
+    val javadocJar by tasks.creating(Jar::class) {
+        val javadoc = tasks.named("javadoc")
+        dependsOn(javadoc)
+        archiveClassifier.set("javadoc")
+        from(javadoc)
+    }
 
-            groupId = publishGroupId
-            artifactId = "developers-tx-result-adapter"
-            version = System.getenv("DEPLOY_VERSION")
-
-            pom {
-                packaging = "jar"
-                name.set("pom: nexus-deploy-test-name")
-                description.set("pom: nexus-deploy-test-desc")
-                url.set(gitRepositoryUrl)
-
-                licenses {
-                    license {
-                        name.set(publishLicense)
-                        url.set(publishLicenseUrl)
-                        distribution.set("repo")
-                    }
+    publishing {
+        repositories {
+            maven {
+                if (System.getenv(DEPLOY_VERSION).endsWith("-SNAPSHOT")) {
+                    name = snapshotRepoName
+                    url = uri(snapshotRepoUrl)
+                } else {
+                    name = releaseRepoName
+                    url = uri(releasesRepoUrl)
                 }
-                developers {
-                    developer {
-                        id.set(developerId)
-                        name.set(developerName)
-                        email.set(developerEmail)
-                    }
+
+                credentials {
+                    username = System.getenv(SONATYPE_USERNAME)
+                    password = System.getenv(SONATYPE_PASSWORD)
                 }
-                scm {
+            }
+        }
+
+        publications {
+            create<MavenPublication>(project.name) {
+                from(components["kotlin"])
+
+                artifact(sourcesJar)
+                artifact(javadocJar)
+
+                groupId = publishGroupId
+                artifactId = "tx-result-adapter-spring-support"
+                version = System.getenv("DEPLOY_VERSION")
+
+                pom {
+                    packaging = "jar"
+                    name.set("line-blockchain-developers-tx-result-adapter-spring-support")
+                    description.set("A module to support spring configuration")
                     url.set(gitRepositoryUrl)
-                    connection.set(scmConnectionUrl)
-                    developerConnection.set(developerConnectionUrl)
-                }
-            }
 
-            versionMapping {
-                usage("java-api") {
-                    fromResolutionOf("runtimeClasspath")
+                    licenses {
+                        license {
+                            name.set(publishLicense)
+                            url.set(publishLicenseUrl)
+                            distribution.set("repo")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set(developerId)
+                            name.set(developerName)
+                            email.set(developerEmail)
+                        }
+                    }
+                    scm {
+                        url.set(gitRepositoryUrl)
+                        connection.set(scmConnectionUrl)
+                        developerConnection.set(developerConnectionUrl)
+                    }
                 }
-                usage("java-runtime") {
-                    fromResolutionResult()
+
+                versionMapping {
+                    usage("java-api") {
+                        fromResolutionOf("runtimeClasspath")
+                    }
+                    usage("java-runtime") {
+                        fromResolutionResult()
+                    }
                 }
             }
         }
     }
+
+    signing {
+        val secretKey = System.getenv(GPG_PRIVATE_KEY)
+        val password = System.getenv(GPG_PASSPHRASE)
+        useInMemoryPgpKeys(secretKey, password)
+        sign(publishing.publications[project.name])
+    }
 }
 
-signing {
-    val secretKey = System.getenv(GPG_PRIVATE_KEY)
-    val password = System.getenv(GPG_PASSPHRASE)
-    useInMemoryPgpKeys(secretKey, password)
-    sign(publishing.publications[project.name])
+if (project.gradle.startParameter.taskNames.contains("publish")) {
+    setPublishingContext()
 }
