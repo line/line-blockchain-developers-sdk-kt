@@ -25,11 +25,19 @@ logDependencies()
 
 dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.14.2")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.14.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
 
     // for com.linecorp.link.developers.network.account package
     implementation("com.google.guava:guava:31.1-android")
-    implementation("org.bitcoinj:bitcoinj-core:0.15.6")
+    implementation("org.bouncycastle:bcprov-jdk15to18:1.67")
+    implementation("com.google.protobuf:protobuf-java:3.21.7")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("org.bitcoinj:bitcoinj-core:0.15.6") {
+        exclude("com.squareup.okhttp3", "okhttp")
+    }
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation("org.apache.commons:commons-lang3:3.12.0")
