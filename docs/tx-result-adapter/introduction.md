@@ -4,7 +4,7 @@ The LINE Blockchain Developers tx-result SDK for Java makes it easy to handle re
 
 # Modules
 ## tx-result-adapter
-This module helps parse result of transaction into a certain structured object, which is [`TxResult`](../../libs/developers-tx-result-adapter/src/main/kotlin/com/linecorp/link/developers/txresult/core/model/models.kt#L7).
+This module helps parse result of transaction into a certain structured object, which is [`TxResult`](./../../libs/developers-tx-result-adapter/src/main/kotlin/com/linecorp/link/developers/txresult/core/model/models.kt#L23).
 TxResult has all required information such as block height, txHash, result status, what you sent(messages) and what happened(events). For details, please refer to following section.
 
 ### Install
