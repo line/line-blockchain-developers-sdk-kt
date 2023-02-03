@@ -169,11 +169,11 @@ class DomainTxEventConverterV1 {
         )
     }
 
-    fun tokenPermissionGranted(event: RawTransactionEvent): EventTokenPermissionGranted {
+    fun tokenPermissionGranted(@Suppress("UNUSED_PARAMETER") event: RawTransactionEvent): EventTokenPermissionGranted {
         TODO()
     }
 
-    fun tokenPermissionRenounced(event: RawTransactionEvent): EventTokenPermissionRenounced {
+    fun tokenPermissionRenounced(@Suppress("UNUSED_PARAMETER") event: RawTransactionEvent): EventTokenPermissionRenounced {
         TODO()
     }
 
@@ -276,7 +276,7 @@ class DomainTxEventConverterV1 {
         val tokenId = event.tokenId()
         val tokenType = event.tokenType().let { it.ifBlank { tokenId } }
         val isFungible = tokenType.isNotBlank() && tokenType.startsWith("0")
-        val eventType = event?.type
+        val eventType = event.type
         return if (eventType == "modify_collection") {
             EventCollectionModified(
                 contractId = event.contractId(),

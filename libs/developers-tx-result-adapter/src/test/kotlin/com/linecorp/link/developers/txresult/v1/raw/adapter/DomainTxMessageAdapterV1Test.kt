@@ -13,14 +13,15 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
+@file:Suppress("UNCHECKED_CAST")
 
 package com.linecorp.link.developers.txresult.v1.raw.adapter
 
 import com.linecorp.link.developers.txresult.util.RawTransactionLoader
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class DomainTxMessageAdapterV1Test {
     private lateinit var underTest: DomainTxMessageAdapterV1

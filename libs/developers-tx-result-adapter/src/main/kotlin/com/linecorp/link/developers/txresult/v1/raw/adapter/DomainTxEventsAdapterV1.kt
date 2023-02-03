@@ -127,10 +127,6 @@ class DomainTxEventsAdapterV1 : TxResultAdapter<RawTransactionResult, Set<Transa
             setOf(txEventConverter.collectionNftIssued(event))
         }
 
-        RawEventType.CollectionMsgMintFT -> {
-            setOf(txEventConverter.collectionFtMinted(event))
-        }
-
         RawEventType.CollectionMsgMintNFT -> {
             setOf(txEventConverter.collectionNftMinted(event))
         }

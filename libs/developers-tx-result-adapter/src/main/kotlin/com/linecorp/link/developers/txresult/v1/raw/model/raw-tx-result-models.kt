@@ -18,6 +18,8 @@ package com.linecorp.link.developers.txresult.v1.raw.model
 
 import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.linecorp.link.developers.chain.account.Address
+import com.linecorp.link.developers.chain.account.PubKey
 import com.linecorp.link.developers.txresult.core.event.token.TokenAttribute
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.Amount
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.Approver
@@ -36,8 +38,6 @@ import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.Sym
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.To
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.TokenId
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.TokenType
-import com.linecorp.link.developers.chain.account.Address
-import com.linecorp.link.developers.chain.account.PubKey
 import org.apache.commons.lang3.StringUtils
 
 data class RawTransactionResult(
@@ -250,6 +250,7 @@ data class RawTransactionRequestAmount(
     val amount: String? = null,
 )
 
+@Suppress("UNCHECKED_CAST")
 data class RawMessageValueMap(
     private val value: Map<String, Any>,
 ) {

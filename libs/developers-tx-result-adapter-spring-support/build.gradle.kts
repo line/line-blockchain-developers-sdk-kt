@@ -21,6 +21,7 @@ plugins {
     kotlin("plugin.spring") version "1.6.21"
     id("signing")
     `maven-publish`
+    id("org.owasp.dependencycheck") version "8.0.2"
 }
 
 kotlinDependencies()
@@ -30,17 +31,28 @@ dependencies {
     implementation(project(Libs.projectTxResultAdapter))
     implementation(Libs.coroutinesCore)
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.14.2")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.14.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
 
     // for com.linecorp.link.developers.network.account package
     implementation("com.google.guava:guava:31.1-android")
-    implementation("org.bitcoinj:bitcoinj-core:0.15.6")
+    implementation("org.bouncycastle:bcprov-jdk15to18:1.67")
+    implementation("com.google.protobuf:protobuf-java:3.21.7")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("org.bitcoinj:bitcoinj-core:0.15.6") {
+        exclude("com.squareup.okhttp3", "okhttp")
+    }
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation("org.apache.commons:commons-lang3:3.12.0")
 
     // spring
-    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.yaml:snakeyaml:1.33")
+    implementation("org.springframework.boot:spring-boot-starter") {
+        exclude(group = "org.yaml", module = "snakeyaml")
+    }
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     // Use the Kotlin JUnit integration.
@@ -62,6 +74,10 @@ java {
 tasks {
     test {
         useJUnitPlatform()
+    }
+
+    bootJar {
+        enabled = false
     }
 }
 
