@@ -24,4 +24,3 @@ Please check [CONTRIBUTING](./CONTRIBUTING.md) before making a contribution.
 
 ### License
 Please check [LICENSE](./LICENSE) before making a contribution.
-
