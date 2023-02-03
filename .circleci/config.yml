@@ -1,0 +1,27 @@
+version: 2.1
+
+executors:
+  openjdk8-executor:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+jobs:
+  build:
+    executor: openjdk8-executor
+
+    steps:
+      - checkout
+      - run: gradle build
+
+  test:
+    executor: openjdk8-executor
+
+    steps:
+      - checkout
+      - run: gradle test
+
+workflows:
+  push-workflow:
+    jobs:
+      - build
+      - test
