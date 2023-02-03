@@ -11,12 +11,12 @@ TxResult has all required information such as block height, txHash, result statu
 
 #### Gradle Kotlin DSL
 ```
-implementation("com.github.line:developers-tx-result-adapter:${latest-version}")
+implementation("com.linecorp.lbd:tx-result-adapter:${latest-version}")
 ```
 
 #### Gradle Groovy DSL
 ```
-implementation 'com.github.line:developers-tx-result-adapter:${latest-version}'
+implementation 'com.linecorp.lbd:tx-result-adapter:${latest-version}'
 ```
 
 #### Test
