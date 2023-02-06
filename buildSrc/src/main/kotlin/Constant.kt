@@ -1,3 +1,5 @@
+import org.gradle.api.GradleException
+
 /*
  * Copyright 2023 LINE Corporation
  *
@@ -23,9 +25,7 @@ const val scmConnectionUrl = "https://github.com/line/line-blockchain-developers
 const val developerConnectionUrl = "https://github.com/line/line-blockchain-developers-sdk-kt"
 const val gitRepositoryUrl = "https://github.com/line/line-blockchain-developers-sdk-kt"
 
-const val releaseRepoName = "ossRelease"
-const val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-const val snapshotRepoName = "ossSnapshot"
+const val releasesRepoUrl = "https://oss.sonatype.org/service/local/"
 const val snapshotRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
 
 const val developerId = "line"
@@ -40,3 +40,8 @@ const val DEPLOY_VERSION = "DEPLOY_VERSION"
 
 val requiredEnvironments =
     listOf(GPG_PRIVATE_KEY, GPG_PASSPHRASE, SONATYPE_PASSWORD, SONATYPE_USERNAME, DEPLOY_VERSION)
+fun checkEnvironmentAndThrow() {
+    requiredEnvironments.forEach {
+        System.getenv(it) ?: throw GradleException("Environment need to be set : $it")
+    }
+}
