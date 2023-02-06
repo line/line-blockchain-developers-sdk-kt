@@ -24,6 +24,3 @@ jobs:
 
       - name: Create staging repository and Upload archives to sonatype nexus
         run: gradle publish
-
-      - name: Close staging repository and Publish to maven central repository
-        run: gradle closeAndReleaseRepository
