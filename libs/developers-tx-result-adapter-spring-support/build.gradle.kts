@@ -86,13 +86,6 @@ repositories {
 }
 
 fun setPublishingContext() {
-    fun checkEnvironmentAndThrow() {
-        requiredEnvironments.forEach {
-            System.getenv(it) ?: throw GradleException("Environment need to be set : $it")
-        }
-    }
-    checkEnvironmentAndThrow()
-
     val sourcesJar by tasks.creating(Jar::class) {
         archiveClassifier.set("sources")
         from(sourceSets.main.map { it.allSource })
@@ -106,23 +99,6 @@ fun setPublishingContext() {
     }
 
     publishing {
-        repositories {
-            maven {
-                if (System.getenv(DEPLOY_VERSION).endsWith("-SNAPSHOT")) {
-                    name = snapshotRepoName
-                    url = uri(snapshotRepoUrl)
-                } else {
-                    name = releaseRepoName
-                    url = uri(releasesRepoUrl)
-                }
-
-                credentials {
-                    username = System.getenv(SONATYPE_USERNAME)
-                    password = System.getenv(SONATYPE_PASSWORD)
-                }
-            }
-        }
-
         publications {
             create<MavenPublication>(project.name) {
                 from(components["kotlin"])

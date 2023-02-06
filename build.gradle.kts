@@ -52,10 +52,12 @@ subprojects {
     }
 }
 
+
 plugins {
     base
     java
     kotlin("jvm") version Versions.kotlin apply false
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 group = projectGroupId
@@ -63,4 +65,24 @@ group = projectGroupId
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+
+fun setPublishingContext() {
+    checkEnvironmentAndThrow()
+    version = System.getenv(DEPLOY_VERSION)
+    nexusPublishing {
+        repositories {
+            sonatype {
+                nexusUrl.set(uri(releasesRepoUrl))
+                snapshotRepositoryUrl.set(uri(snapshotRepoUrl))
+                username.set(System.getenv(SONATYPE_USERNAME))
+                password.set(System.getenv(SONATYPE_PASSWORD))
+            }
+        }
+    }
+}
+
+if (project.gradle.startParameter.taskNames.contains("publish")) {
+    setPublishingContext()
 }
