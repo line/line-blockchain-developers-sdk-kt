@@ -20,7 +20,7 @@ import com.linecorp.link.developers.txresult.adapter.TxResultAdapter
 import com.linecorp.link.developers.txresult.core.event.UnknownTransactionEvent
 import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.Sender
-import com.linecorp.link.developers.txresult.v1.raw.model.RawEventType
+import com.linecorp.link.developers.txresult.v1.raw.model.RawMessageEventKeyType
 import com.linecorp.link.developers.txresult.v1.raw.model.RawTransactionEvent
 import com.linecorp.link.developers.txresult.v1.raw.model.RawTransactionLog
 import com.linecorp.link.developers.txresult.v1.raw.model.RawTransactionResult
@@ -48,168 +48,203 @@ class DomainTxEventsAdapterV1 : TxResultAdapter<RawTransactionResult, Set<Transa
                 if (event == null) {
                     setOf(unknownTransactionEvent(eventType.name))
                 } else {
-                    resolveTransactionEvent(log, event, eventType)
+                    resolveTransactionEvent(eventType, event, log)
                 }
             }.toSet()
         }
     }
 
-    private fun resolveTransactionEvent( // TODO Can refactoring with more efficient code?
-        log: RawTransactionLog, event: RawTransactionEvent, eventType: RawEventType
+    private fun resolveTransactionEvent(
+        eventType: RawMessageEventKeyType,
+        event: RawTransactionEvent,
+        log: RawTransactionLog,
     ): Set<TransactionEvent> = when (eventType) {
         // account
-        RawEventType.AccountMsgCreateAccount -> {
-            setOf(txEventConverter.accountCreated(event))
+        RawMessageEventKeyType.AccountMsgCreateAccount -> {
+            setOf(txEventConverter.accountCreated(event, log.msgIndex))
         }
 
-        RawEventType.AccountMsgEmpty -> {
-            setOf(txEventConverter.emptyMsgCreated(event))
+        RawMessageEventKeyType.AccountMsgEmpty -> {
+            setOf(txEventConverter.emptyMsgCreated(event, log.msgIndex))
         }
         // coin
-        RawEventType.CoinMsgSend -> {
-            setOf(txEventConverter.coinTransferred(event))
-        }
-        // token
-        RawEventType.TokenMsgIssue -> {
-            setOf(txEventConverter.tokenIssued(event))
-        }
-
-        RawEventType.TokenMsgMint -> {
-            setOf(txEventConverter.tokenMinted(event))
-        }
-
-        RawEventType.TokenMsgBurn -> {
-            setOf(txEventConverter.tokenBurned(event))
-        }
-
-        RawEventType.TokenMsgBurnFrom -> {
-            setOf(txEventConverter.tokenBurned(event))
-        }
-
-        RawEventType.TokenMsgModify -> {
-            setOf(txEventConverter.tokenModified(log, event))
-        }
-
-        RawEventType.TokenMsgTransfer -> {
-            setOf(txEventConverter.tokenTransferred(event))
-        }
-
-        RawEventType.TokenMsgTransferFrom -> {
-            setOf(txEventConverter.tokenTransferred(event))
-        }
-
-        RawEventType.TokenMsgApprove -> {
-            setOf(txEventConverter.tokenProxyApproved(event))
-        }
-
-        RawEventType.TokenMsgGrantPermission -> {
-            setOf(txEventConverter.tokenPermissionGranted(event))
-        }
-
-        RawEventType.TokenMsgRevokePermission -> {
-            setOf(txEventConverter.tokenPermissionRenounced(event))
+        RawMessageEventKeyType.CoinMsgSend -> {
+            setOf(txEventConverter.coinTransferred(event, log.msgIndex))
         }
 
         // collection
-        RawEventType.CollectionMsgMintFT -> {
-            setOf(txEventConverter.collectionFtMinted(event))
+        RawMessageEventKeyType.CollectionMsgCreate -> {
+            val eventGrantPermission = log.findEvent(RawMessageEventKeyType.GrantPermission)
+            setOf(txEventConverter.collectionCreated(event, eventGrantPermission, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgCreate -> {
-            setOf(txEventConverter.collectionCreated(log, event))
+        RawMessageEventKeyType.CollectionMsgIssueFT -> {
+            setOf(txEventConverter.collectionFtIssued(event, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgIssueFT -> {
-            setOf(txEventConverter.collectionFtIssued(event))
+        RawMessageEventKeyType.CollectionMsgIssueNFT -> {
+            val senderAddress = log.events.first { it.type == "message" }.findAttribute(Sender)
+            setOf(txEventConverter.collectionNftIssued(event, senderAddress, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgIssueNFT -> {
-            setOf(txEventConverter.collectionNftIssued(event))
+        RawMessageEventKeyType.CollectionMsgMintFT -> {
+            setOf(txEventConverter.collectionFtMinted(event, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgMintNFT -> {
-            setOf(txEventConverter.collectionNftMinted(event))
+        RawMessageEventKeyType.CollectionMsgMintNFT -> {
+            setOf(txEventConverter.collectionNftMinted(event, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgBurnFT -> {
-            setOf(txEventConverter.collectionFtBurned(event))
+        RawMessageEventKeyType.CollectionMsgBurnFT -> {
+            setOf(txEventConverter.collectionFtBurned(event, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgBurnFTFrom -> {
-            setOf(txEventConverter.collectionFtBurned(event))
+        RawMessageEventKeyType.CollectionMsgBurnFTFrom -> {
+            setOf(txEventConverter.collectionFtBurned(event, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgBurnNFT -> {
-            setOf(txEventConverter.collectionNftBurned(event))
+        RawMessageEventKeyType.CollectionMsgBurnNFT -> {
+            val eventOperationBurnNft =
+                log.findEvent(RawMessageEventKeyType.CollectionOperationBurnNFT)
+
+            setOf(txEventConverter.collectionNftBurned(event, eventOperationBurnNft, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgBurnNFTFrom -> {
-            setOf(txEventConverter.collectionNftBurned(event))
+        RawMessageEventKeyType.CollectionMsgBurnNFTFrom -> {
+            val eventOperationBurnNft =
+                log.findEvent(RawMessageEventKeyType.CollectionOperationBurnNFT)
+
+            setOf(txEventConverter.collectionNftBurned(event, eventOperationBurnNft, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgModify -> {
+        RawMessageEventKeyType.CollectionMsgModify -> {
             // TODO figure out better way get sender address
             val senderAddress = log.events.first { it.type == "message" }.findAttribute(Sender)
-            setOf(txEventConverter.collectionModified(event, senderAddress))
+            setOf(txEventConverter.collectionModified(event, senderAddress, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgTransferFT -> {
-            setOf(txEventConverter.collectionFtTransferred(event))
+        RawMessageEventKeyType.CollectionMsgTransferFT -> {
+            setOf(txEventConverter.collectionFtTransferred(event, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgTransferFTFrom -> {
-            setOf(txEventConverter.collectionFtTransferred(event))
+        RawMessageEventKeyType.CollectionMsgTransferFTFrom -> {
+            setOf(txEventConverter.collectionFtTransferred(event, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgTransferNFT -> {
+        RawMessageEventKeyType.CollectionMsgTransferNFT -> {
+
+            val eventOperationTransferNFT =
+                log.findEvent(RawMessageEventKeyType.CollectionOperationTransferNFT)
+
             setOf(
-                txEventConverter.collectionNftTransferred(event),
-                txEventConverter.collectionNftHolderChanged(event)
+                txEventConverter.collectionNftTransferred(event, log.msgIndex),
+                txEventConverter.collectionNftHolderChanged(event, eventOperationTransferNFT, log.msgIndex)
             )
         }
 
-        RawEventType.CollectionMsgTransferNFTFrom -> {
+        RawMessageEventKeyType.CollectionMsgTransferNFTFrom -> {
+
+            val eventOperationTransferNFT =
+                log.findEvent(RawMessageEventKeyType.CollectionOperationTransferNFT)
+
             setOf(
-                txEventConverter.collectionNftTransferred(event),
-                txEventConverter.collectionNftHolderChanged(event)
+                txEventConverter.collectionNftTransferred(event, log.msgIndex),
+                txEventConverter.collectionNftHolderChanged(event, eventOperationTransferNFT, log.msgIndex)
             )
         }
 
-        RawEventType.CollectionMsgAttach -> {
+        RawMessageEventKeyType.CollectionMsgAttach -> {
+
+            val eventOperationRootChanged =
+                log.findEvent(RawMessageEventKeyType.CollectionOperationRootChanged)
+
             setOf(
-                txEventConverter.collectionNftAttached(event),
-                txEventConverter.collectionNftRootChanged(event)
+                txEventConverter.collectionNftAttached(event, log.msgIndex),
+                txEventConverter.collectionNftRootChanged(event, eventOperationRootChanged, log.msgIndex)
             )
         }
 
-        RawEventType.CollectionMsgAttachFrom -> {
+        RawMessageEventKeyType.CollectionMsgAttachFrom -> {
+            val eventOperationRootChanged =
+                log.findEvent(RawMessageEventKeyType.CollectionOperationRootChanged)
+
             setOf(
-                txEventConverter.collectionNftAttached(event),
-                txEventConverter.collectionNftRootChanged(event)
+                txEventConverter.collectionNftAttached(event, log.msgIndex),
+                txEventConverter.collectionNftRootChanged(event, eventOperationRootChanged, log.msgIndex)
             )
         }
 
-        RawEventType.CollectionMsgDetach -> {
+        RawMessageEventKeyType.CollectionMsgDetach -> {
+
+            val eventOperationRootChanged =
+                log.findEvent(RawMessageEventKeyType.CollectionOperationRootChanged)
+
             setOf(
-                txEventConverter.collectionNftDetached(event),
-                txEventConverter.collectionNftRootChanged(event)
+                txEventConverter.collectionNftDetached(event, log.msgIndex),
+                txEventConverter.collectionNftRootChanged(event, eventOperationRootChanged, log.msgIndex)
             )
         }
 
-        RawEventType.CollectionMsgDetachFrom -> {
+        RawMessageEventKeyType.CollectionMsgDetachFrom -> {
+
+            val eventOperationRootChanged =
+                log.findEvent(RawMessageEventKeyType.CollectionOperationRootChanged)
+
             setOf(
-                txEventConverter.collectionNftDetached(event),
-                txEventConverter.collectionNftRootChanged(event)
+                txEventConverter.collectionNftDetached(event, log.msgIndex),
+                txEventConverter.collectionNftRootChanged(event, eventOperationRootChanged, log.msgIndex)
             )
         }
 
-        RawEventType.CollectionMsgApprove -> {
-            setOf(txEventConverter.collectionProxyApproved(event))
+        RawMessageEventKeyType.CollectionMsgApprove -> {
+            setOf(txEventConverter.collectionProxyApproved(event, log.msgIndex))
         }
 
-        RawEventType.CollectionMsgDisapprove -> {
-            setOf(txEventConverter.collectionProxyDisapproved(event))
+        RawMessageEventKeyType.CollectionMsgDisapprove -> {
+            setOf(txEventConverter.collectionProxyDisapproved(event, log.msgIndex))
         }
+
+        // token
+        RawMessageEventKeyType.TokenMsgIssue -> {
+            setOf(txEventConverter.tokenIssued(event, log.msgIndex))
+        }
+
+        RawMessageEventKeyType.TokenMsgMint -> {
+            setOf(txEventConverter.tokenMinted(event, log.msgIndex))
+        }
+
+        RawMessageEventKeyType.TokenMsgBurn -> {
+            setOf(txEventConverter.tokenBurned(event, log.msgIndex))
+        }
+
+        RawMessageEventKeyType.TokenMsgBurnFrom -> {
+            setOf(txEventConverter.tokenBurned(event, log.msgIndex))
+        }
+
+        RawMessageEventKeyType.TokenMsgModify -> {
+            val messageEvent = log.events.find { it.type == "message" }
+            setOf(txEventConverter.tokenModified(event, messageEvent, log.msgIndex))
+        }
+
+        RawMessageEventKeyType.TokenMsgTransfer -> {
+            setOf(txEventConverter.tokenTransferred(event, log.msgIndex))
+        }
+
+        RawMessageEventKeyType.TokenMsgTransferFrom -> {
+            setOf(txEventConverter.tokenTransferred(event, log.msgIndex))
+        }
+
+        RawMessageEventKeyType.TokenMsgApprove -> {
+            setOf(txEventConverter.tokenProxyApproved(event, log.msgIndex))
+        }
+
+//        RawMessageEventKeyType.TokenMsgGrantPermission -> {
+//            setOf(txEventConverter.tokenPermissionGranted(event, log.msgIndex))
+//        }
+//
+//        RawMessageEventKeyType.TokenMsgRevokePermission -> {
+//            setOf(txEventConverter.tokenPermissionRenounced(event, log.msgIndex))
+//        }
 
         else -> {
             setOf(unknownTransactionEvent(eventType.name))
