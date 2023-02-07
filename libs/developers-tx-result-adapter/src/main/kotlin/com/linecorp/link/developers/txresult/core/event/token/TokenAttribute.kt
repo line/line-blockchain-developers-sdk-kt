@@ -16,7 +16,6 @@
 
 package com.linecorp.link.developers.txresult.core.event.token
 
-
 data class TokenAttribute(
     val key: String,
     val value: Any, // TODO not to use Any

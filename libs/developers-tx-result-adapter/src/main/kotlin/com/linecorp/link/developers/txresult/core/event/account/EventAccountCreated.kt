@@ -20,4 +20,5 @@ import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 
 data class EventAccountCreated(
     val createdAddress: String,
+    override val msgIndex: Int,
 ) : TransactionEvent

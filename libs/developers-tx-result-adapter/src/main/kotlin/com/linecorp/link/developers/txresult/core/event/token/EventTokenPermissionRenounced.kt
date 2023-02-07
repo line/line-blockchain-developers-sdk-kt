@@ -16,8 +16,11 @@
 
 package com.linecorp.link.developers.txresult.core.event.token
 
+import com.linecorp.link.developers.txresult.core.model.TransactionEvent
+
 data class EventTokenPermissionRenounced(
-override val contractId: String,
+    override val msgIndex: Int,
+    val contractId: String,
     val permission: TokenPermission,
     val granteeAddress: String,
-): ServiceTokenEvent(contractId)
+): TransactionEvent

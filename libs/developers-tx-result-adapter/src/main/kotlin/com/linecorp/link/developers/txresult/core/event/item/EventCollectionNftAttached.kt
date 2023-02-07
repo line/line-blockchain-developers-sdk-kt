@@ -16,16 +16,13 @@
 
 package com.linecorp.link.developers.txresult.core.event.item
 
-import com.linecorp.link.developers.txresult.util.ItemTokenTypeUtil
+import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 
 data class EventCollectionNftAttached(
-override val contractId: String,
+    override val msgIndex: Int,
+    val contractId: String,
     val childTokenId: String,
     val parentTokenId: String,
     val holderAddress: String,
     val proxyAddress: String? = null,
-) : ItemNonFungibleTokenEvent(
-    contractId = contractId,
-    tokenTypes = listOf(ItemTokenTypeUtil.tokenType(childTokenId)),
-    tokenIndices = listOf(ItemTokenTypeUtil.tokenIndex(childTokenId))
-)
+) : TransactionEvent

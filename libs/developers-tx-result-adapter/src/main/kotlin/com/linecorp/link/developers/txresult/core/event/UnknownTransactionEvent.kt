@@ -21,5 +21,6 @@ import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 data class UnknownTransactionEvent(
     val type: String,
     val attributes: Collection<Map<String, String>>, // TODO Wouldn't a map be enough?
-    val extraMessage: String? = null
+    val extraMessage: String? = null,
+    override val msgIndex: Int = -1
 ) : TransactionEvent

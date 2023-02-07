@@ -16,8 +16,11 @@
 
 package com.linecorp.link.developers.txresult.core.event.item
 
+import com.linecorp.link.developers.txresult.core.model.TransactionEvent
+
 data class EventCollectionProxyDisapproved(
-override val contractId: String,
+    override val msgIndex: Int,
+    val contractId: String,
     val approverAddress: String,
     val proxyAddress: String,
-) : ItemTokenEvent(contractId)
+) : TransactionEvent

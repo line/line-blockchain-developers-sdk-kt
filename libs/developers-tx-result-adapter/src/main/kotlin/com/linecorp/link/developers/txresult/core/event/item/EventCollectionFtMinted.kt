@@ -16,16 +16,14 @@
 
 package com.linecorp.link.developers.txresult.core.event.item
 
-import com.linecorp.link.developers.txresult.util.ItemTokenTypeUtil
-
+import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 
 data class EventCollectionFtMinted(
-override val contractId: String,
+    override val msgIndex: Int,
+    val contractId: String,
+    val tokenType: String,
     val tokenId: String,
     val amount: String,
     val toAddress: String,
     val minterAddress: String,
-) : ItemFungibleTokenEvent(
-    contractId = contractId,
-    tokenType = ItemTokenTypeUtil.tokenType(tokenId)
-)
+) : TransactionEvent

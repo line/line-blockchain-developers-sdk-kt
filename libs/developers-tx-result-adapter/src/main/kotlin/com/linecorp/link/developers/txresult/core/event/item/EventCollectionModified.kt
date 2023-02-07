@@ -16,8 +16,11 @@
 
 package com.linecorp.link.developers.txresult.core.event.item
 
+import com.linecorp.link.developers.txresult.core.model.TransactionEvent
+
 data class EventCollectionModified(
-override val contractId: String,
+    override val msgIndex: Int,
+    val contractId: String,
     val tokenAttributes: Set<CollectionAttribute>,
     val modifierAddress: String,
-) : ItemTokenEvent(contractId)
+) : TransactionEvent

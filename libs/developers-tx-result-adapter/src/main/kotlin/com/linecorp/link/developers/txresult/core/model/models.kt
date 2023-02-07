@@ -43,7 +43,7 @@ data class TxStatusResult(
     val code: Int,
     val codeSpace: String = StringUtils.EMPTY,
 ) {
-    val result: TxSuccessResult
+    val status: TxSuccessResult
         get() = if (code == 0) SUCCEEDED else FAILED
 }
 
@@ -56,13 +56,9 @@ data class TxMessage(
 interface TransactionEvent {
     val eventName: String
         get() = this::class.java.simpleName
+    val msgIndex: Int
 }
 
 enum class TxSuccessResult {
     SUCCEEDED, FAILED
-}
-
-enum class HrpPrefix(val prefix: String) {
-    TEST_NET("tlink"), MAIN_NET("link")
-
 }
