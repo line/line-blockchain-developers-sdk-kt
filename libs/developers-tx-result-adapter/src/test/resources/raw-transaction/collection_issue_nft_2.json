@@ -1,0 +1,80 @@
+{
+  "height": 22945447,
+  "txhash": "5199069065C51854EEB4B237C47915D8D90D1E825D10E8EC26E9F47BA78AD991",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "issue_nft",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "2d8be688"
+            },
+            {
+              "key": "token_type",
+              "value": "1000012e"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "issue_nft"
+            },
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 73862,
+  "gasUsed": 60336,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgIssueNFT",
+          "value": {
+            "owner": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4",
+            "contractId": "2d8be688",
+            "name": "QANT",
+            "meta": "http://example.com/nonfungible/2d8be688"
+          }
+        }
+      ],
+      "fee": {
+        "gas": 73862,
+        "amount": []
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A1mdoBg0PGWui1MmSCmbw7t07IpY5haRjlpOvHT8RMz1"
+          },
+          "signature": "HF//ZoBeYf+bwhSh+5xRQc36yTfiLr7W1UYL7JlH8IU4GeSqW2W6jmOq6ulpz3aKneEDus0ByJVaG0f9HBJp9w=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1671698696000
+}

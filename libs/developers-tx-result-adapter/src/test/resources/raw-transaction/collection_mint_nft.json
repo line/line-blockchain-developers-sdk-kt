@@ -1,0 +1,81 @@
+{
+  "height": 172207,
+  "txhash": "F8387F24FC023E3E6E664BF8BE3FD36E8CE3D002A95F506CA4FA9ABA83FEDDBE",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "mint_nft",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "61e14383"
+            },
+            {
+              "key": "name",
+              "value": "NFT index name"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000007"
+            },
+            {
+              "key": "from",
+              "value": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"
+            },
+            {
+              "key": "to",
+              "value": "tlink12v6t8c3reucj3ahfvx9tvghpltwchh7uvj5frl"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 100000000,
+  "gasUsed": 116561,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgMintNFT",
+          "value": {
+            "from": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq",
+            "contractId": "61e14383",
+            "to": "tlink12v6t8c3reucj3ahfvx9tvghpltwchh7uvj5frl",
+            "params": [
+              {
+                "name": "NFT index name",
+                "meta": "NFT index meta",
+                "tokenType": "10000001"
+              }
+            ]
+          }
+        }
+      ],
+      "fee": {
+        "gas": 100000000,
+        "amount": [ ]
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A41pCdZ71Vw66K5er5JrzVqYffiZsjoLBDB2szrNIJjy"
+          },
+          "signature": "96H62bqWWjN9ses+BodcY1+WbciFj9wvTgA9kl3XTEsCOOJ/JR2lvZ3TZQQfc5rWzGBqrEWbhIEqCDjMZ2ssSg=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1606885179000
+}

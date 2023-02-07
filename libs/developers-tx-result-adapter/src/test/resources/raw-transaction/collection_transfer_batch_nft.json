@@ -1,113 +1,108 @@
 {
-  "responseTime": 1670402381155,
-  "statusCode": 1000,
-  "statusMessage": "Success",
-  "responseData": {
-    "height": 23106624,
-    "txhash": "2FAD1E4E6207D9197B77C67319375BCA5A31E6F404EE1E096E45262323C0101D",
-    "codespace": "",
-    "code": 0,
-    "index": 0,
-    "data": "",
-    "logs": [
-      {
-        "msgIndex": 0,
-        "log": "",
-        "events": [
-          {
-            "type": "message",
-            "attributes": [
-              {
-                "key": "action",
-                "value": "transfer_nft"
-              },
-              {
-                "key": "module",
-                "value": "collection"
-              },
-              {
-                "key": "sender",
-                "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
-              }
-            ]
-          },
-          {
-            "type": "operation_transfer_nft",
-            "attributes": [
-              {
-                "key": "token_id",
-                "value": "1000000100000004"
-              },
-              {
-                "key": "token_id",
-                "value": "1000000100000006"
-              }
-            ]
-          },
-          {
-            "type": "transfer_nft",
-            "attributes": [
-              {
-                "key": "contract_id",
-                "value": "803820e6"
-              },
-              {
-                "key": "from",
-                "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
-              },
-              {
-                "key": "to",
-                "value": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv"
-              },
-              {
-                "key": "token_id",
-                "value": "1000000100000004"
-              },
-              {
-                "key": "token_id",
-                "value": "1000000100000006"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "info": "",
-    "gasWanted": 78681,
-    "gasUsed": 64355,
-    "tx": {
-      "type": "cosmos-sdk/StdTx",
-      "value": {
-        "msg": [
-          {
-            "type": "collection/MsgTransferNFT",
-            "value": {
-              "from": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
-              "contractId": "803820e6",
-              "to": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv",
-              "tokenIds": [
-                "1000000100000004",
-                "1000000100000006"
-              ]
-            }
-          }
-        ],
-        "fee": {
-          "gas": 78681,
-          "amount": []
-        },
-        "memo": "",
-        "signatures": [
-          {
-            "pubKey": {
-              "type": "tendermint/PubKeySecp256k1",
-              "value": "A974lA1KH/9LMErULy1+cv+UVW/dYOb1XmkM1GWfC0Si"
+  "height": 23106624,
+  "txhash": "2FAD1E4E6207D9197B77C67319375BCA5A31E6F404EE1E096E45262323C0101D",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "transfer_nft"
             },
-            "signature": "esNaChjbBbIElyln+NyIfDF/h/y3R9RUzdSN4TiHxZxLSNmQHsfIlkgxZqw5PpE2e8o7TMDNFW9PqIN1j9+qyw=="
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
+            }
+          ]
+        },
+        {
+          "type": "operation_transfer_nft",
+          "attributes": [
+            {
+              "key": "token_id",
+              "value": "1000000100000004"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000006"
+            }
+          ]
+        },
+        {
+          "type": "transfer_nft",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "803820e6"
+            },
+            {
+              "key": "from",
+              "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
+            },
+            {
+              "key": "to",
+              "value": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000004"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000006"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 78681,
+  "gasUsed": 64355,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgTransferNFT",
+          "value": {
+            "from": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
+            "contractId": "803820e6",
+            "to": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv",
+            "tokenIds": [
+              "1000000100000004",
+              "1000000100000006"
+            ]
           }
-        ]
-      }
-    },
-    "timestamp": 1670402367000
-  }
+        }
+      ],
+      "fee": {
+        "gas": 78681,
+        "amount": []
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A974lA1KH/9LMErULy1+cv+UVW/dYOb1XmkM1GWfC0Si"
+          },
+          "signature": "esNaChjbBbIElyln+NyIfDF/h/y3R9RUzdSN4TiHxZxLSNmQHsfIlkgxZqw5PpE2e8o7TMDNFW9PqIN1j9+qyw=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1670402367000
 }

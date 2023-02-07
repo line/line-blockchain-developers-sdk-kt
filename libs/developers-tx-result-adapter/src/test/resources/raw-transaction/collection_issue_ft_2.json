@@ -1,0 +1,108 @@
+{
+  "height": 22942487,
+  "txhash": "7BD7188DDBA2F107EFE9B059BCC508CBFE3ACDCCE5F86C9BA6FA854D815943B8",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "issue_ft",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "2d8be688"
+            },
+            {
+              "key": "name",
+              "value": "QAT"
+            },
+            {
+              "key": "token_id",
+              "value": "0000024500000000"
+            },
+            {
+              "key": "owner",
+              "value": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4"
+            },
+            {
+              "key": "to",
+              "value": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4"
+            },
+            {
+              "key": "amount",
+              "value": "0"
+            },
+            {
+              "key": "mintable",
+              "value": "true"
+            },
+            {
+              "key": "decimals",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "issue_ft"
+            },
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 79798,
+  "gasUsed": 65283,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgIssueFT",
+          "value": {
+            "owner": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4",
+            "contractId": "2d8be688",
+            "to": "link1z9x3cnadjdvxlrlyl9myrau2uxqrpd0hfwslu4",
+            "name": "QAT",
+            "meta": "http://example.com/fungible/2d8be688",
+            "amount": 0,
+            "mintable": true,
+            "decimals": 0
+          }
+        }
+      ],
+      "fee": {
+        "gas": 79798,
+        "amount": []
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "A1mdoBg0PGWui1MmSCmbw7t07IpY5haRjlpOvHT8RMz1"
+          },
+          "signature": "zeL+ZViLrTFVggqaD5blawOU70JyrBFu3EDz5CKNsbMp148OAHN4HWXqwRVMlCdDLQ3gOi2z9liT4v4EcUpcIg=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1671688075000
+}
