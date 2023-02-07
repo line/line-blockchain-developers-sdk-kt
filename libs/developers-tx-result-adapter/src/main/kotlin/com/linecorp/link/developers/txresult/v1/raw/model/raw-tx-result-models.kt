@@ -83,7 +83,7 @@ data class RawTransactionLog(
 )
 
 
-fun RawTransactionLog.findEvent(rawEventType: RawEventType): RawTransactionEvent? {
+fun RawTransactionLog.findEvent(rawEventType: RawMessageEventKeyType): RawTransactionEvent? {
     return this.events.find { it.type == rawEventType.eventName || rawEventType.candidateEventName.contains(it.type) }
 }
 

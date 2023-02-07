@@ -18,8 +18,7 @@ package com.linecorp.link.developers.txresult.v1.raw.model
 
 import org.apache.commons.lang3.StringUtils
 
-
-enum class RawEventType(
+enum class RawMessageEventKeyType(
     val type: String,
     val eventName: String,
     val candidateEventName: Collection<String> = emptyList()
@@ -53,16 +52,19 @@ enum class RawEventType(
     CollectionMsgMintNFT(type = "collection/MsgMintNFT", eventName = "mint_nft"),
     CollectionMsgBurnFT(type = "collection/MsgBurnFT", eventName = "burn_ft"),
     CollectionMsgBurnFTFrom(type = "collection/MsgBurnFTFrom", eventName = "burn_ft_from"),
+    CollectionOperationBurnNFT(type = "", eventName = "operation_burn_nft"), // exceptional case that not enough data from single event
     CollectionMsgBurnNFT(type = "collection/MsgBurnNFT", eventName = "burn_nft"),
     CollectionMsgBurnNFTFrom(type = "collection/MsgBurnNFTFrom", eventName = "burn_nft_from"),
     CollectionMsgTransferFT(type = "collection/MsgTransferFT", eventName = "transfer_ft"),
     CollectionMsgTransferFTFrom(type = "collection/MsgTransferFTFrom", eventName = "transfer_ft_from"),
     CollectionMsgTransferNFT(type = "collection/MsgTransferNFT", eventName = "transfer_nft"),
     CollectionMsgTransferNFTFrom(type = "collection/MsgTransferNFTFrom", eventName = "transfer_nft_from"),
+    CollectionOperationTransferNFT(type = "", eventName = "operation_transfer_nft"), // exceptional case that not enough data from single event
     CollectionMsgAttach(type = "collection/MsgAttach", eventName = "attach"),
     CollectionMsgAttachFrom(type = "collection/MsgAttachFrom", eventName = "attach_from"),
     CollectionMsgDetach(type = "collection/MsgDetach", eventName = "detach"),
     CollectionMsgDetachFrom(type = "collection/MsgDetachFrom", eventName = "detach_from"),
+    CollectionOperationRootChanged(type = "", eventName = "operation_root_changed"), // exceptional case that not enough data from single event
     CollectionMsgApprove(type = "collection/MsgApprove", eventName = "approve_collection"),
     CollectionMsgModify(
         type = "collection/MsgModify",
@@ -71,9 +73,9 @@ enum class RawEventType(
     ),
     CollectionMsgDisapprove(type = "collection/MsgDisapprove", eventName = "disapprove_collection"),
     CollectionMsgGrantPermission(type = "collection/MsgGrantPermission", eventName = StringUtils.EMPTY),
-    CollectionMsgRevokePermission(type = "collection/MsgRevokePermission", eventName = StringUtils.EMPTY),
+    CollectionMsgRevokePermission(type = "collection/MsgRevokePermission", eventName = StringUtils.EMPTY)
 }
 
-fun convertToEventType(value: String): RawEventType? {
-    return RawEventType.values().singleOrNull { it.type == value }
+fun convertToEventType(value: String): RawMessageEventKeyType? {
+    return RawMessageEventKeyType.values().singleOrNull { it.type == value }
 }
