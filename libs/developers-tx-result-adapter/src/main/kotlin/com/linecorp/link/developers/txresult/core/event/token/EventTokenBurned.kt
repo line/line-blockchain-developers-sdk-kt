@@ -16,9 +16,12 @@
 
 package com.linecorp.link.developers.txresult.core.event.token
 
+import com.linecorp.link.developers.txresult.core.model.TransactionEvent
+
 data class EventTokenBurned(
-override val contractId: String,
+    override val msgIndex: Int,
+    val contractId: String,
     val amount: String,
     val fromAddress: String,
     val proxyAddress: String? = null,
-) : ServiceTokenEvent(contractId)
+) : TransactionEvent

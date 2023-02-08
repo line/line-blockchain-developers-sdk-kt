@@ -23,4 +23,5 @@ data class EventCoinTransferred(
     val amount: String,
     val fromAddress: String,
     val toAddress: String,
+    override val msgIndex: Int,
 ) : TransactionEvent

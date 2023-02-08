@@ -1,6 +1,6 @@
 {
-  "height": 23106467,
-  "txhash": "89A283DAC0A3142E8616D93020724C21D86767C9C504480727FACD0BA798D8DB",
+  "height": 23106251,
+  "txhash": "9B8120E8D23C03C7E8FCD511BF76833E53FBD03933B25DE0CA2235E940B3E775",
   "codespace": "",
   "code": 0,
   "index": 0,
@@ -36,11 +36,11 @@
             },
             {
               "key": "name",
-              "value": "name5"
+              "value": "name1"
             },
             {
               "key": "token_id",
-              "value": "1000000100000009"
+              "value": "1000000100000005"
             },
             {
               "key": "from",
@@ -84,11 +84,11 @@
             },
             {
               "key": "name",
-              "value": "name6"
+              "value": "name2"
             },
             {
               "key": "token_id",
-              "value": "100000010000000a"
+              "value": "1000000100000006"
             },
             {
               "key": "from",
@@ -96,7 +96,7 @@
             },
             {
               "key": "to",
-              "value": "tlink1cqvmpjyyfk4p0xr7zz2g2273jzpw3swwtqk3kf"
+              "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
             }
           ]
         }
@@ -132,11 +132,11 @@
             },
             {
               "key": "name",
-              "value": "name7"
+              "value": "name3"
             },
             {
               "key": "token_id",
-              "value": "100000010000000b"
+              "value": "1000000100000007"
             },
             {
               "key": "from",
@@ -144,7 +144,55 @@
             },
             {
               "key": "to",
-              "value": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv"
+              "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "msgIndex": 3,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "mint_nft"
+            },
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
+            }
+          ]
+        },
+        {
+          "type": "mint_nft",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "803820e6"
+            },
+            {
+              "key": "name",
+              "value": "name4"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000008"
+            },
+            {
+              "key": "from",
+              "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
+            },
+            {
+              "key": "to",
+              "value": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t"
             }
           ]
         }
@@ -152,8 +200,8 @@
     }
   ],
   "info": "",
-  "gasWanted": 123760,
-  "gasUsed": 101911,
+  "gasWanted": 151351,
+  "gasUsed": 124903,
   "tx": {
     "type": "cosmos-sdk/StdTx",
     "value": {
@@ -166,8 +214,8 @@
             "to": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
             "params": [
               {
-                "name": "name5",
-                "meta": "meta5",
+                "name": "name1",
+                "meta": "meta1",
                 "tokenType": "10000001"
               }
             ]
@@ -178,11 +226,11 @@
           "value": {
             "from": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
             "contractId": "803820e6",
-            "to": "tlink1cqvmpjyyfk4p0xr7zz2g2273jzpw3swwtqk3kf",
+            "to": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
             "params": [
               {
-                "name": "name6",
-                "meta": "meta6",
+                "name": "name2",
+                "meta": "meta2",
                 "tokenType": "10000001"
               }
             ]
@@ -193,11 +241,26 @@
           "value": {
             "from": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
             "contractId": "803820e6",
-            "to": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv",
+            "to": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
             "params": [
               {
-                "name": "name7",
-                "meta": "meta7",
+                "name": "name3",
+                "meta": "meta3",
+                "tokenType": "10000001"
+              }
+            ]
+          }
+        },
+        {
+          "type": "collection/MsgMintNFT",
+          "value": {
+            "from": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
+            "contractId": "803820e6",
+            "to": "tlink1uly93jzy4qlpf6k803uz4tke6auwl3ukhns90t",
+            "params": [
+              {
+                "name": "name4",
+                "meta": "meta4",
                 "tokenType": "10000001"
               }
             ]
@@ -205,8 +268,8 @@
         }
       ],
       "fee": {
-        "gas": 123760,
-        "amount": []
+        "gas": 151351,
+        "amount": [ ]
       },
       "memo": "",
       "signatures": [
@@ -215,10 +278,10 @@
             "type": "tendermint/PubKeySecp256k1",
             "value": "A974lA1KH/9LMErULy1+cv+UVW/dYOb1XmkM1GWfC0Si"
           },
-          "signature": "1FUTIzq/ZP2kCZAZ4T/LFs6xlUx5VsueM5n3yfBKpJF8LpgdXUNvHEfwKWmlV+k/s+nuUPJtCE7Y+1QalJvg0A=="
+          "signature": "1okqQBiKGFmxhaCfCoiHglCpLJMatk5O01gcyed6kLs4D/z5I4JfpArYxip3ypmzy5uSgxVsge5en/8BoXj+tQ=="
         }
       ]
     }
   },
-  "timestamp": 1670401788000
+  "timestamp": 1670401001000
 }

@@ -1,0 +1,109 @@
+{
+  "height": 23314225,
+  "txhash": "A9B14772D88CB966B4205ADA05DFE6B90E343AECC245AE83D7F7BE1C28FF24C7",
+  "codespace": "",
+  "code": 0,
+  "index": 0,
+  "data": "",
+  "logs": [
+    {
+      "msgIndex": 0,
+      "log": "",
+      "events": [
+        {
+          "type": "attach",
+          "attributes": [
+            {
+              "key": "contract_id",
+              "value": "803820e6"
+            },
+            {
+              "key": "from",
+              "value": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv"
+            },
+            {
+              "key": "to_token_id",
+              "value": "1000000100000005"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000001"
+            },
+            {
+              "key": "old_root_token_id",
+              "value": "1000000100000001"
+            },
+            {
+              "key": "new_root_token_id",
+              "value": "1000000100000005"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "attach"
+            },
+            {
+              "key": "module",
+              "value": "collection"
+            },
+            {
+              "key": "sender",
+              "value": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv"
+            }
+          ]
+        },
+        {
+          "type": "operation_root_changed",
+          "attributes": [
+            {
+              "key": "token_id",
+              "value": "1000000100000001"
+            },
+            {
+              "key": "token_id",
+              "value": "1000000100000007"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "info": "",
+  "gasWanted": 68688,
+  "gasUsed": 56027,
+  "tx": {
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+      "msg": [
+        {
+          "type": "collection/MsgAttach",
+          "value": {
+            "from": "tlink1nq492tmyhcdz5dp52r7hht6f3w9f3m5wwxwyxv",
+            "contractId": "803820e6",
+            "toTokenId": "1000000100000005",
+            "tokenId": "1000000100000001"
+          }
+        }
+      ],
+      "fee": {
+        "gas": 68688,
+        "amount": [ ]
+      },
+      "memo": "",
+      "signatures": [
+        {
+          "pubKey": {
+            "type": "tendermint/PubKeySecp256k1",
+            "value": "Ay27pG/VOf3rTGJZm4kfdBhVvYTpLuehBEENhC6S24Nq"
+          },
+          "signature": "WtVp3zR28gUS5beS5fVJvodkH2DiUu1OcaO+ikGqcCpt2ie5TMZXUdz2pvP7MwIC02Qe8R6y1Xp5MAWRyAJGCQ=="
+        }
+      ]
+    }
+  },
+  "timestamp": 1671158140000
+}

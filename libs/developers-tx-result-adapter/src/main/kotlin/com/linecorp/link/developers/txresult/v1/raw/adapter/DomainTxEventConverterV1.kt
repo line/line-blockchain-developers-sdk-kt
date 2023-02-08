@@ -39,13 +39,10 @@ import com.linecorp.link.developers.txresult.core.event.item.EventCollectionNftT
 import com.linecorp.link.developers.txresult.core.event.item.EventCollectionNftTypeModified
 import com.linecorp.link.developers.txresult.core.event.item.EventCollectionProxyApproved
 import com.linecorp.link.developers.txresult.core.event.item.EventCollectionProxyDisapproved
-import com.linecorp.link.developers.txresult.core.event.item.ItemTokenEvent
 import com.linecorp.link.developers.txresult.core.event.token.EventTokenBurned
 import com.linecorp.link.developers.txresult.core.event.token.EventTokenIssued
 import com.linecorp.link.developers.txresult.core.event.token.EventTokenMinted
 import com.linecorp.link.developers.txresult.core.event.token.EventTokenModified
-import com.linecorp.link.developers.txresult.core.event.token.EventTokenPermissionGranted
-import com.linecorp.link.developers.txresult.core.event.token.EventTokenPermissionRenounced
 import com.linecorp.link.developers.txresult.core.event.token.EventTokenProxyApproved
 import com.linecorp.link.developers.txresult.core.event.token.EventTokenTransferred
 import com.linecorp.link.developers.txresult.core.model.TransactionEvent
@@ -53,16 +50,10 @@ import com.linecorp.link.developers.txresult.util.ItemTokenTypeUtil
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.Amount
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.ContractId
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.CreateAccountTarget
-import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.From
-import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.Proxy
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.Sender
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.TokenId
 import com.linecorp.link.developers.txresult.v1.raw.model.EventAttributeType.TokenType
-import com.linecorp.link.developers.txresult.v1.raw.model.RawEventType.AccountMsgEmpty
-import com.linecorp.link.developers.txresult.v1.raw.model.RawEventType.GrantPermission
-import com.linecorp.link.developers.txresult.v1.raw.model.RawMessageValueMap
 import com.linecorp.link.developers.txresult.v1.raw.model.RawTransactionEvent
-import com.linecorp.link.developers.txresult.v1.raw.model.RawTransactionLog
 import com.linecorp.link.developers.txresult.v1.raw.model.amount
 import com.linecorp.link.developers.txresult.v1.raw.model.approverAddress
 import com.linecorp.link.developers.txresult.v1.raw.model.attributesExclude
@@ -70,7 +61,6 @@ import com.linecorp.link.developers.txresult.v1.raw.model.contractId
 import com.linecorp.link.developers.txresult.v1.raw.model.decimals
 import com.linecorp.link.developers.txresult.v1.raw.model.exParentTokenId
 import com.linecorp.link.developers.txresult.v1.raw.model.findAttribute
-import com.linecorp.link.developers.txresult.v1.raw.model.findEvent
 import com.linecorp.link.developers.txresult.v1.raw.model.fromAddress
 import com.linecorp.link.developers.txresult.v1.raw.model.multiTokenIds
 import com.linecorp.link.developers.txresult.v1.raw.model.name
@@ -89,27 +79,28 @@ import com.linecorp.link.developers.txresult.v1.raw.model.tokenType
 
 class DomainTxEventConverterV1 {
 
-    fun accountCreated(event: RawTransactionEvent): EventAccountCreated {
+    fun accountCreated(event: RawTransactionEvent, msgIndex: Int): EventAccountCreated {
         val createdAccountAddress = event.findAttribute(CreateAccountTarget)
-        return EventAccountCreated(createdAccountAddress)
+        return EventAccountCreated(createdAccountAddress, msgIndex)
     }
 
-    fun emptyMsgCreated(event: RawTransactionEvent): EventEmptyMsgCreated {
+    fun emptyMsgCreated(event: RawTransactionEvent, msgIndex: Int): EventEmptyMsgCreated {
         val senderAddress = event.findAttribute(Sender)
-        return EventEmptyMsgCreated(senderAddress)
+        return EventEmptyMsgCreated(senderAddress, msgIndex)
     }
 
-    fun coinTransferred(event: RawTransactionEvent): EventCoinTransferred {
+    fun coinTransferred(event: RawTransactionEvent, msgIndex: Int): EventCoinTransferred {
         val amountPair = event.findAttribute(Amount).parseAmount()
         return EventCoinTransferred(
             denomination = amountPair.second,
             amount = amountPair.first,
             fromAddress = event.senderAddress(),
-            toAddress = event.recipientAddress()
+            toAddress = event.recipientAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun tokenIssued(event: RawTransactionEvent): EventTokenIssued {
+    fun tokenIssued(event: RawTransactionEvent, msgIndex: Int): EventTokenIssued {
         return EventTokenIssued(
             contractId = event.contractId(),
             issuerAddress = event.ownerAddress(),
@@ -117,107 +108,117 @@ class DomainTxEventConverterV1 {
             symbol = event.symbol(),
             receiverAddress = event.toAddress(),
             amount = event.amount(),
-            decimals = event.decimals().toInt()
+            decimals = event.decimals().toInt(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun tokenMinted(event: RawTransactionEvent): EventTokenMinted {
+    fun tokenMinted(event: RawTransactionEvent, msgIndex: Int): EventTokenMinted {
         return EventTokenMinted(
             contractId = event.contractId(),
             minterAddress = event.fromAddress(),
             toAddress = event.toAddress(),
             amount = event.amount(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun tokenBurned(event: RawTransactionEvent): EventTokenBurned {
+    fun tokenBurned(event: RawTransactionEvent, msgIndex: Int): EventTokenBurned {
         return EventTokenBurned(
             contractId = event.contractId(),
             amount = event.amount(),
             fromAddress = event.fromAddress(),
             proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun tokenModified(log: RawTransactionLog, event: RawTransactionEvent): EventTokenModified {
-        val messageTypeEvent = log.findEvent(AccountMsgEmpty)
-        val tokenAttributes = event.attributesExclude(ContractId).map {
+    fun tokenModified(eventTokenModified: RawTransactionEvent, emptyMessageEvent: RawTransactionEvent?, msgIndex: Int): EventTokenModified {
+        val tokenAttributes = eventTokenModified.attributesExclude(ContractId).map {
             it.toTokenAttribute()
         }.toSet()
         return EventTokenModified(
-            contractId = event.contractId(),
-            modifierAddress = messageTypeEvent.senderAddress(),
-            tokenAttributes = tokenAttributes
+            contractId = eventTokenModified.contractId(),
+            modifierAddress = emptyMessageEvent.senderAddress(),
+            tokenAttributes = tokenAttributes,
+            msgIndex = msgIndex,
         )
     }
 
-    fun tokenTransferred(event: RawTransactionEvent): EventTokenTransferred {
+    fun tokenTransferred(event: RawTransactionEvent, msgIndex: Int): EventTokenTransferred {
         return EventTokenTransferred(
             contractId = event.contractId(),
             fromAddress = event.fromAddress(),
             amount = event.amount(),
             toAddress = event.toAddress(),
-            proxyAddress = event.proxyAddress()
+            proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun tokenProxyApproved(event: RawTransactionEvent): EventTokenProxyApproved {
+    fun tokenProxyApproved(event: RawTransactionEvent, msgIndex: Int): EventTokenProxyApproved {
         return EventTokenProxyApproved(
             contractId = event.contractId(),
             approverAddress = event.approverAddress(),
-            proxyAddress = event.proxyAddress()
+            proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun tokenPermissionGranted(@Suppress("UNUSED_PARAMETER") event: RawTransactionEvent): EventTokenPermissionGranted {
-        TODO()
-    }
-
-    fun tokenPermissionRenounced(@Suppress("UNUSED_PARAMETER") event: RawTransactionEvent): EventTokenPermissionRenounced {
-        TODO()
-    }
+//    fun tokenPermissionGranted(event: RawTransactionEvent, msgIndex: Int): EventTokenPermissionGranted {
+//        TODO()
+//    }
+//
+//    fun tokenPermissionRenounced(event: RawTransactionEvent, msgIndex: Int): EventTokenPermissionRenounced {
+//        TODO()
+//    }
 
     fun collectionCreated(
-        log: RawTransactionLog,
-        event: RawTransactionEvent,
+        eventCollectionCreated: RawTransactionEvent,
+        eventGrantPerm: RawTransactionEvent?,
+        msgIndex: Int,
     ): EventCollectionCreated {
-        val eventGrantPerm = log.findEvent(GrantPermission)
         return EventCollectionCreated(
-            contractId = event.contractId(),
+            contractId = eventCollectionCreated.contractId(),
             creatorAddress = eventGrantPerm.toAddress(),
-            name = event.name()
+            name = eventCollectionCreated.name(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionFtBurned(event: RawTransactionEvent): EventCollectionFtBurned {
+    fun collectionFtBurned(event: RawTransactionEvent, msgIndex: Int): EventCollectionFtBurned {
         val rawAmount = event.amount()
         val amount = rawAmount.split(":")[0]
         val tokenId = rawAmount.split(":")[1]
 
         return EventCollectionFtBurned(
             contractId = event.contractId(),
+            tokenType = ItemTokenTypeUtil.tokenType(tokenId),
             tokenId = tokenId,
             fromAddress = event.fromAddress(),
             amount = amount,
             proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionFtIssued(event: RawTransactionEvent): EventCollectionFtIssued {
+    fun collectionFtIssued(event: RawTransactionEvent, msgIndex: Int): EventCollectionFtIssued {
         return EventCollectionFtIssued(
             contractId = event.contractId(),
             name = event.name(),
-            tokenType = event.tokenId(),
+            tokenType = ItemTokenTypeUtil.tokenType(event.tokenId()),
             amount = event.amount(),
             decimals = event.decimals().toInt(),
             issuerAddress = event.ownerAddress(),
-            receiverAddress = event.toAddress()
+            receiverAddress = event.toAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionFtModified(
+    private fun collectionFtModified(
         event: RawTransactionEvent,
-        senderAddress: String
+        senderAddress: String,
+        msgIndex: Int,
     ): EventCollectionFtModified {
 
         return EventCollectionFtModified(
@@ -226,13 +227,15 @@ class DomainTxEventConverterV1 {
             modifierAddress = senderAddress,
             tokenAttributes = event.attributesExclude(ContractId, TokenId).map {
                 CollectionAttribute(it.key, it.value)
-            }.toSet()
+            }.toSet(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftTypeModified(
+    private fun collectionNftTypeModified(
         event: RawTransactionEvent,
         senderAddress: String,
+        msgIndex: Int,
     ): EventCollectionNftTypeModified {
 
         return EventCollectionNftTypeModified(
@@ -241,11 +244,16 @@ class DomainTxEventConverterV1 {
             modifierAddress = senderAddress,
             tokenAttributes = event.attributesExclude(ContractId, TokenType).map {
                 CollectionAttribute(it.key, it.value)
-            }.toSet()
+            }.toSet(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftModified(event: RawTransactionEvent, senderAddress: String): EventCollectionNftModified {
+    private fun collectionNftModified(
+        event: RawTransactionEvent,
+        senderAddress: String,
+        msgIndex: Int,
+    ): EventCollectionNftModified {
 
         return EventCollectionNftModified(
             contractId = event.contractId(),
@@ -253,11 +261,12 @@ class DomainTxEventConverterV1 {
             modifierAddress = senderAddress,
             tokenAttributes = event.attributesExclude(ContractId, TokenId).map {
                 CollectionAttribute(it.key, it.value)
-            }.toSet()
+            }.toSet(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionFtTransferred(event: RawTransactionEvent): EventCollectionFtTransferred {
+    fun collectionFtTransferred(event: RawTransactionEvent, msgIndex: Int): EventCollectionFtTransferred {
         val rawAmount = event.amount()
         val amount = rawAmount.split(":")[0]
         val tokenId = rawAmount.split(":")[1]
@@ -265,14 +274,20 @@ class DomainTxEventConverterV1 {
         return EventCollectionFtTransferred(
             contractId = event.contractId(),
             amount = amount,
+            tokenType = ItemTokenTypeUtil.tokenType(tokenId),
             tokenId = tokenId,
             fromAddress = event.fromAddress(),
             toAddress = event.toAddress(),
-            proxyAddress = event.proxyAddress()
+            proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionModified(event: RawTransactionEvent, senderAddress: String): ItemTokenEvent {
+    fun collectionModified(
+        event: RawTransactionEvent,
+        senderAddress: String,
+        msgIndex: Int,
+    ): TransactionEvent {
         val tokenId = event.tokenId()
         val tokenType = event.tokenType().let { it.ifBlank { tokenId } }
         val isFungible = tokenType.isNotBlank() && tokenType.startsWith("0")
@@ -283,130 +298,169 @@ class DomainTxEventConverterV1 {
                 modifierAddress = senderAddress,
                 tokenAttributes = event.attributesExclude(ContractId).map {
                     CollectionAttribute(it.key, it.value)
-                }.toSet()
+                }.toSet(),
+                msgIndex = msgIndex,
             )
         } else if (eventType == "modify_token_type") {
-            collectionNftTypeModified(event, senderAddress)
+            collectionNftTypeModified(event, senderAddress, msgIndex)
         } else if (isFungible) {
-            collectionFtModified(event, senderAddress)
+            collectionFtModified(event, senderAddress, msgIndex)
         } else {
-            collectionNftModified(event, senderAddress)
+            collectionNftModified(event, senderAddress, msgIndex)
         }
     }
 
-    fun collectionNftBurned(event: RawTransactionEvent): EventCollectionNftBurned {
+    fun collectionNftBurned(
+        eventBurnNft: RawTransactionEvent,
+        eventOperationBurnNft: RawTransactionEvent?,
+        msgIndex: Int,
+    ): EventCollectionNftBurned {
         return EventCollectionNftBurned(
-            contractId = event.contractId(),
-            tokenIds = listOf(event.tokenId()), // TODO get tokenIds from operation_burn_nft
-            fromAddress = event.fromAddress(),
-            proxyAddress = event.proxyAddress(),
+            contractId = eventBurnNft.contractId(),
+            tokenIds = eventOperationBurnNft.multiTokenIds(),
+            fromAddress = eventBurnNft.fromAddress(),
+            proxyAddress = eventBurnNft.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftAttached(event: RawTransactionEvent): EventCollectionNftAttached {
+    fun collectionNftAttached(
+        event: RawTransactionEvent,
+        msgIndex: Int
+    ): EventCollectionNftAttached {
         return EventCollectionNftAttached(
             contractId = event.contractId(),
             holderAddress = event.fromAddress(),
             childTokenId = event.tokenId(),
             parentTokenId = event.parentTokenId(),
             proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftDetached(event: RawTransactionEvent): EventCollectionNftDetached {
+    fun collectionNftDetached(
+        event: RawTransactionEvent,
+        msgIndex: Int,
+    ): EventCollectionNftDetached {
         return EventCollectionNftDetached(
             contractId = event.contractId(),
             holderAddress = event.fromAddress(),
             exChildTokenId = event.tokenId(),
             exParentTokenId = event.exParentTokenId(),
             proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftHolderChanged(event: RawTransactionEvent): EventCollectionNftHolderChanged {
+    fun collectionNftHolderChanged(
+        eventTransferNFT: RawTransactionEvent,
+        eventOperationTransferNft: RawTransactionEvent?,
+        msgIndex: Int,
+    ): EventCollectionNftHolderChanged {
         return EventCollectionNftHolderChanged(
-            contractId = event.contractId(),
-            tokenIds = event.multiTokenIds(),
-            fromAddress = event.fromAddress(),
-            toAddress = event.toAddress()
+            contractId = eventTransferNFT.contractId(),
+            tokenIds = eventOperationTransferNft.multiTokenIds(),
+            fromAddress = eventTransferNFT.fromAddress(),
+            toAddress = eventTransferNFT.toAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftIssued(event: RawTransactionEvent): EventCollectionNftIssued {
+    fun collectionNftIssued(
+        event: RawTransactionEvent,
+        issuerAddress: String,
+        msgIndex: Int,
+    ): EventCollectionNftIssued {
         return EventCollectionNftIssued(
             contractId = event.contractId(),
             tokenType = event.tokenType(),
+            issuerAddress = issuerAddress,
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftRootChanged(event: RawTransactionEvent): EventCollectionNftRootChanged {
+    fun collectionNftRootChanged(
+        event: RawTransactionEvent,
+        eventOperationRootChanged: RawTransactionEvent?,
+        msgIndex: Int,
+    ): EventCollectionNftRootChanged {
         val oldRootTokenId = event.exParentTokenId()
         val newRootTokenId = event.newRootTokenId()
         return EventCollectionNftRootChanged(
             contractId = event.contractId(),
-            tokenIds = listOf(event.tokenId()), // TODO tokenIds from operation_root_changed
+            tokenIds = eventOperationRootChanged.multiTokenIds(),
             oldRootTokenId = oldRootTokenId,
-            newRootTokenId = newRootTokenId
+            newRootTokenId = newRootTokenId,
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftTransferred(event: RawTransactionEvent): EventCollectionNftTransferred {
+    fun collectionNftTransferred(
+        event: RawTransactionEvent,
+        msgIndex: Int,
+    ): EventCollectionNftTransferred {
         return EventCollectionNftTransferred(
             contractId = event.contractId(),
             tokenIds = event.multiTokenIds(),
             fromAddress = event.fromAddress(),
             toAddress = event.toAddress(),
-            proxyAddress = event.proxyAddress()
+            proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionProxyApproved(event: RawTransactionEvent): EventCollectionProxyApproved {
+    fun collectionProxyApproved(
+        event: RawTransactionEvent,
+        msgIndex: Int,
+    ): EventCollectionProxyApproved {
         return EventCollectionProxyApproved(
             contractId = event.contractId(),
             approverAddress = event.approverAddress(),
             proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionProxyDisapproved(event: RawTransactionEvent): EventCollectionProxyDisapproved {
+    fun collectionProxyDisapproved(
+        event: RawTransactionEvent,
+        msgIndex: Int,
+    ): EventCollectionProxyDisapproved {
         return EventCollectionProxyDisapproved(
             contractId = event.contractId(),
             approverAddress = event.approverAddress(),
             proxyAddress = event.proxyAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionFtMinted(event: RawTransactionEvent): EventCollectionFtMinted {
+    fun collectionFtMinted(
+        event: RawTransactionEvent,
+        msgIndex: Int,
+    ): EventCollectionFtMinted {
         val rawAmount = event.amount()
         val amount = rawAmount.split(":")[0]
         val tokenId = rawAmount.split(":")[1]
         return EventCollectionFtMinted(
             contractId = event.contractId(),
+            tokenType = ItemTokenTypeUtil.tokenType(tokenId),
             tokenId = tokenId,
             amount = amount,
             minterAddress = event.fromAddress(),
-            toAddress = event.toAddress()
+            toAddress = event.toAddress(),
+            msgIndex = msgIndex,
         )
     }
 
-    fun collectionNftMinted(event: RawTransactionEvent): EventCollectionNftMinted {
+    fun collectionNftMinted(
+        event: RawTransactionEvent,
+        msgIndex: Int,
+    ): EventCollectionNftMinted {
         return EventCollectionNftMinted(
             contractId = event.contractId(),
             tokenIds = event.multiTokenIds(),
             toAddress = event.toAddress(),
-            minterAddress = event.fromAddress()
-        )
-    }
-
-    fun collectionFtBurnedFromMessage(rawMessageValueMap: RawMessageValueMap): TransactionEvent {
-        val amountMap = rawMessageValueMap.findList(Amount)
-
-        return EventCollectionFtBurned(
-            contractId = rawMessageValueMap.find(ContractId),
-            tokenId = amountMap.first().find(TokenId),
-            fromAddress = rawMessageValueMap.find(From),
-            amount = amountMap.first().find(Amount),
-            proxyAddress = rawMessageValueMap.find(Proxy),
+            minterAddress = event.fromAddress(),
+            msgIndex = msgIndex,
         )
     }
 }

@@ -19,5 +19,6 @@ package com.linecorp.link.developers.txresult.core.event.account
 import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 
 data class EventEmptyMsgCreated(
-    val senderAddress: String
+    val senderAddress: String,
+    override val msgIndex: Int
 ): TransactionEvent
