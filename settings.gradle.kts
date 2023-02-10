@@ -3,7 +3,7 @@
  * LINE Corporation PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-rootProject.name = "developers-tx-result-adapter"
+rootProject.name = "line-blockchain-developers-sdk-kt"
 
 // libs
 listOf(
