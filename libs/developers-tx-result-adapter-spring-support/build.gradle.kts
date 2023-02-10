@@ -156,7 +156,3 @@ fun setPublishingContext() {
         sign(publishing.publications[project.name])
     }
 }
-
-if (project.gradle.startParameter.taskNames.contains("publish")) {
-    setPublishingContext()
-}
