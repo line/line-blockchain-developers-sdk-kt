@@ -138,22 +138,20 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                 )
             }
             value["eventName"] == "EventTokenPermissionGranted" -> {
-                val permissionTypeRef = object : TypeReference<TokenPermission>() {}
                 EventTokenPermissionGranted(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
                     granteeAddress = value["granteeAddress"].toString(),
                     granterAddress = value["granterAddress"].toString(),
-                    permission = p.readValueAs(permissionTypeRef)
+                    permission = TokenPermission.valueOf(value["permission"].toString())
                 )
             }
             value["eventName"] == "EventTokenPermissionRenounced" -> {
-                val permissionTypeRef = object : TypeReference<TokenPermission>() {}
                 EventTokenPermissionRenounced(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
                     granteeAddress = value["granteeAddress"].toString(),
-                    permission = p.readValueAs(permissionTypeRef)
+                    permission = TokenPermission.valueOf(value["permission"].toString())
                 )
             }
             value["eventName"] == "EventTokenProxyApproved" -> {

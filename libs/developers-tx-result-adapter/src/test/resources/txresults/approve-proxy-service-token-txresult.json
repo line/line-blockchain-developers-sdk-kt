@@ -1,0 +1,38 @@
+{
+  "summary": {
+    "height": 1207317,
+    "txHash": "2C981A65B9A2F4DF6EC8CC5E084905A9C2C8488F7E533C9F71394F254D76F039",
+    "txIndex": 0,
+    "timestamp": 1618370726000,
+    "signers": [
+      {
+        "address": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"
+      }
+    ],
+    "result": {
+      "code": 0,
+      "codeSpace": "",
+      "status": "SUCCEEDED"
+    }
+  },
+  "messages": [
+    {
+      "msgIndex": 0,
+      "requestType": "token/MsgApprove",
+      "details": {
+        "approver":"link1j8jd9nps56txm2w3afcjsktrrjh0ft82eftchd",
+        "contractId":"f38bb8a6",
+        "proxy":"link1he0tp59u36mdjaw560gh8c27pz8fqms88l8nhu"
+      }
+    }
+  ],
+  "events": [
+    {
+      "eventName": "EventTokenProxyApproved",
+      "msgIndex": 0,
+      "contractId": "9636a07e",
+      "approverAddress": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq",
+      "proxyAddress": "tlink1xrr7amq5g80afllmfcud59y3w60q58llx2zpe9"
+    }
+  ]
+}
