@@ -307,6 +307,11 @@ interface ApiClient {
     ): GenericResponse<TransactionResponse>
 
     // item-tokens
+    @POST(ITEM_TOKENS_PATH)
+    suspend fun createItemTokenCollection(
+        @Body request: CreateItemTokenCollectionRequest
+    ): GenericResponse<TransactionResponse>
+
     /**
      * Retrieve item token contract list
      */
@@ -497,6 +502,16 @@ interface ApiClient {
         @Path("contractId") contractId: String,
         @Body request: NonFungibleTokenMultiMintRequest,
     ): GenericResponse<TransactionResponse>
+
+    /**
+     * Mint multiple non-fungibles to multi recipients
+     */
+    @POST(NON_FUNGIBLE_TOKEN_MULTI_RECIPIENTS_MULTI_MINT_PATH)
+    suspend fun multiMintNonFungibleToMultiRecipients(
+        @Path("contractId") contractId: String,
+        @Body request: MultiMintItemTokenWithMultiRecipientsRequest,
+    ): GenericResponse<TransactionResponse>
+
 
     /**
      * Burn a non-fungible
@@ -731,7 +746,7 @@ interface ApiClient {
     /**
      * Issue session token for service-token-proxy setting
      */
-    @POST(ISSUE_SESSION_TOKEN_FOR_ITEM_TOKEN_PROXY)
+    @POST(ISSUE_SESSION_TOKEN_FOR_SERVICE_TOKEN_PROXY)
     suspend fun issueSessionTokenForServiceTokenProxy(
         @Path("userId") userId: String,
         @Path("contractId") contractId: String,
@@ -828,4 +843,28 @@ interface ApiClient {
         @Query("pageToken") pageToken: String?,
         @Query("orderBy") orderBy: OrderBy = OrderBy.ASC,
     ): GenericResponse<NonFungibleBalanceWithTypeAmountList>
+
+    @PUT(ITEM_TOKEN_FT_MEDIA_RESOURCE_REFRESH_PATH)
+    suspend fun updateFungibleItemTokensMediaResource(
+        @Path("contractId") contractId: String,
+        @Body request: UpdateFungibleTokenResourceRequest,
+    ): GenericResponse<UpdateTokenMediaRefreshResponse>
+
+    @PUT(ITEM_TOKEN_NFT_MEDIA_RESOURCE_REFRESH_PATH)
+    suspend fun updateNonFungibleItemTokensMediaResource(
+        @Path("contractId") contractId: String,
+        @Body request: UpdateNonFungibleTokenResourceRequest,
+    ): GenericResponse<UpdateTokenMediaRefreshResponse>
+
+    @PUT(ITEM_TOKEN_FT_THUMBNAIL_REFRESH_PATH)
+    suspend fun updateFungibleItemTokensThumbnail(
+        @Path("contractId") contractId: String,
+        @Body request: UpdateFungibleTokenResourceRequest,
+    ): GenericResponse<UpdateTokenMediaRefreshResponse>
+
+    @PUT(ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_PATH)
+    suspend fun updateNonFungibleItemTokensThumbnail(
+        @Path("contractId") contractId: String,
+        @Body request: UpdateNonFungibleTokenResourceRequest,
+    ): GenericResponse<UpdateTokenMediaRefreshResponse>
 }

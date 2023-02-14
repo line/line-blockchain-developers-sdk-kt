@@ -18,6 +18,8 @@
 package com.linecorp.link.developers.client.request
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.linecorp.link.developers.client.util.TokenUtil
+import java.math.BigInteger
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -439,6 +441,33 @@ data class NonFungibleTokenMultiMintRequest(
 }
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+data class MultiMintItemTokenWithMultiRecipientsRequest(
+    val ownerAddress: String,
+    val ownerSecret: String,
+    val mintList: List<ItemTokenWithReceiverRequest>
+)
+
+@Suppress("MemberVisibilityCanBePrivate")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+class ItemTokenWithReceiverRequest(
+    val tokenType: String,
+    val name: String,
+    val meta: String?,
+    toAddress: String?,
+    toUserId: String?,
+) : AbstractTransactionRequest(toAddress, toUserId) {
+    init {
+        if (name.length !in NAME_LENGTH_RANGE) {
+            throw IllegalArgumentException("Invalid item token name: out of range($NAME_LENGTH_RANGE)")
+        }
+        if (!meta.isNullOrEmpty() && meta.length !in META_LENGTH_RANGE) {
+            throw IllegalArgumentException("Invalid item token meta: out of range($META_LENGTH_RANGE)")
+        }
+    }
+}
+
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class MultiMintNonFungible(
     val tokenType: String,
     val name: String,
@@ -532,6 +561,41 @@ data class NonFungibleTokenItemTokenDetachRequest(
 }
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+data class CreateItemTokenCollectionRequest(
+    val serviceWalletAddress: String,
+    val serviceWalletSecret: String,
+    val name: String,
+    val baseImgUri: String,
+) {
+    init {
+        if (serviceWalletAddress.isBlank()) {
+            throw IllegalArgumentException("Invalid service wallet address - blank value is not allowed")
+        }
+
+        if (!WALLET_ADDRESS_REGEX.matches(serviceWalletAddress)) {
+            throw IllegalArgumentException("Invalid service wallet address - invalid pattern against $WALLET_ADDRESS_REGEX")
+
+        }
+
+        if (serviceWalletSecret.isBlank()) {
+            throw IllegalArgumentException()
+        }
+
+        if ((name.length !in NAME_LENGTH_RANGE) || (!name.isAlphanumeric())) {
+            throw IllegalArgumentException(getInvalidItemTokenNameMessage(name))
+        }
+
+        if (baseImgUri.isBlank()) {
+            throw IllegalArgumentException("Invalid base img uri - blank value is not allowed")
+        }
+
+        if (!BASE_URI_OR_EMPTY_REGEX.matches(baseImgUri)) {
+            throw IllegalArgumentException("Invalid base img uri - invalid pattern against ${BASE_URI_OR_EMPTY_REGEX.pattern}")
+        }
+    }
+}
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class UserServiceTokenTransferRequest(
     val toAddress: String? = null,
     val toUserId: String? = null,
@@ -564,6 +628,7 @@ data class UserAssetProxyRequest(
         }
     }
 }
+
 
 abstract class AbstractBurnTransactionRequest(
     fromUserId: String?,
@@ -616,3 +681,45 @@ enum class RequestType {
 }
 
 fun RequestType.name() = this.name.lowercase()
+
+
+// token media resource refresh
+abstract class AbstractUpdateTokenResourceRequest<T>(private val updateList: List<T>) {
+    fun validate(limitInRequest: Int) {
+        if (this.updateList.isEmpty()) {
+            throw IllegalArgumentException("Empty token-list to update")
+        }
+        if (this.updateList.size > limitInRequest) {
+            throw IllegalArgumentException("Too many request over limit $limitInRequest")
+        }
+
+        if (hasInvalidTokenId()) {
+            throw IllegalArgumentException("Invalid updateList - check out token list")
+        }
+    }
+
+    abstract fun hasInvalidTokenId(): Boolean
+}
+data class UpdateFungibleTokenResourceRequest(
+    val updateList: List<TokenType>
+): AbstractUpdateTokenResourceRequest<TokenType>(updateList) {
+    override fun hasInvalidTokenId(): Boolean {
+        return updateList
+            .any { TokenUtil.filterInvalidItemTokenType(it.tokenType) }
+    }
+}
+data class TokenType(val tokenType: String)
+
+data class UpdateNonFungibleTokenResourceRequest(val updateList: List<NonFungibleTokenIdentifier>) :
+    AbstractUpdateTokenResourceRequest<NonFungibleTokenIdentifier>(updateList) {
+
+    override fun hasInvalidTokenId(): Boolean {
+        return updateList
+            .map {
+                "${it.tokenType}${it.tokenIndex}"
+            }
+            .any { TokenUtil.filterInvalidItemTokenIdentifier(it) }
+    }
+}
+
+data class NonFungibleTokenIdentifier(val tokenType: String, val tokenIndex: String)

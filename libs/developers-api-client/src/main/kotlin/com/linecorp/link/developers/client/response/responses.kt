@@ -342,3 +342,6 @@ data class ItemTokensMediaResourceStatus(
     val detailStatus: String? = null
 )
 
+data class UpdateTokenMediaRefreshResponse(
+    val requestId: String
+)

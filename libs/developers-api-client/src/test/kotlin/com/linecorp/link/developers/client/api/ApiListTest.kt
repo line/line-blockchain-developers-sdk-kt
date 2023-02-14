@@ -19,11 +19,15 @@ package com.linecorp.link.developers.client.api
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
+import retrofit2.http.POST
+import retrofit2.http.PUT
 
 class ApiListTest {
     @Test
-    fun listApis() {
+    fun listGETApis() {
         val getAPIs = ApiClient::class.java.declaredMethods.mapNotNull { method ->
             method.getAnnotation(GET::class.java)?.let {
                 "GET ${method.getAnnotation(GET::class.java).value}"
@@ -32,9 +36,84 @@ class ApiListTest {
         }.sorted()
 
         val expectedGETAPIs = listOfAPIs.filter { it.startsWith("GET") }.sorted()
-
         assertEquals(expectedGETAPIs, getAPIs)
+    }
 
+    @Test
+    fun listPOSTApis() {
+        // post
+        val postAPIs = ApiClient::class.java.declaredMethods.mapNotNull { method ->
+            method.getAnnotation(POST::class.java)?.let {
+                "POST ${method.getAnnotation(POST::class.java).value}"
+            }
+
+        }
+
+        val postAPIs2 = ApiClient::class.java.declaredMethods.mapNotNull { method ->
+            method.getAnnotation(HTTP::class.java)?.let {
+                if (it.method == "POST") {
+                    "POST ${method.getAnnotation(HTTP::class.java).path}"
+                } else {
+                    null
+                }
+            }
+        }
+
+        val actualAPIs = ( postAPIs +postAPIs2 ).sorted()
+
+        val expectedPOSTAPIs = listOfAPIs.filter { it.startsWith("POST") }.sorted()
+        assertEquals(expectedPOSTAPIs, actualAPIs)
+    }
+
+    @Test
+    fun listPUTApis() {
+        // put
+        val putAPIs = ApiClient::class.java.declaredMethods.mapNotNull { method ->
+            method.getAnnotation(PUT::class.java)?.let {
+                "PUT ${method.getAnnotation(PUT::class.java).value}"
+            }
+
+        }
+
+        val putAPIs2 = ApiClient::class.java.declaredMethods.mapNotNull { method ->
+            method.getAnnotation(HTTP::class.java)?.let {
+                if (it.method == "PUT") {
+                    "PUT ${method.getAnnotation(HTTP::class.java).path}"
+                } else {
+                    null
+                }
+            }
+        }
+
+        val actualAPIs = ( putAPIs +putAPIs2 ).sorted()
+
+        val expectedPUTAPIs = listOfAPIs.filter { it.startsWith("PUT") }.sorted()
+        assertEquals(expectedPUTAPIs, actualAPIs)
+    }
+
+    @Test
+    fun listDELETEApis() {
+        // delete
+        val deleteAPIs = ApiClient::class.java.declaredMethods.mapNotNull { method ->
+            method.getAnnotation(DELETE::class.java)?.let {
+                "DELETE ${method.getAnnotation(DELETE::class.java).value}"
+            }
+
+        }
+        val deleteAPIs2 = ApiClient::class.java.declaredMethods.mapNotNull { method ->
+            method.getAnnotation(HTTP::class.java)?.let {
+                if (it.method == "DELETE") {
+                    "DELETE ${method.getAnnotation(HTTP::class.java).path}"
+                } else {
+                    null
+                }
+            }
+        }
+
+        val actualAPIs = ( deleteAPIs +deleteAPIs2 ).sorted()
+
+        val expectedDELETEAPIs = listOfAPIs.filter { it.startsWith("DELETE") }.sorted()
+        assertEquals(expectedDELETEAPIs, actualAPIs)
     }
 
     companion object {
@@ -117,7 +196,7 @@ class ApiListTest {
             "GET /v2/users/{userId}/transactions",
             "GET /v1/users/{userId}/transactions",
             "POST /v1/user-requests/{requestSessionToken}/commit",
-            "POST v1/users/{userId}/base-coin/request-transfer",
+            "POST /v1/users/{userId}/base-coin/request-transfer",
             "POST /v1/users/{userId}/item-tokens/{contractId}/request-proxy",
             "POST /v1/users/{userId}/service-tokens/{contractId}/request-proxy",
             "POST /v1/users/{userId}/service-tokens/{contractId}/request-transfer",
