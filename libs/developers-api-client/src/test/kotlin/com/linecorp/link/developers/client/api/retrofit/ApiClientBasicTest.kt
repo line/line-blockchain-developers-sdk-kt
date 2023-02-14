@@ -50,9 +50,9 @@ class ApiClientBasicTest {
     fun test_success_time_api() {
 
         val apiClient = retrofitApiClientFactory.buildDefaultApiClient(
-            baseUrl,
-            false,
-            apiKeySecret
+            baseUrl = baseUrl,
+            enableLogging = true,
+            apiKeySecret = apiKeySecret
         )
         val now = clock.instant().toEpochMilli()
 
@@ -60,8 +60,6 @@ class ApiClientBasicTest {
             delay(1000)
             apiClient.time()
         }
-
-        println("now: $now, responseTime: ${timeResponse.responseTime}")
 
         assertNotNull((timeResponse))
         assertEquals(1000, timeResponse.statusCode)
@@ -74,9 +72,9 @@ class ApiClientBasicTest {
     @Test
     fun test_error_time_api_invalid_service_api_key() {
         val apiClient = retrofitApiClientFactory.buildDefaultApiClient(
-            baseUrl,
-            false,
-            invalidApiKeySecret
+            baseUrl = baseUrl,
+            enableLogging = true,
+            apiKeySecret = apiKeySecret
         )
 
         val now = Instant.now().toEpochMilli()
@@ -95,9 +93,9 @@ class ApiClientBasicTest {
     @Test
     fun test_error_time_api_invalid_base_url() {
         val apiClient = retrofitApiClientFactory.buildDefaultApiClient(
-            invalidBaseUrl,
-            false,
-            apiKeySecret
+            baseUrl = invalidBaseUrl,
+            enableLogging = true,
+            apiKeySecret = apiKeySecret
         )
         val timeResponse = runBlocking {
             apiClient.time()

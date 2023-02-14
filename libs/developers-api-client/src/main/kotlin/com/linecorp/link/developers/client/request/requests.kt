@@ -596,6 +596,24 @@ data class CreateItemTokenCollectionRequest(
 }
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+data class UserBaseCoinTransferRequest(
+    val toAddress: String? = null,
+    val toUserId: String? = null,
+    val amount: String,
+    val landingUri: String?
+) : AbstractTransactionRequest(toAddress, toUserId) {
+    init {
+        require(PATTERN_NUMERIC_VALUE_REGEX.matches(amount)) {
+            "Invalid amount - invalid pattern against ${PATTERN_NUMERIC_VALUE_REGEX.pattern}"
+        }
+
+        if (landingUri != null && landingUri.isBlank()) {
+            throw IllegalArgumentException("Invalid landing uri - blank value is not allowed")
+        }
+    }
+}
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class UserServiceTokenTransferRequest(
     val toAddress: String? = null,
     val toUserId: String? = null,

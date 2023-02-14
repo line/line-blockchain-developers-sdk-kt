@@ -47,7 +47,7 @@ interface ApiClient {
      */
     @POST(SERVICE_TOKENS_PATH)
     suspend fun issueServiceToken(
-        @Body issueServiceTokenRequest: IssueServiceTokenRequest
+        @Body request: IssueServiceTokenRequest
     ): GenericResponse<TransactionResponse>
 
     @GET(SERVICE_TOKEN_BY_TX_HASH_PATH)
@@ -638,7 +638,9 @@ interface ApiClient {
      * Retrieve base coin balance (user wallet)
      */
     @GET(USER_BASE_COIN_BALANCE_PATH)
-    suspend fun baseCoinBalanceOfUser(userId: String): GenericResponse<BaseCoinBalance>
+    suspend fun baseCoinBalanceOfUser(
+        @Path("userId") userId: String
+    ): GenericResponse<BaseCoinBalance>
 
     /**
      * Retrieve balance of all service tokens (user wallet)
@@ -741,6 +743,7 @@ interface ApiClient {
     suspend fun issueSessionTokenForBaseCoinTransfer(
         @Path("userId") userId: String,
         @Query("requestType") requestType: String,
+        @Body request: UserBaseCoinTransferRequest
     ): GenericResponse<RequestSession>
 
     /**
