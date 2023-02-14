@@ -275,6 +275,36 @@ data class NonFungibleTokenHolder(
     val amount: String
 )
 
+data class NonFungibleBalanceWithTypeAmount(
+    val type: ItemTokenTypeInfo,
+    val token: NonFungibleTokenInfo
+)
+
+data class NonFungibleBalanceWithTypeAmountList(
+    val list: Collection<NonFungibleBalanceWithTypeAmount>,
+    val prePageToken: String? = null,
+    val nextPageToken: String? = null,
+)
+
+data class ItemTokenTypeInfo(
+    val tokenType: String,
+    val name: String?,
+    val meta: String,
+    val createdAt: Long,
+    val totalSupply: String,
+    val totalMint: String,
+    val totalBurn: String
+)
+
+data class NonFungibleTokenInfo(
+    val name: String,
+    val tokenId: String,
+    val meta: String,
+    val createdAt: Long,
+    val burnedAt: Long?
+)
+
+
 data class UserIdAddress(val userId: String, val address: String)
 data class RequestSession(val requestSessionToken: String, val redirectUri: String)
 
@@ -300,3 +330,15 @@ class RequestSessionStatusDeserializer(): StdDeserializer<RequestSessionStatus>(
 }
 
 data class ProxyStatus(val isApproved: Boolean)
+
+// item token media resources
+data class ItemTokensMediaResourceStatus(
+    val tokenType: String,
+    val tokenIndex: String? = null,
+    val url: String?, // when status error, there is no url
+    val status: String,
+    val lastModified: String?,
+    val refreshedAt: String?,
+    val detailStatus: String? = null
+)
+

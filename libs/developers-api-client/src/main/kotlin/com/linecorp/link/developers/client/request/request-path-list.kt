@@ -78,6 +78,7 @@ const val WALLET_NON_FUNGIBLE_TOKEN_BATCH_TRANSFER_PATH =
 const val WALLET_FUNGIBLE_TOKEN_TRANSFER_PATH = "$WALLET_FUNGIBLE_TOKEN_BALANCE_PATH/transfer"
 
 // item-tokens
+const val ITEM_TOKENS_PATH = "$V1/item-tokens"
 const val ITEM_TOKEN_PATH = "$V1/item-tokens/{contractId}"
 const val FUNGIBLE_TOKENS_PATH = "$V1/item-tokens/{contractId}/fungibles"
 const val FUNGIBLE_TOKEN_PATH = "$V1/item-tokens/{contractId}/fungibles/{tokenType}"
@@ -108,6 +109,12 @@ const val NON_FUNGIBLE_TOKEN_PARENT_PATH =
 const val NON_FUNGIBLE_TOKEN_ROOT_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}/root"
 
+const val ITEM_TOKEN_NFT_MEDIA_REFRESH_STATUS_PATH = "$V1/item-tokens/{contractId}/non-fungibles/media-resources/{requestId}/status"
+const val ITEM_TOKEN_FT_MEDIA_REFRESH_STATUS_PATH = "$V1/item-tokens/{contractId}/fungibles/media-resources/{requestId}/status"
+
+const val ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_STATUS_PATH = "$V1/item-tokens/{contractId}/non-fungibles/thumbnails/{requestId}/status"
+const val ITEM_TOKEN_FT_THUMBNAIL_REFRESH_STATUS_PATH = "$V1/item-tokens/{contractId}/fungibles/thumbnails/{requestId}/status"
+
 
 
 // user api path
@@ -128,6 +135,9 @@ const val USER_NON_FUNGIBLE_TOKEN_BALANCES_BY_TYPE_PATH =
     "$V1_USERS/{userId}/item-tokens/{contractId}/non-fungibles/{tokenType}"
 const val USER_NON_FUNGIBLE_TOKEN_BALANCE_PATH =
     "$V1_USERS/{userId}/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}"
+
+const val USER_NON_FUNGIBLE_TOKEN_BALANCES_WITH_TYPE_PATH =
+    "$V1_USERS/{userId}/item-tokens/{contractId}/non-fungibles/with-type"
 
 const val REQUEST_SESSION_TOKEN_PATH = "$V1/user-requests/{requestSessionToken}"
 const val COMMIT_SESSION_TOKEN_PATH = "$V1/user-requests/{requestSessionToken}/commit"

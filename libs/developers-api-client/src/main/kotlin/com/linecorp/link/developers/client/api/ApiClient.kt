@@ -308,6 +308,12 @@ interface ApiClient {
 
     // item-tokens
     /**
+     * Retrieve item token contract list
+     */
+    @GET(ITEM_TOKENS_PATH)
+    suspend fun itemTokens(): GenericResponse<Collection<ItemToken>>
+
+    /**
      * Retrieve item token contract information
      */
     @GET(ITEM_TOKEN_PATH)
@@ -558,6 +564,30 @@ interface ApiClient {
         @Body request: NonFungibleTokenItemTokenDetachRequest,
     ): GenericResponse<TransactionResponse>
 
+    @GET(ITEM_TOKEN_FT_MEDIA_REFRESH_STATUS_PATH)
+    suspend fun fungibleItemTokensMediaResourceStatus(
+        @Path("contractId") contractId: String,
+        @Path("requestId") requestId: String,
+    ): GenericResponse<ItemTokensMediaResourceStatus>
+
+    @GET(ITEM_TOKEN_NFT_MEDIA_REFRESH_STATUS_PATH)
+    suspend fun nonFungibleItemTokensMediaResourceStatus(
+        @Path("contractId") contractId: String,
+        @Path("requestId") requestId: String,
+    ): GenericResponse<ItemTokensMediaResourceStatus>
+
+    @GET(ITEM_TOKEN_FT_THUMBNAIL_REFRESH_STATUS_PATH)
+    suspend fun fungibleItemTokensThumbnailStatus(
+        @Path("contractId") contractId: String,
+        @Path("requestId") requestId: String,
+    ): GenericResponse<ItemTokensMediaResourceStatus>
+
+    @GET(ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_STATUS_PATH)
+    suspend fun nonFungibleItemTokensThumbnailStatus(
+        @Path("contractId") contractId: String,
+        @Path("requestId") requestId: String,
+    ): GenericResponse<ItemTokensMediaResourceStatus>
+
     // user api
     /**
      * Retrieve user information
@@ -789,4 +819,13 @@ interface ApiClient {
         @Path("contractId") contractId: String,
         @Body request: BatchTransferNonFungibleOfUserRequest,
     ): GenericResponse<TransactionResponse>
+
+    @GET(USER_NON_FUNGIBLE_TOKEN_BALANCES_WITH_TYPE_PATH)
+    suspend fun nonFungibleBalancesWithType(
+        @Path("userId") userId: String,
+        @Path("contractId") contractId: String,
+        @Query("limit") limit: Int = 10,
+        @Query("pageToken") pageToken: String?,
+        @Query("orderBy") orderBy: OrderBy = OrderBy.ASC,
+    ): GenericResponse<NonFungibleBalanceWithTypeAmountList>
 }
