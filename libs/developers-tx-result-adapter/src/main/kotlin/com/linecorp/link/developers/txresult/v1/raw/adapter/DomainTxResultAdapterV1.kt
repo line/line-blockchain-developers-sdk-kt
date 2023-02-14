@@ -31,8 +31,8 @@ class DomainTxResultAdapterV1(
     override fun adapt(input: RawTransactionResult): TxResult {
         return TxResult(
             summary = txResultSummaryAdapter.adapt(input),
-            txMessages = txMessageAdapter.adapt(input),
-            txEvents = txEventsAdapter.adapt(input),
+            messages = txMessageAdapter.adapt(input),
+            events = txEventsAdapter.adapt(input),
         )
     }
 }
