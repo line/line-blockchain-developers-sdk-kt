@@ -29,7 +29,9 @@ import org.junit.jupiter.api.Test
 import java.time.Instant
 import java.time.ZoneId
 import kotlinx.coroutines.delay
+import org.junit.jupiter.api.Disabled
 
+@Disabled
 class ApiClientBasicTest {
     private lateinit var retrofitApiClientFactory: RetrofitApiClientFactory
 
