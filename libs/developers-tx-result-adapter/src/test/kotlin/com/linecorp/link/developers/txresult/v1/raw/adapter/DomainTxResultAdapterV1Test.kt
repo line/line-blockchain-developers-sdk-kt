@@ -70,9 +70,9 @@ class DomainTxResultAdapterV1Test {
         assertEquals("", txResult.summary.result.codeSpace)
         assertEquals(0, txResult.summary.result.code)
 
-        assertEquals(1, txResult.txMessages.size)
-        assertNotNull(txResult.txMessages.find { it.requestType == "collection/MsgMintFT" })
-        val txResultMessage = txResult.txMessages.find { it.requestType == "collection/MsgMintFT" }
+        assertEquals(1, txResult.messages.size)
+        assertNotNull(txResult.messages.find { it.requestType == "collection/MsgMintFT" })
+        val txResultMessage = txResult.messages.find { it.requestType == "collection/MsgMintFT" }
         val details = txResultMessage?.details as Map<String, String>
         assertEquals(details["from"], "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq")
         assertEquals(details["contractId"], "61e14383")
@@ -81,7 +81,7 @@ class DomainTxResultAdapterV1Test {
         assertEquals(amounts[0]["tokenId"], "0000000100000000")
         assertEquals(amounts[0]["amount"], 1000)
 
-        val mintFtEvent = txResult.txEvents.firstOrNull { it::class == EventCollectionFtMinted::class }
+        val mintFtEvent = txResult.events.firstOrNull { it::class == EventCollectionFtMinted::class }
         assertNotNull(mintFtEvent)
         assertEquals((mintFtEvent as EventCollectionFtMinted).contractId, "61e14383")
     }

@@ -22,8 +22,8 @@ import org.apache.commons.lang3.StringUtils
 
 data class TxResult(
     val summary: TxResultSummary,
-    val txMessages: Set<TxMessage>,
-    val txEvents: Set<TransactionEvent>,
+    val messages: Set<TxMessage>,
+    val events: Set<TransactionEvent>,
 )
 
 data class TxResultSummary(
