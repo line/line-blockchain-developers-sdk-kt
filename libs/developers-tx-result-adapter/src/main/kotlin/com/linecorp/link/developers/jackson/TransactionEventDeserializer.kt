@@ -67,8 +67,8 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): TransactionEvent {
         val mapTypeReference = object : TypeReference<Map<Any, Any?>>() {}
         val value: Map<Any, Any?> = p.readValueAs(mapTypeReference)
-        return when {
-            value["eventName"] == "EventCoinTransferred" -> {
+        return when(value["eventName"]) {
+            "EventCoinTransferred" -> {
                 EventCoinTransferred(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     denomination = value["denomination"].toString(),
@@ -77,19 +77,19 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     amount = value["amount"].toString(),
                 )
             }
-            value["eventName"] == "EventAccountCreated" -> {
+            "EventAccountCreated" -> {
                 EventAccountCreated(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     createdAddress = value["createdAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventEmptyMsgCreated" -> {
+            "EventEmptyMsgCreated" -> {
                 EventEmptyMsgCreated(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     senderAddress = value["senderAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventTokenBurned" -> {
+            "EventTokenBurned" -> {
                 EventTokenBurned(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -98,7 +98,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     amount = value["amount"].toString(),
                 )
             }
-            value["eventName"] == "EventTokenIssued" -> {
+            "EventTokenIssued" -> {
                 EventTokenIssued(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -110,7 +110,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     amount = value["amount"].toString(),
                 )
             }
-            value["eventName"] == "EventTokenMinted" -> {
+            "EventTokenMinted" -> {
                 EventTokenMinted(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -119,7 +119,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     amount = value["amount"].toString(),
                 )
             }
-            value["eventName"] == "EventTokenTransferred" -> {
+            "EventTokenTransferred" -> {
                 EventTokenTransferred(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -129,7 +129,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     amount = value["amount"].toString(),
                 )
             }
-            value["eventName"] == "EventTokenModified" -> {
+            "EventTokenModified" -> {
                 EventTokenModified(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -137,7 +137,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     tokenAttributes = deserializeTokenAttributes(value)
                 )
             }
-            value["eventName"] == "EventTokenPermissionGranted" -> {
+            "EventTokenPermissionGranted" -> {
                 EventTokenPermissionGranted(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -146,7 +146,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     permission = TokenPermission.valueOf(value["permission"].toString())
                 )
             }
-            value["eventName"] == "EventTokenPermissionRenounced" -> {
+            "EventTokenPermissionRenounced" -> {
                 EventTokenPermissionRenounced(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -154,7 +154,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     permission = TokenPermission.valueOf(value["permission"].toString())
                 )
             }
-            value["eventName"] == "EventTokenProxyApproved" -> {
+            "EventTokenProxyApproved" -> {
                 EventTokenProxyApproved(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -162,7 +162,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventTokenProxyDisapproved" -> {
+            "EventTokenProxyDisapproved" -> {
                 EventTokenProxyDisapproved(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -170,7 +170,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionCreated" -> {
+            "EventCollectionCreated" -> {
                 EventCollectionCreated(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -178,7 +178,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     creatorAddress = value["creatorAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionModified" -> {
+            "EventCollectionModified" -> {
                 EventCollectionModified(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -186,7 +186,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     modifierAddress = value["modifierAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionFtIssued" -> {
+            "EventCollectionFtIssued" -> {
                 EventCollectionFtIssued(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -198,7 +198,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     receiverAddress = value["receiverAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionFtMinted" -> {
+            "EventCollectionFtMinted" -> {
                 EventCollectionFtMinted(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -209,7 +209,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     minterAddress = value["minterAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionFtModified" -> {
+            "EventCollectionFtModified" -> {
                 EventCollectionFtModified(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -218,7 +218,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     modifierAddress = value["modifierAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionFtTransferred" -> {
+            "EventCollectionFtTransferred" -> {
                 EventCollectionFtTransferred(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -230,7 +230,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"]?.toString(),
                 )
             }
-            value["eventName"] == "EventCollectionFtBurned" -> {
+            "EventCollectionFtBurned" -> {
                 EventCollectionFtBurned(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -241,7 +241,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"]?.toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftIssued" -> {
+            "EventCollectionNftIssued" -> {
                 EventCollectionNftIssued(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -249,7 +249,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     issuerAddress = value["issuerAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftMinted" -> {
+            "EventCollectionNftMinted" -> {
                 @Suppress("UNCHECKED_CAST")
                 EventCollectionNftMinted(
                     msgIndex = value["msgIndex"].toString().toInt(),
@@ -259,7 +259,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     minterAddress = value["minterAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftModified" -> {
+            "EventCollectionNftModified" -> {
                 EventCollectionNftModified(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -268,7 +268,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     modifierAddress = value["modifierAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftTypeModified" -> {
+            "EventCollectionNftTypeModified" -> {
                 EventCollectionNftTypeModified(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -277,7 +277,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     modifierAddress = value["modifierAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftAttached" -> {
+            "EventCollectionNftAttached" -> {
                 EventCollectionNftAttached(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -287,7 +287,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"]?.toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftDetached" -> {
+            "EventCollectionNftDetached" -> {
                 EventCollectionNftDetached(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -297,7 +297,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"]?.toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftRootChanged" -> {
+            "EventCollectionNftRootChanged" -> {
                 @Suppress("UNCHECKED_CAST")
                 EventCollectionNftRootChanged(
                     msgIndex = value["msgIndex"].toString().toInt(),
@@ -307,7 +307,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     newRootTokenId = value["newRootTokenId"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftHolderChanged" -> {
+            "EventCollectionNftHolderChanged" -> {
                 @Suppress("UNCHECKED_CAST")
                 EventCollectionNftHolderChanged(
                     msgIndex = value["msgIndex"].toString().toInt(),
@@ -317,7 +317,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     toAddress = value["toAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftTransferred" -> {
+            "EventCollectionNftTransferred" -> {
                 @Suppress("UNCHECKED_CAST")
                 EventCollectionNftTransferred(
                     msgIndex = value["msgIndex"].toString().toInt(),
@@ -328,7 +328,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"]?.toString(),
                 )
             }
-            value["eventName"] == "EventCollectionNftBurned" -> {
+            "EventCollectionNftBurned" -> {
                 @Suppress("UNCHECKED_CAST")
                 EventCollectionNftBurned(
                     msgIndex = value["msgIndex"].toString().toInt(),
@@ -338,7 +338,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"]?.toString(),
                 )
             }
-            value["eventName"] == "EventCollectionPermissionGranted" -> {
+            "EventCollectionPermissionGranted" -> {
                 EventCollectionPermissionGranted(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -347,7 +347,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     granterAddress = value["granterAddress"]?.toString(),
                 )
             }
-            value["eventName"] == "EventCollectionPermissionRenounced" -> {
+            "EventCollectionPermissionRenounced" -> {
                 EventCollectionPermissionRenounced(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -355,7 +355,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     granteeAddress = value["granteeAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionProxyApproved" -> {
+            "EventCollectionProxyApproved" -> {
                 EventCollectionProxyApproved(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
@@ -363,7 +363,7 @@ class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
                     proxyAddress = value["proxyAddress"].toString(),
                 )
             }
-            value["eventName"] == "EventCollectionProxyDisapproved" -> {
+            "EventCollectionProxyDisapproved" -> {
                 EventCollectionProxyDisapproved(
                     msgIndex = value["msgIndex"].toString().toInt(),
                     contractId = value["contractId"].toString(),
