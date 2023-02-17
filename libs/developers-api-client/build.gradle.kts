@@ -97,7 +97,7 @@ publishing {
             artifact(javadocJar)
 
             groupId = publishGroupId
-            artifactId = "developers-tx-result-adapter"
+            artifactId = "developers-api-client"
             version = System.getenv("DEPLOY_VERSION")
 
             pom {
