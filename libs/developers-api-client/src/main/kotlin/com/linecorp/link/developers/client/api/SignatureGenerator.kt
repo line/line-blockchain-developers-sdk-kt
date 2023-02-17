@@ -108,7 +108,7 @@ class DefaultSignatureGenerator(
                 stringBuilder.append("?").append(flatQueryParam)
             }
         }
-        if (flattenBody.isNotBlank()) {
+        if (body.isNotEmpty()) {
             if (!stringBuilder.contains('?')) {
                 stringBuilder.append("?").append(flattenBody)
             } else {
