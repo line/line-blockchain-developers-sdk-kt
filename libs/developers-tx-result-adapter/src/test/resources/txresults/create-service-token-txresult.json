@@ -1,0 +1,48 @@
+{
+  "summary":{
+    "height":1207317,
+    "txHash":"2C981A65B9A2F4DF6EC8CC5E084905A9C2C8488F7E533C9F71394F254D76F039",
+    "txIndex":0,
+    "timestamp":1618370726000,
+    "signers":[
+      {
+        "address": "tlink1n9pqyk4jy8d3pd20quryudxw3g47cl99403558"
+      }
+    ],
+    "result":{
+      "code":0,
+      "codeSpace":"",
+      "status":"SUCCEEDED"
+    }
+  },
+  "messages":[
+    {
+      "msgIndex":0,
+      "requestType":"token/MsgIssue",
+      "details":{
+        "owner":"tlink1n9pqyk4jy8d3pd20quryudxw3g47cl99403558",
+        "to":"tlink1n9pqyk4jy8d3pd20quryudxw3g47cl99403558",
+        "name":"Test",
+        "meta":"",
+        "symbol":"TEST",
+        "imgUri":"https://service-token.com/image/token",
+        "amount":"987654321",
+        "mintable":true,
+        "decimals":"6"
+      }
+    }
+  ],
+  "events":[
+    {
+      "eventName": "EventTokenIssued",
+      "msgIndex": 0,
+      "contractId":"9be17165",
+      "issuerAddress":"tlink1n9pqyk4jy8d3pd20quryudxw3g47cl99403558",
+      "receiverAddress":"tlink1n9pqyk4jy8d3pd20quryudxw3g47cl99403558",
+      "name":"Test",
+      "symbol":"TEST",
+      "decimals":6,
+      "amount":"987654321"
+    }
+  ]
+}

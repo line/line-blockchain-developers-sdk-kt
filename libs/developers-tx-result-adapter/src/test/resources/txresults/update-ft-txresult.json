@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "height": 1207317,
+    "txHash": "2C981A65B9A2F4DF6EC8CC5E084905A9C2C8488F7E533C9F71394F254D76F039",
+    "txIndex": 0,
+    "timestamp": 1618370726000,
+    "signers": [
+      {
+        "address": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt"
+      }
+    ],
+    "result": {
+      "code": 0,
+      "codeSpace": "",
+      "status": "SUCCEEDED"
+    }
+  },
+  "messages": [
+    {
+      "msgIndex": 0,
+      "requestType": "collection/MsgModify",
+      "details": {
+        "owner": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt",
+        "contract_id": "d036ce60",
+        "token_type": "00000001",
+        "token_index": "00000000",
+        "changes": [
+          {
+            "field": "name",
+            "value": "FTTEST1"
+          }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "eventName": "EventCollectionFtModified",
+      "msgIndex": 0,
+      "contractId": "d036ce60",
+      "tokenAttributes": [
+        {
+          "key": "name",
+          "value": "FTTEST1"
+        }
+      ],
+      "modifierAddress": "link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt"
+    }
+  ]
+}
