@@ -1,0 +1,73 @@
+{
+  "summary": {
+    "height": 1207317,
+    "txHash": "2C981A65B9A2F4DF6EC8CC5E084905A9C2C8488F7E533C9F71394F254D76F039",
+    "txIndex": 0,
+    "timestamp": 1618370726000,
+    "signers": [
+      {
+        "address": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"
+      }
+    ],
+    "result": {
+      "code": 0,
+      "codeSpace": "",
+      "status": "SUCCEEDED"
+    }
+  },
+  "messages": [
+    {
+      "msgIndex": 0,
+      "requestType": "collection/MsgMintNFT",
+      "details": {
+        "from": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq",
+        "contractId": "61e14383",
+        "to": "tlink12v6t8c3reucj3ahfvx9tvghpltwchh7uvj5frl",
+        "params": [
+          {
+            "name": "NFT index name",
+            "meta": "NFT index meta",
+            "tokenType": "10000001"
+          }
+        ]
+      }
+    },
+    {
+      "msgIndex":1,
+      "requestType":"collection/MsgTransferNFTFrom",
+      "details":{
+        "proxy":"link1he0tp59u36mdjaw560gh8c27pz8fqms88l8nhu",
+        "from":"link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt",
+        "contract_id":"d036ce60",
+        "to":"link1rrjua8zktmqnr6hlsqz7qyx5gxm5z96yt8f5ae",
+        "token_ids":[
+          "1000000100000001"
+        ]
+      }
+    }
+
+  ],
+  "events": [
+    {
+      "eventName": "EventCollectionNftMinted",
+      "msgIndex": 0,
+      "contractId": "61e14383",
+      "tokenIds": [
+        "1000000100000007"
+      ],
+      "toAddress": "tlink12v6t8c3reucj3ahfvx9tvghpltwchh7uvj5frl",
+      "minterAddress": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"
+    },
+    {
+      "eventName": "EventCollectionNftTransferred",
+      "msgIndex": 1,
+      "contractId":"d036ce60",
+      "tokenIds":[
+        "1000000100000001"
+      ],
+      "fromAddress":"link153tnef6fp2w95ny00cegj6pfyvsqcsy2dkv6lt",
+      "toAddress":"link1rrjua8zktmqnr6hlsqz7qyx5gxm5z96yt8f5ae",
+      "proxyAddress":"link1he0tp59u36mdjaw560gh8c27pz8fqms88l8nhu"
+    }
+  ]
+}

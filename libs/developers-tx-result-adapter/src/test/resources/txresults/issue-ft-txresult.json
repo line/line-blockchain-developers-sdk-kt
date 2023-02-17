@@ -1,0 +1,43 @@
+{
+  "summary": {
+    "height": 1207317,
+    "txHash": "2C981A65B9A2F4DF6EC8CC5E084905A9C2C8488F7E533C9F71394F254D76F039",
+    "txIndex": 0,
+    "timestamp": 1618370726000,
+    "signers": [
+      {
+        "address": "link17k4j8nfr47urlzfz6h7hzdaankpkz0dgce0xkz"
+      }
+    ],
+    "result": {
+      "code": 0,
+      "codeSpace": "",
+      "status": "SUCCEEDED"
+    }
+  },
+  "messages": [
+    {
+      "msgIndex": 0,
+      "requestType": "collection/MsgIssueFT",
+      "details": {
+        "owner": "link17k4j8nfr47urlzfz6h7hzdaankpkz0dgce0xkz",
+        "name": "test",
+        "meta": "",
+        "base_img_uri": "http://test-image-server.com"
+      }
+    }
+  ],
+  "events": [
+    {
+      "eventName": "EventCollectionFtIssued",
+      "msgIndex": 0,
+      "contractId": "61e14383",
+      "tokenType": "0000003100000000",
+      "name": "FungibleName",
+      "amount": "0",
+      "decimals": 0,
+      "issuerAddress": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq",
+      "receiverAddress": "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"
+    }
+  ]
+}
