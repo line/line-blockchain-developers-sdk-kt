@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test
 class DomainTxResultAdapterV1Test {
     private lateinit var txResultSummaryAdapter: TxResultAdapter<RawTransactionResult, TxResultSummary>
     private lateinit var txMessageAdapter: TxResultAdapter<RawTransactionResult, Set<TxMessage>>
-    private lateinit var txEventsAdapter: TxResultAdapter<RawTransactionResult, Set<TransactionEvent>>
+    private lateinit var txEventsAdapter: TxResultAdapter<RawTransactionResult, List<TransactionEvent>>
     private lateinit var underTest: DomainTxResultAdapterV1
     private lateinit var jsonRawTransactionResultAdapter: JsonRawTransactionResultAdapter
 
