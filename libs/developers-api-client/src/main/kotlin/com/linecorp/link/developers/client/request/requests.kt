@@ -320,8 +320,8 @@ data class FungibleTokenCreateUpdateRequest(
             getInvalidItemTokenNameMessage(name)
         }
 
-        if (meta != null && meta.length !in META_LENGTH_RANGE) {
-            throw IllegalArgumentException("Invalid fungible token meta - out of range: $META_LENGTH_RANGE")
+        require(meta != null && meta.length !in META_LENGTH_RANGE) {
+            "Invalid fungible token meta - out of range: $META_LENGTH_RANGE"
         }
     }
 }
@@ -387,8 +387,8 @@ data class NonFungibleTokenCreateUpdateRequest(
             getInvalidItemTokenNameMessage(name)
         }
 
-        if (meta != null && meta.length !in META_LENGTH_RANGE) {
-            throw IllegalArgumentException("Invalid non-fungible token meta - out of range: $META_LENGTH_RANGE")
+        require(meta != null && meta.length !in META_LENGTH_RANGE) {
+            "Invalid non-fungible token meta - out of range: $META_LENGTH_RANGE"
         }
     }
 
@@ -414,8 +414,8 @@ data class NonFungibleTokenMintRequest(
             getInvalidItemTokenNameMessage(name)
         }
 
-        if (meta != null && meta.length !in META_LENGTH_RANGE) {
-            throw IllegalArgumentException("Invalid non-fungible token meta - out of range: $META_LENGTH_RANGE")
+        require(meta != null && meta.length !in META_LENGTH_RANGE) {
+            "Invalid non-fungible token meta - out of range: $META_LENGTH_RANGE"
         }
     }
 }
@@ -458,11 +458,11 @@ class ItemTokenWithReceiverRequest(
     toUserId: String?,
 ) : AbstractTransactionRequest(toAddress, toUserId) {
     init {
-        if (name.length !in NAME_LENGTH_RANGE) {
-            throw IllegalArgumentException("Invalid item token name: out of range($NAME_LENGTH_RANGE)")
+        require(name.length !in NAME_LENGTH_RANGE) {
+            "Invalid item token name: out of range($NAME_LENGTH_RANGE)"
         }
-        if (!meta.isNullOrEmpty() && meta.length !in META_LENGTH_RANGE) {
-            throw IllegalArgumentException("Invalid item token meta: out of range($META_LENGTH_RANGE)")
+        require(!meta.isNullOrEmpty() && meta.length !in META_LENGTH_RANGE) {
+            "Invalid item token meta: out of range($META_LENGTH_RANGE)"
         }
     }
 }
@@ -482,8 +482,8 @@ data class MultiMintNonFungible(
             getInvalidItemTokenNameMessage(name)
         }
 
-        if (meta != null && meta.length !in META_LENGTH_RANGE) {
-            throw IllegalArgumentException("Invalid non-fungible token meta - out of range: $META_LENGTH_RANGE")
+        require(meta != null && meta.length !in META_LENGTH_RANGE) {
+            "Invalid non-fungible token meta - out of range: $META_LENGTH_RANGE"
         }
     }
 }
@@ -523,14 +523,12 @@ data class NonFungibleTokenItemTokenAttachRequest(
             "tokenHolderAddress or tokenHolderUserId, one of them is required"
         }
 
-        if (tokenHolderAddress != null && !WALLET_ADDRESS_REGEX.matches(tokenHolderAddress)) {
-            throw IllegalArgumentException(
-                "Invalid token holder address - invalid pattern against: ${WALLET_ADDRESS_REGEX.pattern}"
-            )
+        require(tokenHolderAddress != null && !WALLET_ADDRESS_REGEX.matches(tokenHolderAddress)) {
+            "Invalid token holder address - invalid pattern against: ${WALLET_ADDRESS_REGEX.pattern}"
         }
 
-        if (tokenHolderUserId != null && tokenHolderUserId.isBlank()) {
-            throw IllegalArgumentException("Invalid token holder user id - can not be blank")
+        require(tokenHolderUserId != null && tokenHolderUserId.isBlank()) {
+            "Invalid token holder user id - can not be blank"
         }
     }
 }
@@ -553,14 +551,12 @@ data class NonFungibleTokenItemTokenDetachRequest(
             "tokenHolderAddress or tokenHolderUserId, one of them is required"
         }
 
-        if (tokenHolderAddress != null && !WALLET_ADDRESS_REGEX.matches(tokenHolderAddress)) {
-            throw IllegalArgumentException(
-                "Invalid token holder address - invalid pattern against: ${WALLET_ADDRESS_REGEX.pattern}"
-            )
+        require(tokenHolderAddress != null && !WALLET_ADDRESS_REGEX.matches(tokenHolderAddress)) {
+            "Invalid token holder address - invalid pattern against: ${WALLET_ADDRESS_REGEX.pattern}"
         }
 
-        if (tokenHolderUserId != null && tokenHolderUserId.isBlank()) {
-            throw IllegalArgumentException("Invalid token holder user id - can not be blank")
+        require(tokenHolderUserId != null && tokenHolderUserId.isBlank()) {
+            "Invalid token holder user id - can not be blank"
         }
     }
 }
@@ -573,33 +569,22 @@ data class CreateItemTokenCollectionRequest(
     val baseImgUri: String,
 ) {
     init {
-        if (serviceWalletAddress.isBlank()) {
-            throw IllegalArgumentException("Invalid service wallet address - blank value is not allowed")
+        require(serviceWalletAddress.isBlank()) { "Invalid service wallet address - blank value is not allowed" }
+
+        require(!WALLET_ADDRESS_REGEX.matches(serviceWalletAddress)) {
+            "Invalid service wallet address - invalid pattern against $WALLET_ADDRESS_REGEX"
         }
 
-        if (!WALLET_ADDRESS_REGEX.matches(serviceWalletAddress)) {
-            throw IllegalArgumentException(
-                "Invalid service wallet address - invalid pattern against $WALLET_ADDRESS_REGEX"
-            )
+        require(serviceWalletSecret.isBlank())
 
+        require((name.length !in NAME_LENGTH_RANGE) || (!name.isAlphanumeric())) {
+            getInvalidItemTokenNameMessage(name)
         }
 
-        if (serviceWalletSecret.isBlank()) {
-            throw IllegalArgumentException()
-        }
+        require(baseImgUri.isBlank()) { "Invalid base img uri - blank value is not allowed" }
 
-        if ((name.length !in NAME_LENGTH_RANGE) || (!name.isAlphanumeric())) {
-            throw IllegalArgumentException(getInvalidItemTokenNameMessage(name))
-        }
-
-        if (baseImgUri.isBlank()) {
-            throw IllegalArgumentException("Invalid base img uri - blank value is not allowed")
-        }
-
-        if (!BASE_URI_OR_EMPTY_REGEX.matches(baseImgUri)) {
-            throw IllegalArgumentException(
-                "Invalid base img uri - invalid pattern against ${BASE_URI_OR_EMPTY_REGEX.pattern}"
-            )
+        require(!BASE_URI_OR_EMPTY_REGEX.matches(baseImgUri)) {
+            "Invalid base img uri - invalid pattern against ${BASE_URI_OR_EMPTY_REGEX.pattern}"
         }
     }
 }
@@ -616,9 +601,7 @@ data class UserBaseCoinTransferRequest(
             "Invalid amount - invalid pattern against ${PATTERN_NUMERIC_VALUE_REGEX.pattern}"
         }
 
-        if (landingUri != null && landingUri.isBlank()) {
-            throw IllegalArgumentException("Invalid landing uri - blank value is not allowed")
-        }
+        require(landingUri != null && landingUri.isBlank()) { "Invalid landing uri - blank value is not allowed" }
     }
 }
 
@@ -634,9 +617,7 @@ data class UserServiceTokenTransferRequest(
             "Invalid amount - invalid pattern against ${PATTERN_NUMERIC_VALUE_REGEX.pattern}"
         }
 
-        if (landingUri != null && landingUri.isBlank()) {
-            throw IllegalArgumentException("Invalid landing uri - blank value is not allowed")
-        }
+        require(landingUri != null && landingUri.isBlank()) { "Invalid landing uri - blank value is not allowed" }
     }
 }
 
@@ -650,9 +631,7 @@ data class UserAssetProxyRequest(
             "Invalid owner address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}"
         }
 
-        if (landingUri != null && landingUri.isBlank()) {
-            throw IllegalArgumentException("Invalid landing uri - blank value is not allowed")
-        }
+        require(landingUri != null && landingUri.isBlank()) { "Invalid landing uri - blank value is not allowed" }
     }
 }
 
@@ -664,15 +643,11 @@ abstract class AbstractBurnTransactionRequest(
     init {
         require(fromAddress != null || fromUserId != null) { "fromAddress or fromUserId, one of them is required" }
 
-        if (fromAddress != null && !WALLET_ADDRESS_REGEX.matches(fromAddress)) {
-            throw IllegalArgumentException(
-                "Invalid fromAddress wallet address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}"
-            )
+        require(fromAddress != null && !WALLET_ADDRESS_REGEX.matches(fromAddress)) {
+            "Invalid fromAddress wallet address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}"
         }
 
-        if (fromUserId != null && fromUserId.isBlank()) {
-            throw IllegalArgumentException("Invalid fromUserId - fromUserId can not be blank")
-        }
+        require(fromUserId != null && fromUserId.isBlank()) { "Invalid fromUserId - fromUserId can not be blank" }
     }
 }
 
@@ -683,15 +658,11 @@ abstract class AbstractTransactionRequest(
     init {
         require(toAddress != null || toUserId != null) { "toAddress or toUserId, one of them is required" }
 
-        if (toAddress != null && !WALLET_ADDRESS_REGEX.matches(toAddress)) {
-            throw IllegalArgumentException(
-                "Invalid toAddress wallet address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}"
-            )
+        require(toAddress != null && !WALLET_ADDRESS_REGEX.matches(toAddress)) {
+            "Invalid toAddress wallet address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}"
         }
 
-        if (toUserId != null && toUserId.isBlank()) {
-            throw IllegalArgumentException("Invalid toUserId - fromUserId can not be blank")
-        }
+        require(toUserId != null && toUserId.isBlank()) { "Invalid toUserId - fromUserId can not be blank" }
     }
 }
 
@@ -717,16 +688,9 @@ fun RequestType.name() = this.name.lowercase()
 // token media resource refresh
 abstract class AbstractUpdateTokenResourceRequest<T>(private val updateList: List<T>) {
     fun validate(limitInRequest: Int) {
-        if (this.updateList.isEmpty()) {
-            throw IllegalArgumentException("Empty token-list to update")
-        }
-        if (this.updateList.size > limitInRequest) {
-            throw IllegalArgumentException("Too many request over limit $limitInRequest")
-        }
-
-        if (hasInvalidTokenId()) {
-            throw IllegalArgumentException("Invalid updateList - check out token list")
-        }
+        require(this.updateList.isEmpty()) { "Empty token-list to update" }
+        require(this.updateList.size > limitInRequest) { "Too many request over limit $limitInRequest" }
+        require(hasInvalidTokenId()) { "Invalid updateList - check out token list" }
     }
 
     abstract fun hasInvalidTokenId(): Boolean
