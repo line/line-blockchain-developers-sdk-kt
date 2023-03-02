@@ -51,6 +51,7 @@ class DomainTxSummaryAdapterV1Test {
         assertEquals("", txResultSummary.result.codeSpace)
         assertEquals(0, txResultSummary.result.code)
 
-        assertTrue(rawTransactionResult.getSignerAddresses("tlink").contains("tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"))
+        assertTrue(rawTransactionResult.getSignerAddresses("tlink")
+            .contains("tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq"))
     }
 }

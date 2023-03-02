@@ -126,7 +126,8 @@ class DomainTxEventsAdapterV1CollectionTransferTest {
     @Test
     fun `given collection_transfer_batch_nft tx-result, then extract 'EventCollectionNftTransferred' `() {
         val rawTransactionInJsonText =
-            RawTransactionLoader.loadRawTransactionResultInJsonText("raw-transaction/collection_transfer_batch_nft.json")
+            RawTransactionLoader.loadRawTransactionResultInJsonText(
+                "raw-transaction/collection_transfer_batch_nft.json")
 
         val rawTransactionResult = jsonRawTransactionResultAdapter.adapt(rawTransactionInJsonText)
 

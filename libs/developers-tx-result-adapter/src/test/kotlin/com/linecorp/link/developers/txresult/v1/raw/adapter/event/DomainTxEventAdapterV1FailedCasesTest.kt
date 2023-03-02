@@ -37,7 +37,8 @@ class DomainTxEventAdapterV1FailedCasesTest {
     @Test
     fun `given collection_transfer_failed_nft tx-result, then extract 'EventCollectionNftTransferred' `() {
         val rawTransactionInJsonText =
-            RawTransactionLoader.loadRawTransactionResultInJsonText("raw-transaction/collection_transfer_failed_nft.json")
+            RawTransactionLoader
+                .loadRawTransactionResultInJsonText("raw-transaction/collection_transfer_failed_nft.json")
 
         val rawTransactionResult = jsonRawTransactionResultAdapter.adapt(rawTransactionInJsonText)
 

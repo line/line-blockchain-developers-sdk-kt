@@ -144,7 +144,8 @@ class NetworkResponseAdapterFactory : CallAdapter.Factory() {
             return null
         }
         // the response type is Service and should be parameterized
-        check(responseType is ParameterizedType) { "Response must be parameterized as NetworkResponse<Foo> or NetworkResponse<out Foo>" }
+        check(responseType is ParameterizedType)
+        { "Response must be parameterized as NetworkResponse<Foo> or NetworkResponse<out Foo>" }
 
 //        val bodyType = getParameterUpperBound(0, responseType)
         val errorBodyConverter = retrofit.nextResponseBodyConverter<Any>(

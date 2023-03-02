@@ -288,7 +288,8 @@ data class TokenId(val tokenId: String) {
     init {
 
         require(tokenId.length == tokenIdLength) { "Invalid tokenId: length of token-id has to be 16" }
-        require(tokenIdFormat.matches(tokenId)) { "Invalid tokenId: invalid format of tokenId, valid format is $tokenIdFormat" }
+        require(tokenIdFormat.matches(tokenId)) {
+            "Invalid tokenId: invalid format of tokenId, valid format is $tokenIdFormat" }
     }
 
     companion object {
@@ -523,7 +524,9 @@ data class NonFungibleTokenItemTokenAttachRequest(
         }
 
         if (tokenHolderAddress != null && !WALLET_ADDRESS_REGEX.matches(tokenHolderAddress)) {
-            throw IllegalArgumentException("Invalid token holder address - invalid pattern against: ${WALLET_ADDRESS_REGEX.pattern}")
+            throw IllegalArgumentException(
+                "Invalid token holder address - invalid pattern against: ${WALLET_ADDRESS_REGEX.pattern}"
+            )
         }
 
         if (tokenHolderUserId != null && tokenHolderUserId.isBlank()) {
@@ -551,7 +554,9 @@ data class NonFungibleTokenItemTokenDetachRequest(
         }
 
         if (tokenHolderAddress != null && !WALLET_ADDRESS_REGEX.matches(tokenHolderAddress)) {
-            throw IllegalArgumentException("Invalid token holder address - invalid pattern against: ${WALLET_ADDRESS_REGEX.pattern}")
+            throw IllegalArgumentException(
+                "Invalid token holder address - invalid pattern against: ${WALLET_ADDRESS_REGEX.pattern}"
+            )
         }
 
         if (tokenHolderUserId != null && tokenHolderUserId.isBlank()) {
@@ -573,7 +578,9 @@ data class CreateItemTokenCollectionRequest(
         }
 
         if (!WALLET_ADDRESS_REGEX.matches(serviceWalletAddress)) {
-            throw IllegalArgumentException("Invalid service wallet address - invalid pattern against $WALLET_ADDRESS_REGEX")
+            throw IllegalArgumentException(
+                "Invalid service wallet address - invalid pattern against $WALLET_ADDRESS_REGEX"
+            )
 
         }
 
@@ -590,7 +597,9 @@ data class CreateItemTokenCollectionRequest(
         }
 
         if (!BASE_URI_OR_EMPTY_REGEX.matches(baseImgUri)) {
-            throw IllegalArgumentException("Invalid base img uri - invalid pattern against ${BASE_URI_OR_EMPTY_REGEX.pattern}")
+            throw IllegalArgumentException(
+                "Invalid base img uri - invalid pattern against ${BASE_URI_OR_EMPTY_REGEX.pattern}"
+            )
         }
     }
 }
@@ -656,7 +665,9 @@ abstract class AbstractBurnTransactionRequest(
         require(fromAddress != null || fromUserId != null) { "fromAddress or fromUserId, one of them is required" }
 
         if (fromAddress != null && !WALLET_ADDRESS_REGEX.matches(fromAddress)) {
-            throw IllegalArgumentException("Invalid fromAddress wallet address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}")
+            throw IllegalArgumentException(
+                "Invalid fromAddress wallet address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}"
+            )
         }
 
         if (fromUserId != null && fromUserId.isBlank()) {
@@ -673,7 +684,9 @@ abstract class AbstractTransactionRequest(
         require(toAddress != null || toUserId != null) { "toAddress or toUserId, one of them is required" }
 
         if (toAddress != null && !WALLET_ADDRESS_REGEX.matches(toAddress)) {
-            throw IllegalArgumentException("Invalid toAddress wallet address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}")
+            throw IllegalArgumentException(
+                "Invalid toAddress wallet address - invalid pattern against ${WALLET_ADDRESS_REGEX.pattern}"
+            )
         }
 
         if (toUserId != null && toUserId.isBlank()) {
@@ -718,14 +731,16 @@ abstract class AbstractUpdateTokenResourceRequest<T>(private val updateList: Lis
 
     abstract fun hasInvalidTokenId(): Boolean
 }
+
 data class UpdateFungibleTokenResourceRequest(
     val updateList: List<TokenType>
-): AbstractUpdateTokenResourceRequest<TokenType>(updateList) {
+) : AbstractUpdateTokenResourceRequest<TokenType>(updateList) {
     override fun hasInvalidTokenId(): Boolean {
         return updateList
             .any { TokenUtil.filterInvalidItemTokenType(it.tokenType) }
     }
 }
+
 data class TokenType(val tokenType: String)
 
 data class UpdateNonFungibleTokenResourceRequest(val updateList: List<NonFungibleTokenIdentifier>) :

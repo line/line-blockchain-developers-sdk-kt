@@ -42,7 +42,9 @@ internal object Bech32Utils {
             if (bits > 0) {
                 out.write((acc shl (toBits - bits)) and maxv)
             }
-        } else require(!(bits >= fromBits || ((acc shl (toBits - bits)) and maxv) != 0)) { "Could not convert bits, invalid padding" }
+        } else require(!(bits >= fromBits || ((acc shl (toBits - bits)) and maxv) != 0)) {
+            "Could not convert bits, invalid padding"
+        }
         return out.toByteArray()
     }
 }
