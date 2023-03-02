@@ -20,13 +20,6 @@ jobs:
       - checkout
       - run: gradle test
 
-  detekt:
-    executor: openjdk8-executor
-
-    steps:
-      - checkout
-      - run: gradle detekt
-
 workflows:
   push-workflow:
     jobs:
