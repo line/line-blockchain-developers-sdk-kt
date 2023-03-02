@@ -44,6 +44,13 @@ allprojects {
         sourceCompatibility = "1.8"
         targetCompatibility = "1.8"
     }
+
+    afterEvaluate {
+        detekt {
+            buildUponDefaultConfig = true
+            config.setFrom(files("$rootDir/detekt-config.yml"))
+        }
+    }
 }
 
 subprojects {
