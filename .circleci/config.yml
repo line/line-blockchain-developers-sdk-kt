@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - checkout
-      - run: gradle build
+      - run: gradle build -x test
 
   test:
     executor: openjdk8-executor
