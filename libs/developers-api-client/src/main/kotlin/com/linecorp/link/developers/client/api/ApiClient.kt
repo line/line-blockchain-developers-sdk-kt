@@ -119,12 +119,14 @@ interface ApiClient {
     /**
      * Save the text
      */
+    @Deprecated("This API will be removed soon")
     @POST(MEMO_PATH)
     suspend fun saveMemo(@Body request: MemoRequest): GenericResponse<TransactionResponse>
 
     /**
      * Query memo of a transaction by tx-hash
      */
+    @Deprecated("This API will be removed soon")
     @GET(MEMO_BY_TX_HASH_PATH)
     suspend fun queryMemo(@Path("txHash") txHash: String): GenericResponse<Memo>
 
