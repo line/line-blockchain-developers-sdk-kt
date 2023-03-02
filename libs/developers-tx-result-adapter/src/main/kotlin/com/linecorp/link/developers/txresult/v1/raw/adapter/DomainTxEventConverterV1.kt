@@ -77,6 +77,7 @@ import com.linecorp.link.developers.txresult.v1.raw.model.toTokenAttribute
 import com.linecorp.link.developers.txresult.v1.raw.model.tokenId
 import com.linecorp.link.developers.txresult.v1.raw.model.tokenType
 
+@Suppress("TooManyFunctions")
 class DomainTxEventConverterV1 {
 
     fun accountCreated(event: RawTransactionEvent, msgIndex: Int): EventAccountCreated {
