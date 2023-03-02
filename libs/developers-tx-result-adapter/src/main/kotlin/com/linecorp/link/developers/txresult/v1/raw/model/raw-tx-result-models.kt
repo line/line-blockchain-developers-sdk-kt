@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
+@file:Suppress("TooManyFunctions")
 package com.linecorp.link.developers.txresult.v1.raw.model
 
 import com.fasterxml.jackson.annotation.JsonAlias

@@ -32,6 +32,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+@Suppress("TooManyFunctions")
 interface ApiClient {
     @GET(TIME_API_PATH)
     suspend fun time(): GenericResponse<Unit>
