@@ -42,6 +42,7 @@ internal class Address private constructor(val type: Type, val body: ByteArray) 
      *
      * @return <a href="https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki">bech32</a> formatted string
      */
+    @Suppress("MagicNumber")
     fun toBech32(hrpPrefix: String /*= DEFAULT_BECH32_HRP_PREFIX*/): String { // dev3 comment out default arg
         if (body.isEmpty()) return ""
 
@@ -110,6 +111,7 @@ internal class Address private constructor(val type: Type, val body: ByteArray) 
          * @param bech32Address Bech32 address
          * @return new address corresponding to the given [bech32Address]
          */
+        @Suppress("MagicNumber")
         @JvmStatic
         @JvmName("of")
         // dev3 comment out default arg

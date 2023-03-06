@@ -46,6 +46,7 @@ class DomainTxSummaryAdapterV1(
         )
     }
 
+    @Suppress("TooGenericExceptionCaught")
     private fun txSigners(input: RawTransactionResult): Set<TxSigner> {
         return try {
             input.getSignerAddresses(hrpPrefix).map {

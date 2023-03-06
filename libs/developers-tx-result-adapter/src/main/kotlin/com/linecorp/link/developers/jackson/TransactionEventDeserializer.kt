@@ -64,6 +64,7 @@ import com.linecorp.link.developers.txresult.core.event.token.TokenPermission
 import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 
 class TransactionEventDeserializer : JsonDeserializer<TransactionEvent>() {
+    @Suppress("LongMethod", "CyclomaticComplexMethod")
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): TransactionEvent {
         val mapTypeReference = object : TypeReference<Map<Any, Any?>>() {}
         val value: Map<Any, Any?> = p.readValueAs(mapTypeReference)
