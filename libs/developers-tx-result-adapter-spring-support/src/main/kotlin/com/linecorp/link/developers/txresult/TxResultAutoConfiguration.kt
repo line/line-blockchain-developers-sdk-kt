@@ -72,7 +72,7 @@ class TxResultAutoConfiguration {
         type = ["com.linecorp.link.developers.txresult.v1.raw.adapter.DomainTxEventsAdapterV1"]
     )
     @Bean
-    fun txEventsAdapterV1(): TxResultAdapter<RawTransactionResult, Set<TransactionEvent>> {
+    fun txEventsAdapterV1(): TxResultAdapter<RawTransactionResult, List<TransactionEvent>> {
         return DomainTxEventsAdapterV1()
     }
 
@@ -84,7 +84,7 @@ class TxResultAutoConfiguration {
     fun txResultAdapterV1(
         txResultSummaryAdapter: TxResultAdapter<RawTransactionResult, TxResultSummary>,
         txMessageAdapter: TxResultAdapter<RawTransactionResult, Set<TxMessage>>,
-        txEventsAdapter: TxResultAdapter<RawTransactionResult, Set<TransactionEvent>>
+        txEventsAdapter: TxResultAdapter<RawTransactionResult, List<TransactionEvent>>
     ): TxResultAdapter<RawTransactionResult, TxResult> {
         return DomainTxResultAdapterV1(
             txResultSummaryAdapter = txResultSummaryAdapter,
