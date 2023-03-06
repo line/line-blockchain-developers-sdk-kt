@@ -30,6 +30,7 @@ import retrofit2.Retrofit
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
+@Suppress("TooManyFunctions")
 internal class NetworkResponseCall<R : Any>(
     private val delegate: Call<R>,
     private val errorBodyConverter: Converter<ResponseBody, R>

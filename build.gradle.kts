@@ -18,6 +18,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 allprojects {
 
+    apply {
+        plugin("io.gitlab.arturbosch.detekt")
+    }
+
     buildscript {
         repositories {
             mavenCentral()
@@ -58,6 +62,7 @@ plugins {
     java
     kotlin("jvm") version Versions.kotlin apply false
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
 group = projectGroupId
