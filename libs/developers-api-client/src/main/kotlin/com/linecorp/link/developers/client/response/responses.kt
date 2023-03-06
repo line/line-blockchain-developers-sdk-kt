@@ -313,7 +313,7 @@ enum class RequestSessionStatus {
     AUTHORIZED, UNAUTHORIZED
 }
 
-class RequestSessionStatusDeserializer(): StdDeserializer<RequestSessionStatus>(RequestSessionStatus::class.java) {
+class RequestSessionStatusDeserializer : StdDeserializer<RequestSessionStatus>(RequestSessionStatus::class.java) {
     override fun deserialize(jsonParser: JsonParser, ctxt: DeserializationContext): RequestSessionStatus {
         val node: JsonNode = jsonParser.codec.readTree(jsonParser)
 

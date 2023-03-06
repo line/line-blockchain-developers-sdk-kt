@@ -283,16 +283,16 @@ data class BatchTransferNonFungibleOfUserRequest(
 
 data class TokenId(val tokenId: String) {
     private val tokenIdFormat = "\\d{8}\\d{8}".toRegex()
-    private val tokenIdLength = 16
 
     init {
 
-        require(tokenId.length == tokenIdLength) { "Invalid tokenId: length of token-id has to be 16" }
+        require(tokenId.length == TOKEN_ID_LENGTH) { "Invalid tokenId: length of token-id has to be 16" }
         require(tokenIdFormat.matches(tokenId)) {
             "Invalid tokenId: invalid format of tokenId, valid format is $tokenIdFormat" }
     }
 
     companion object {
+        const val TOKEN_ID_LENGTH = 16
         @Suppress("unused")
         fun fromMulti(identifiers: Set<String>): Collection<TokenId> {
             return identifiers.map {
@@ -636,7 +636,7 @@ data class UserAssetProxyRequest(
 }
 
 
-abstract class AbstractBurnTransactionRequest(
+open class AbstractBurnTransactionRequest(
     fromUserId: String?,
     fromAddress: String?
 ) {
@@ -651,7 +651,7 @@ abstract class AbstractBurnTransactionRequest(
     }
 }
 
-abstract class AbstractTransactionRequest(
+open class AbstractTransactionRequest(
     toAddress: String?,
     toUserId: String?
 ) {

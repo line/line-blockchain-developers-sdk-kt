@@ -14,13 +14,14 @@
  *   under the License.
  *
  */
-
+@file:Suppress("MagicNumber")
 package com.linecorp.link.developers.client.request
 
 const val MIN_LIMIT_1 = 1
 const val MAX_LIMIT_50 = 50
 
 const val DEFAULT_PAGE_1 = 1
+
 
 val NAME_LENGTH_RANGE = 3..20
 val SYMBOL_LENGTH_RANGE = 2..5

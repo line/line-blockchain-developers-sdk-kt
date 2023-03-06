@@ -19,17 +19,16 @@ package com.linecorp.link.developers.client.api.retrofit
 
 import com.linecorp.link.developers.client.api.ApiKeySecret
 import java.time.Clock
+import java.time.Instant
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import java.time.Instant
-import java.time.ZoneId
-import kotlinx.coroutines.delay
 import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 
 @Disabled
 class ApiClientBasicTest {
@@ -39,7 +38,6 @@ class ApiClientBasicTest {
     private val invalidBaseUrl = "https://invali-url.com/"
     private val apiKeySecret =
         ApiKeySecret(System.getenv("API_KEY"), System.getenv("API_SECRET"))
-    private val invalidApiKeySecret = ApiKeySecret("invalid-api-key", "invalid-api-secret")
 
     private val clock = Clock.systemUTC()
 

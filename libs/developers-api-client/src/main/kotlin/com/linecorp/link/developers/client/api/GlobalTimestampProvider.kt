@@ -23,7 +23,7 @@ interface GlobalTimestampProvider {
     fun timestamp(): Long
 }
 
-class DefaultGlobalTimestampProvider() : GlobalTimestampProvider {
+class DefaultGlobalTimestampProvider : GlobalTimestampProvider {
     // https://docs-blockchain.line.biz/api-guide#response-body
     private val globalClock = Clock.systemUTC()
 

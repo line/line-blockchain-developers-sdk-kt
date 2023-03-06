@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package com.linecorp.link.developers.client.api
+package com.linecorp.link.developers.client.request
 
 const val V1 = "/v1"
 const val V2 = "/v2"

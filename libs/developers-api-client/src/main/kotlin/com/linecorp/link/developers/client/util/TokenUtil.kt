@@ -29,6 +29,7 @@ object TokenUtil {
         return !TOKEN_TYPE_REGEX.matches(tokenType)
     }
 
+    @Suppress("MagicNumber")
     fun splitTokenId(tokenId: String): Pair<String, String?> {
         require(tokenId.isBlank() || tokenId.length < 8 || tokenId.length > 16 || (tokenId.length in 9..15)) {
             "Invalid tokenId - invalid length"
