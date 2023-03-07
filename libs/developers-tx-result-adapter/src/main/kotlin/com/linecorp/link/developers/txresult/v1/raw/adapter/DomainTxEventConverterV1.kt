@@ -134,7 +134,9 @@ class DomainTxEventConverterV1 {
         )
     }
 
-    fun tokenModified(eventTokenModified: RawTransactionEvent, emptyMessageEvent: RawTransactionEvent?, msgIndex: Int): EventTokenModified {
+    fun tokenModified(
+        eventTokenModified: RawTransactionEvent, emptyMessageEvent: RawTransactionEvent?, msgIndex: Int
+    ): EventTokenModified {
         val tokenAttributes = eventTokenModified.attributesExclude(ContractId).map {
             it.toTokenAttribute()
         }.toSet()

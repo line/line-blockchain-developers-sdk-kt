@@ -24,7 +24,7 @@ interface RequestBodyFlattener {
     fun flatten(body: Map<String, Any?>): String
 }
 
-class DefaultRequestBodyFlattener: RequestBodyFlattener {
+class DefaultRequestBodyFlattener : RequestBodyFlattener {
     override fun flatten(body: Map<String, Any?>): String {
         val bodyTreeMap = TreeMap<String, Any?>()
         bodyTreeMap.putAll(body)
@@ -37,25 +37,28 @@ class DefaultRequestBodyFlattener: RequestBodyFlattener {
                 when (v) {
                     is String -> "$k=$v"
                     is List<*> -> {
-                        val listTreeMap = TreeMap<String, String?>()
-                        v as List<Map<String, String>>
-                        v.forEachIndexed { index, map ->
-                            map.keys.union(listTreeMap.keys).forEach { key ->
-                                val value = map[key] ?: StringUtils.EMPTY
-                                if (listTreeMap[key] == null) {
-                                    listTreeMap[key] = "${",".repeat(index)}$value"
-                                } else {
-                                    listTreeMap[key] = "${listTreeMap[key]},$value"
-                                }
-                            }
-                        }
-                        listTreeMap.map { (lk, kv) ->
-                            "$k.$lk=$kv"
-                        }.joinToString("&")
+                        resolveListPropertyValue(v, k)
                     }
-                    else -> throw IllegalArgumentException()
+                    else -> throw IllegalArgumentException("Fail to flatten request body - invalid property value: $v")
                 }
             }.joinToString("&")
         }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun resolveListPropertyValue(propertyValue: Any?, propertyName: String): String {
+        val listTreeMap = TreeMap<String, String?>()
+        propertyValue as List<Map<String, String>>
+        propertyValue.forEachIndexed { index, map ->
+            map.keys.union(listTreeMap.keys).forEach { key ->
+                val value = map[key] ?: StringUtils.EMPTY
+                if (listTreeMap[key] == null) {
+                    listTreeMap[key] = "${",".repeat(index)}$value"
+                } else {
+                    listTreeMap[key] = "${listTreeMap[key]},$value"
+                }
+            }
+        }
+        return listTreeMap.map { (key, value) -> "$propertyName.$key=$value" }.joinToString("&")
     }
 }

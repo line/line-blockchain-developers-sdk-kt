@@ -192,7 +192,9 @@ fun RawTransactionEvent.findAttributeNotNull(
     return this.attributes.firstOrNull { attributeType.values.contains(it.key) }?.value ?: defaultValue
 }
 
-fun RawTransactionEvent?.attributesExclude(vararg eventTypesToExclude: EventAttributeType): Set<RawTransactionEventAttribute> {
+fun RawTransactionEvent?.attributesExclude(
+    vararg eventTypesToExclude: EventAttributeType
+): Set<RawTransactionEventAttribute> {
     return this?.attributes?.filter { rawTransactionEventAttribute ->
         eventTypesToExclude.none { singleEventTypeToExclude ->
             singleEventTypeToExclude.values.contains(rawTransactionEventAttribute.key)

@@ -73,6 +73,7 @@ internal class PubKey {
      *
      * @return <a href="https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki">bech32</a> formatted string
      */
+    @Suppress("MagicNumber")
     fun toBech32(hrpPrefix: String /*= DEFAULT_BECH32_HRP_PREFIX*/): String {   // dev3 comment out default arg
         val encodedBody: ByteArray = Amino.addAminoPrefix(encodingType, body)
 

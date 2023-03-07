@@ -40,10 +40,7 @@ internal object Amino {
             hash.size
         )
         require(body.size <= SECP256K1_KEY_SIZE) {
-            String.format(
-                "The body size is %d bytes. Currently, amino encoding is only supported for secp256k1 keys.",
-                body.size
-            )
+            "The body size is ${body.size} bytes. Currently, amino encoding is only supported for secp256k1 keys."
         }
         val sizePrefix = VarInt(body.size.toLong()).encode()
         return Bytes.concat(
@@ -58,9 +55,7 @@ internal object Amino {
 
     fun getNonZeroValueIndex(hash: ByteArray, start: Int, end: Int): Int {
         require(!(start < 0 || end > hash.size)) {
-            String.format(
-                "Invalid index (start: %d, end: %d, length: %d)", start, end, hash.size
-            )
+            "Invalid index (start: $start, end: $end, length: ${hash.size})"
         }
         for (i in start until end) {
             if (hash[i].toInt() != 0x00) {

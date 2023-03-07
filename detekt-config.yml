@@ -1,0 +1,5 @@
+complexity:
+  LongParameterList:
+    functionThreshold: 7
+    constructorThreshold: 7
+    ignoreDefaultParameters: true

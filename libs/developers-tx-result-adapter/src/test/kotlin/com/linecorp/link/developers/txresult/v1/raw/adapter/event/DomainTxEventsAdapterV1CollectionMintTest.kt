@@ -137,7 +137,8 @@ class DomainTxEventsAdapterV1CollectionMintTest {
     @Test
     fun `given collection_multi_recipient_multi_mint_nft tx-result, then extract 'EventCollectionNftMinted' `() {
         val rawTransactionInJsonText =
-            RawTransactionLoader.loadRawTransactionResultInJsonText("raw-transaction/collection_multi_recipient_multi_mint_nft.json")
+            RawTransactionLoader.loadRawTransactionResultInJsonText(
+                "raw-transaction/collection_multi_recipient_multi_mint_nft.json")
 
         val rawTransactionResult = jsonRawTransactionResultAdapter.adapt(rawTransactionInJsonText)
 
@@ -179,10 +180,13 @@ class DomainTxEventsAdapterV1CollectionMintTest {
         assertEquals("EventCollectionNftMinted", eventMintNft3.eventName)
     }
 
+    @Suppress("MaxLineLength")
     @Test
     fun `given collection_multi_mint_nft collection_multi_recipient_multi_mint_nft_different_recipients-result, then extract 'EventCollectionNftMinted' `() {
         val rawTransactionInJsonText =
-            RawTransactionLoader.loadRawTransactionResultInJsonText("raw-transaction/collection_multi_recipient_multi_mint_nft_different_recipients.json")
+            RawTransactionLoader
+                .loadRawTransactionResultInJsonText(
+                    "raw-transaction/collection_multi_recipient_multi_mint_nft_different_recipients.json")
 
         val rawTransactionResult = jsonRawTransactionResultAdapter.adapt(rawTransactionInJsonText)
 
