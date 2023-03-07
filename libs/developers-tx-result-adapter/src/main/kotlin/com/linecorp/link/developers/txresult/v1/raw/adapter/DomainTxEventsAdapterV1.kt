@@ -54,7 +54,7 @@ class DomainTxEventsAdapterV1 : TxResultAdapter<RawTransactionResult, Set<Transa
         }
     }
 
-    @Suppress("LongMethod", "CyclomaticComplexMethod")
+    @Suppress("LongMethod", "CyclomaticComplexMethod", "ComplexMethod")
     private fun resolveTransactionEvent(
         eventType: RawMessageEventKeyType,
         event: RawTransactionEvent,
