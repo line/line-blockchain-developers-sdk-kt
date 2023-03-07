@@ -18,20 +18,25 @@ package com.linecorp.link.developers.chain.crypto
 
 import java.io.ByteArrayOutputStream
 
+@Suppress("MagicNumber")
 internal object Bech32Utils {
     @JvmStatic
     fun convertBits(
-        `in`: ByteArray, inStart: Int, inLen: Int,
-        fromBits: Int, toBits: Int, pad: Boolean
+        input: ByteArray,
+        inStart: Int,
+        inLen: Int,
+        fromBits: Int,
+        toBits: Int,
+        pad: Boolean
     ): ByteArray {
         var acc = 0
         var bits = 0
         val out = ByteArrayOutputStream(64)
         val maxv = (1 shl toBits) - 1
-        val max_acc = (1 shl (fromBits + toBits - 1)) - 1
+        val maxAcc = (1 shl (fromBits + toBits - 1)) - 1
         for (i in 0 until inLen) {
-            val value = `in`[i + inStart].toInt() and 0xff
-            acc = ((acc shl fromBits) or value) and max_acc
+            val value = input[i + inStart].toInt() and 0xff
+            acc = ((acc shl fromBits) or value) and maxAcc
             bits += fromBits
             while (bits >= toBits) {
                 bits -= toBits
@@ -42,7 +47,9 @@ internal object Bech32Utils {
             if (bits > 0) {
                 out.write((acc shl (toBits - bits)) and maxv)
             }
-        } else require(!(bits >= fromBits || ((acc shl (toBits - bits)) and maxv) != 0)) { "Could not convert bits, invalid padding" }
+        } else require(!(bits >= fromBits || ((acc shl (toBits - bits)) and maxv) != 0)) {
+            "Could not convert bits, invalid padding"
+        }
         return out.toByteArray()
     }
 }

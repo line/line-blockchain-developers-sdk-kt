@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package com.linecorp.link.developers.client.api
+package com.linecorp.link.developers.client.request
 
 const val V1 = "/v1"
 const val V2 = "/v2"
@@ -95,7 +95,8 @@ const val NON_FUNGIBLE_TOKEN_ID_PATH =
 
 const val NON_FUNGIBLE_TOKEN_MINT_PATH = "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/mint"
 const val NON_FUNGIBLE_TOKEN_MULTI_MINT_PATH = "$V1/item-tokens/{contractId}/non-fungibles/multi-mint"
-const val NON_FUNGIBLE_TOKEN_MULTI_RECIPIENTS_MULTI_MINT_PATH = "$V1/item-tokens/{contractId}/non-fungibles/multi-recipients/multi-mint"
+const val NON_FUNGIBLE_TOKEN_MULTI_RECIPIENTS_MULTI_MINT_PATH =
+    "$V1/item-tokens/{contractId}/non-fungibles/multi-recipients/multi-mint"
 const val NON_FUNGIBLE_TOKEN_BURN_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}/burn"
 const val NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH =
@@ -110,11 +111,15 @@ const val NON_FUNGIBLE_TOKEN_PARENT_PATH =
 const val NON_FUNGIBLE_TOKEN_ROOT_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}/root"
 
-const val ITEM_TOKEN_NFT_MEDIA_REFRESH_STATUS_PATH = "$V1/item-tokens/{contractId}/non-fungibles/media-resources/{requestId}/status"
-const val ITEM_TOKEN_FT_MEDIA_REFRESH_STATUS_PATH = "$V1/item-tokens/{contractId}/fungibles/media-resources/{requestId}/status"
+const val ITEM_TOKEN_NFT_MEDIA_REFRESH_STATUS_PATH =
+    "$V1/item-tokens/{contractId}/non-fungibles/media-resources/{requestId}/status"
+const val ITEM_TOKEN_FT_MEDIA_REFRESH_STATUS_PATH =
+    "$V1/item-tokens/{contractId}/fungibles/media-resources/{requestId}/status"
 
-const val ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_STATUS_PATH = "$V1/item-tokens/{contractId}/non-fungibles/thumbnails/{requestId}/status"
-const val ITEM_TOKEN_FT_THUMBNAIL_REFRESH_STATUS_PATH = "$V1/item-tokens/{contractId}/fungibles/thumbnails/{requestId}/status"
+const val ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_STATUS_PATH =
+    "$V1/item-tokens/{contractId}/non-fungibles/thumbnails/{requestId}/status"
+const val ITEM_TOKEN_FT_THUMBNAIL_REFRESH_STATUS_PATH =
+    "$V1/item-tokens/{contractId}/fungibles/thumbnails/{requestId}/status"
 
 
 

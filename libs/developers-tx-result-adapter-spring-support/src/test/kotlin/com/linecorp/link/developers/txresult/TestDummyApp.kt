@@ -21,6 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
 
+@Suppress("EmptyClassBlock")
 @SpringBootApplication()
 @ConfigurationPropertiesScan(
     "com.linecorp.link.developers.txresult"

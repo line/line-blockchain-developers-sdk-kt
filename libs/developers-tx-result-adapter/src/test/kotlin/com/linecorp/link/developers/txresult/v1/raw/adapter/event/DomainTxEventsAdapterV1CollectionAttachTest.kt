@@ -103,7 +103,8 @@ class DomainTxEventsAdapterV1CollectionAttachTest {
     @Test
     fun `given collection_attach_nft_already_has_children tx-result, then extract 'EventCollectionNftAttached' `() {
         val rawTransactionInJsonText =
-            RawTransactionLoader.loadRawTransactionResultInJsonText("raw-transaction/collection_attach_nft_already_has_children.json")
+            RawTransactionLoader.loadRawTransactionResultInJsonText(
+                "raw-transaction/collection_attach_nft_already_has_children.json")
 
         val rawTransactionResult = jsonRawTransactionResultAdapter.adapt(rawTransactionInJsonText)
 

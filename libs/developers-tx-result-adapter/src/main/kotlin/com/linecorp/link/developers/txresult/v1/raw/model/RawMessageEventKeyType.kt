@@ -52,19 +52,28 @@ enum class RawMessageEventKeyType(
     CollectionMsgMintNFT(type = "collection/MsgMintNFT", eventName = "mint_nft"),
     CollectionMsgBurnFT(type = "collection/MsgBurnFT", eventName = "burn_ft"),
     CollectionMsgBurnFTFrom(type = "collection/MsgBurnFTFrom", eventName = "burn_ft_from"),
-    CollectionOperationBurnNFT(type = "", eventName = "operation_burn_nft"), // exceptional case that not enough data from single event
+
+    // exceptional case that not enough data from single event
+    CollectionOperationBurnNFT(type = "", eventName = "operation_burn_nft"),
+
     CollectionMsgBurnNFT(type = "collection/MsgBurnNFT", eventName = "burn_nft"),
     CollectionMsgBurnNFTFrom(type = "collection/MsgBurnNFTFrom", eventName = "burn_nft_from"),
     CollectionMsgTransferFT(type = "collection/MsgTransferFT", eventName = "transfer_ft"),
     CollectionMsgTransferFTFrom(type = "collection/MsgTransferFTFrom", eventName = "transfer_ft_from"),
     CollectionMsgTransferNFT(type = "collection/MsgTransferNFT", eventName = "transfer_nft"),
     CollectionMsgTransferNFTFrom(type = "collection/MsgTransferNFTFrom", eventName = "transfer_nft_from"),
-    CollectionOperationTransferNFT(type = "", eventName = "operation_transfer_nft"), // exceptional case that not enough data from single event
+
+    // exceptional case that not enough data from single event
+    CollectionOperationTransferNFT(type = "", eventName = "operation_transfer_nft"),
+
     CollectionMsgAttach(type = "collection/MsgAttach", eventName = "attach"),
     CollectionMsgAttachFrom(type = "collection/MsgAttachFrom", eventName = "attach_from"),
     CollectionMsgDetach(type = "collection/MsgDetach", eventName = "detach"),
     CollectionMsgDetachFrom(type = "collection/MsgDetachFrom", eventName = "detach_from"),
-    CollectionOperationRootChanged(type = "", eventName = "operation_root_changed"), // exceptional case that not enough data from single event
+
+    // exceptional case that not enough data from single event
+    CollectionOperationRootChanged(type = "", eventName = "operation_root_changed"),
+
     CollectionMsgApprove(type = "collection/MsgApprove", eventName = "approve_collection"),
     CollectionMsgModify(
         type = "collection/MsgModify",

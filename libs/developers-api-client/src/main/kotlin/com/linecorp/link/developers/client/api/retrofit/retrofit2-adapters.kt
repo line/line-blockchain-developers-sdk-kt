@@ -18,6 +18,8 @@
 package com.linecorp.link.developers.client.api.retrofit
 
 import com.linecorp.link.developers.client.response.GenericResponse
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 import okhttp3.Request
 import okhttp3.ResponseBody
 import okio.Timeout
@@ -27,8 +29,6 @@ import retrofit2.Callback
 import retrofit2.Converter
 import retrofit2.Response
 import retrofit2.Retrofit
-import java.lang.reflect.ParameterizedType
-import java.lang.reflect.Type
 
 @Suppress("TooManyFunctions")
 internal class NetworkResponseCall<R : Any>(
@@ -74,6 +74,7 @@ internal class NetworkResponseCall<R : Any>(
         return Response.success(response as R)
     }
 
+    @Suppress("TooGenericExceptionCaught", "SwallowedException")
     private fun resolveErrorBody(error: ResponseBody?): R? {
         val errorBody = when {
             error == null || error.contentLength() == 0L -> null
@@ -131,27 +132,28 @@ class NetworkResponseAdapterFactory : CallAdapter.Factory() {
         annotations: Array<Annotation>,
         retrofit: Retrofit
     ): CallAdapter<*, *>? {
-        if (Call::class.java != getRawType(returnType)) {
-            return null
-        }
+        return if (Call::class.java != getRawType(returnType)) {
+            null
+        } else {
+            check(returnType is ParameterizedType) {
+                "return type must be parameterized as Call<NetworkResponse<<Foo>> or Call<NetworkResponse<out Foo>>"
+            }
 
-        check(returnType is ParameterizedType) {
-            "return type must be parameterized as Call<NetworkResponse<<Foo>> or Call<NetworkResponse<out Foo>>"
-        }
+            val responseType = getParameterUpperBound(0, returnType)
+            if (getRawType(responseType) != GenericResponse::class.java) {
+                null
+            } else {
+                // the response type is Service and should be parameterized
+                check(responseType is ParameterizedType)
+                { "Response must be parameterized as NetworkResponse<Foo> or NetworkResponse<out Foo>" }
 
-        val responseType = getParameterUpperBound(0, returnType)
-        if (getRawType(responseType) != GenericResponse::class.java) {
-            return null
+                val errorBodyConverter = retrofit.nextResponseBodyConverter<Any>(
+                    null,
+                    responseType,
+                    annotations
+                )
+                NetworkResponseAdapter<Any>(responseType, errorBodyConverter)
+            }
         }
-        // the response type is Service and should be parameterized
-        check(responseType is ParameterizedType) { "Response must be parameterized as NetworkResponse<Foo> or NetworkResponse<out Foo>" }
-
-//        val bodyType = getParameterUpperBound(0, responseType)
-        val errorBodyConverter = retrofit.nextResponseBodyConverter<Any>(
-            null,
-            responseType,
-            annotations
-        )
-        return NetworkResponseAdapter<Any>(responseType, errorBodyConverter)
     }
 }

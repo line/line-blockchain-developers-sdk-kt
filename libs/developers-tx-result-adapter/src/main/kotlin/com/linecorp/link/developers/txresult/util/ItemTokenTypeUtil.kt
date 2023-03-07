@@ -23,22 +23,27 @@ import com.linecorp.link.developers.txresult.exception.InvalidTokenTypeException
 object ItemTokenTypeUtil {
     private const val MINIMUM_TOKEN_ID_LENGTH = 8
     private const val FULL_TOKEN_ID_LENGTH = 16
+
+    @Suppress("MagicNumber", "MemberVisibilityCanBePrivate")
     fun tokenType(tokenId: String): String {
         validateTokenType(tokenId)
         return tokenId.substring((0..7))
     }
 
+    @Suppress("MagicNumber")
     fun tokenIndex(tokenId: String): String {
         validateTokenIdWithIndex(tokenId)
         return tokenId.substring((8..15))
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     fun validateTokenType(tokenType: String) {
         if (tokenType.isBlank() || tokenType.length < MINIMUM_TOKEN_ID_LENGTH) {
             throw InvalidTokenTypeException(tokenType)
         }
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     fun validateTokenIdWithIndex(tokenId: String) {
         if (tokenId.isBlank() || tokenId.length < FULL_TOKEN_ID_LENGTH) {
             throw InvalidTokenIdException(tokenId)

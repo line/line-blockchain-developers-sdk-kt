@@ -44,6 +44,13 @@ allprojects {
         sourceCompatibility = "1.8"
         targetCompatibility = "1.8"
     }
+
+    afterEvaluate {
+        detekt {
+            buildUponDefaultConfig = true
+            config.setFrom(files("$rootDir/detekt-config.yml"))
+        }
+    }
 }
 
 subprojects {
@@ -62,7 +69,8 @@ plugins {
     java
     kotlin("jvm") version Versions.kotlin apply false
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
+    // https://detekt.dev/docs/introduction/compatibility/
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 group = projectGroupId

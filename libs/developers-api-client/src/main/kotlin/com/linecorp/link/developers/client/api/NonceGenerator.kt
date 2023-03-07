@@ -25,6 +25,7 @@ interface NonceGenerator {
 }
 
 class DefaultStringNonceGenerator : NonceGenerator {
+    @Suppress("MagicNumber")
     override fun newNonce(): String {
         return RandomStringUtils.random(8, 0, 0, true, true, null, SecureRandom())
     }
