@@ -1,8 +1,9 @@
 name: GitHub Actions Demo
 run-name: new tag "${{ github.ref_name }}" triggered maven-central publishing 🚀
 on:
-  release:
-    types: [ created ]
+  push:
+    tags:
+      - '**'
 
 jobs:
   build:
