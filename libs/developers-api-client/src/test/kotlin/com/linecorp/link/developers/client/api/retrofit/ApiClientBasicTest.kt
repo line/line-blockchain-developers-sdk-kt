@@ -54,7 +54,6 @@ class ApiClientBasicTest {
             enableLogging = true,
             apiKeySecret = apiKeySecret
         )
-        val now = clock.instant().toEpochMilli()
 
         val timeResponse = runBlocking {
             delay(1000)
