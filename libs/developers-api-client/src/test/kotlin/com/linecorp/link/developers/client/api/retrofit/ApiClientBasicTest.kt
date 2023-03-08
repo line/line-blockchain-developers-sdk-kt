@@ -39,8 +39,6 @@ class ApiClientBasicTest {
     private val apiKeySecret =
         ApiKeySecret(System.getenv("API_KEY"), System.getenv("API_SECRET"))
 
-    private val clock = Clock.systemUTC()
-
     @BeforeEach
     fun setUp() {
         retrofitApiClientFactory = RetrofitApiClientFactory()
