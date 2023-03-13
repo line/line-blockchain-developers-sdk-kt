@@ -44,7 +44,7 @@ class ChainPropertiesLoadingAndBeansTest {
     private lateinit var txSummaryAdapterV1: TxResultAdapter<RawTransactionResult, TxResultSummary>
 
     @Autowired
-    private lateinit var txEventsAdapterV1: TxResultAdapter<RawTransactionResult, Set<TransactionEvent>>
+    private lateinit var txEventsAdapterV1: TxResultAdapter<RawTransactionResult, List<TransactionEvent>>
 
     @Autowired
     private lateinit var txResultAdapterV1: TxResultAdapter<RawTransactionResult, TxResult>

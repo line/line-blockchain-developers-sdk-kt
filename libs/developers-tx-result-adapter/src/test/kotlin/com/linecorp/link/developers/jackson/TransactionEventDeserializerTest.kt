@@ -198,7 +198,7 @@ class TransactionEventDeserializerTest {
         val actual = objectMapper.readValue(inputStream, typeReference)
         assertTrue(actual.events.any { it is EventTokenProxyApproved })
         val eventCoinTransferred = actual.events.filterIsInstance<EventTokenProxyApproved>().first()
-        assertTrue(eventCoinTransferred.proxyAddress?.isNotBlank() ?: false)
+        assertTrue(eventCoinTransferred.proxyAddress.isNotBlank())
     }
 
 }

@@ -28,16 +28,16 @@ import com.linecorp.link.developers.txresult.v1.raw.model.convertToEventType
 import com.linecorp.link.developers.txresult.v1.raw.model.findAttribute
 import com.linecorp.link.developers.txresult.v1.raw.model.findEvent
 
-class DomainTxEventsAdapterV1 : TxResultAdapter<RawTransactionResult, Set<TransactionEvent>> {
+class DomainTxEventsAdapterV1 : TxResultAdapter<RawTransactionResult, List<TransactionEvent>> {
 
     private val txEventConverter: DomainTxEventConverterV1 = DomainTxEventConverterV1()
 
-    override fun adapt(input: RawTransactionResult): Set<TransactionEvent> {
+    override fun adapt(input: RawTransactionResult): List<TransactionEvent> {
 
         val logs = input.logs
 
         return if (input.code != 0 || logs.isNullOrEmpty()) {
-            emptySet()
+            emptyList()
         } else {
             logs.flatMap { log ->
                 val msgIndex = log.msgIndex
@@ -50,7 +50,7 @@ class DomainTxEventsAdapterV1 : TxResultAdapter<RawTransactionResult, Set<Transa
                 } else {
                     resolveTransactionEvent(eventType, event, log)
                 }
-            }.toSet()
+            }
         }
     }
 

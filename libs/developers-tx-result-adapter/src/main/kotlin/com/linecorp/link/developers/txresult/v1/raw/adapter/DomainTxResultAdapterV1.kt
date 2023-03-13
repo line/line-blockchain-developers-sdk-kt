@@ -26,7 +26,7 @@ import com.linecorp.link.developers.txresult.v1.raw.model.RawTransactionResult
 class DomainTxResultAdapterV1(
     private val txResultSummaryAdapter: TxResultAdapter<RawTransactionResult, TxResultSummary>,
     private val txMessageAdapter: TxResultAdapter<RawTransactionResult, Set<TxMessage>>,
-    private val txEventsAdapter: TxResultAdapter<RawTransactionResult, Set<TransactionEvent>>,
+    private val txEventsAdapter: TxResultAdapter<RawTransactionResult, List<TransactionEvent>>,
 ) : TxResultAdapter<RawTransactionResult, TxResult> {
     override fun adapt(input: RawTransactionResult): TxResult {
         return TxResult(
@@ -36,6 +36,3 @@ class DomainTxResultAdapterV1(
         )
     }
 }
-
-
-
