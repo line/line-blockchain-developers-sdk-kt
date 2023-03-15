@@ -49,7 +49,6 @@ const val V2_WALLET_LIST_PATH = "$V2/wallets"
 const val V1_WALLET_PATH = "$V1_WALLET_LIST_PATH/{walletAddress}"
 const val V2_WALLET_PATH = "$V2_WALLET_LIST_PATH/{walletAddress}"
 const val WALLET_SERVICE_TOKENS_BALANCE_PATH = "$V1_WALLET_PATH/service-tokens"
-const val WALLET_BASE_COIN_BALANCE_PATH = "$V1_WALLET_PATH/base-coin"
 const val WALLET_SERVICE_TOKEN_BALANCE_PATH = "$WALLET_SERVICE_TOKENS_BALANCE_PATH/{contractId}"
 const val WALLET_FUNGIBLE_TOKENS_BALANCE_PATH = "$V1_WALLET_PATH/item-tokens/{contractId}/fungibles"
 const val WALLET_FUNGIBLE_TOKEN_BALANCE_PATH = "$WALLET_FUNGIBLE_TOKENS_BALANCE_PATH/{tokenType}"
@@ -68,8 +67,6 @@ const val WALLET_NON_FUNGIBLE_TOKEN_BALANCE_PATH =
 // transfer
 const val SERVICE_TOKEN_TRANSFER_PATH =
     "$WALLET_SERVICE_TOKEN_BALANCE_PATH/transfer"
-
-const val BASE_COIN_TRANSFER_PATH = "$WALLET_BASE_COIN_BALANCE_PATH/transfer"
 
 const val WALLET_NON_FUNGIBLE_TOKEN_TRANSFER_PATH = "$WALLET_NON_FUNGIBLE_TOKEN_BALANCE_PATH/transfer"
 const val WALLET_NON_FUNGIBLE_TOKEN_BATCH_TRANSFER_PATH =
@@ -129,7 +126,6 @@ const val V2_USERS = "$V2/users"
 const val USER_DETAIL_PATH = "$V1_USERS/{userId}"
 const val V1_USER_TRANSACTIONS_PATH = "$V1_USERS/{userId}/transactions"
 const val V2_USER_TRANSACTIONS_PATH = "$V2_USERS/{userId}/transactions"
-const val USER_BASE_COIN_BALANCE_PATH = "$V1_USERS/{userId}/base-coin"
 const val USER_SERVICE_TOKENS_BALANCE_PATH = "$V1_USERS/{userId}/service-tokens"
 const val USER_SERVICE_TOKEN_BALANCE_PATH = "$V1_USERS/{userId}/service-tokens/{contractId}"
 
@@ -147,7 +143,6 @@ const val USER_NON_FUNGIBLE_TOKEN_BALANCES_WITH_TYPE_PATH =
 
 const val REQUEST_SESSION_TOKEN_PATH = "$V1/user-requests/{requestSessionToken}"
 const val COMMIT_SESSION_TOKEN_PATH = "$V1/user-requests/{requestSessionToken}/commit"
-const val ISSUE_SESSION_TOKEN_FOR_BASE_COIN_PATH = "$V1_USERS/{userId}/base-coin/request-transfer"
 const val ISSUE_SESSION_TOKEN_FOR_SERVICE_TOKEN_PATH =
     "$V1_USERS/{userId}/service-tokens/{contractId}/request-transfer"
 const val ISSUE_SESSION_TOKEN_FOR_SERVICE_TOKEN_PROXY = "$V1_USERS/{userId}/service-tokens/{contractId}/request-proxy"
