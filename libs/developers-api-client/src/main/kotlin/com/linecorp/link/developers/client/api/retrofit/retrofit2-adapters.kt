@@ -20,6 +20,7 @@ package com.linecorp.link.developers.client.api.retrofit
 import com.linecorp.link.developers.client.response.GenericResponse
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
+import mu.KotlinLogging
 import okhttp3.Request
 import okhttp3.ResponseBody
 import okio.Timeout
@@ -29,6 +30,8 @@ import retrofit2.Callback
 import retrofit2.Converter
 import retrofit2.Response
 import retrofit2.Retrofit
+
+private val logger = KotlinLogging.logger {}
 
 @Suppress("TooManyFunctions")
 internal class NetworkResponseCall<R : Any>(
@@ -62,13 +65,14 @@ internal class NetworkResponseCall<R : Any>(
             }
 
             override fun onFailure(call: Call<R>, throwable: Throwable) {
-                val response: Response<R> = resoleFailure(throwable)
+                val response: Response<R> = resolveFailure(throwable)
                 callback.onResponse(this@NetworkResponseCall, response)
             }
         })
     }
 
-    private fun resoleFailure(throwable: Throwable): Response<R> {
+    private fun resolveFailure(throwable: Throwable): Response<R> {
+        logger.error(throwable) { "Fail to handle response: cause: ${throwable.message}" }
         val response = GenericResponse.unknownResponse(throwable)
         @Suppress("UNCHECKED_CAST")
         return Response.success(response as R)

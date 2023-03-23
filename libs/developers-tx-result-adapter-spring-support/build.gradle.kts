@@ -48,6 +48,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation("org.apache.commons:commons-lang3:3.12.0")
 
+    implementation("org.springframework:spring-webflux:5.3.24")
+
     // spring
     implementation("org.yaml:snakeyaml:1.33")
     implementation("org.springframework.boot:spring-boot-starter") {
@@ -62,7 +64,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.12.4")
     testImplementation("com.squareup.okhttp3:okhttp:4.10.0")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
-    testImplementation("org.springframework:spring-webflux:5.3.24")
+
     testImplementation("org.springframework.boot:spring-boot-starter-reactor-netty:2.7.7")
 }
 
