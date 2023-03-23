@@ -19,8 +19,6 @@ package com.linecorp.link.developers.client.api.retrofit
 
 import com.linecorp.link.developers.client.api.ApiKeySecret
 import com.linecorp.link.developers.client.request.IssueServiceTokenRequest
-import com.linecorp.link.developers.client.request.UserBaseCoinTransferRequest
-import java.time.Clock
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull

@@ -17,8 +17,8 @@
 
 package com.linecorp.link.developers.client.api
 
-import org.apache.commons.lang3.StringUtils
 import java.util.TreeMap
+import org.apache.commons.lang3.StringUtils
 
 interface RequestBodyFlattener {
     fun flatten(body: Map<String, Any?>): String

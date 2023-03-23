@@ -17,9 +17,9 @@
 package com.linecorp.link.developers.chain.crypto
 
 import com.google.common.primitives.Bytes
+import java.util.Arrays
 import org.bitcoinj.core.VarInt
 import org.bouncycastle.jcajce.provider.digest.SHA256.Digest
-import java.util.Arrays
 
 internal object Amino {
     private const val DISAMBIGUATION_BYTE_LENGTH = 3

@@ -20,10 +20,10 @@ import com.linecorp.link.developers.txresult.core.event.bank.EventCoinTransferre
 import com.linecorp.link.developers.txresult.util.RawTransactionLoader
 import com.linecorp.link.developers.txresult.v1.raw.adapter.DomainTxEventsAdapterV1
 import com.linecorp.link.developers.txresult.v1.raw.adapter.JsonRawTransactionResultAdapter
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class DomainTxEventsAdapterV1CoinTest {
     private lateinit var underTest: DomainTxEventsAdapterV1

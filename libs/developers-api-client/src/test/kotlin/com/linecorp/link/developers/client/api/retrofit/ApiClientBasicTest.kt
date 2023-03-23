@@ -18,7 +18,6 @@
 package com.linecorp.link.developers.client.api.retrofit
 
 import com.linecorp.link.developers.client.api.ApiKeySecret
-import java.time.Clock
 import java.time.Instant
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
- com.linecorp.link.developers.txresult.TxResultAutoConfiguration
+ com.linecorp.link.developers.txresult.TxResultAutoConfiguration, \
+ com.linecorp.link.developers.client.WebClientConfiguration

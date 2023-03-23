@@ -17,10 +17,7 @@
 
 package com.linecorp.link.developers.client.api.retrofit
 
-import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.module.SimpleModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.linecorp.link.developers.client.api.ApiClient
 import com.linecorp.link.developers.client.api.ApiClientFactory
 import com.linecorp.link.developers.client.api.ApiKeySecret
@@ -29,8 +26,6 @@ import com.linecorp.link.developers.client.api.DefaultRequestQueryParameterOrder
 import com.linecorp.link.developers.client.api.RequestHeadersAppender
 import com.linecorp.link.developers.client.api.RequestQueryParameterSorter
 import com.linecorp.link.developers.jackson.JacksonObjectMapperFactory
-import com.linecorp.link.developers.jackson.TransactionEventDeserializer
-import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

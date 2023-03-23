@@ -17,11 +17,11 @@
 package com.linecorp.link.developers.txresult.v1.raw.adapter
 
 import com.linecorp.link.developers.txresult.util.RawTransactionLoader
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class DomainTxSummaryAdapterV1Test {
     private lateinit var underTest: DomainTxSummaryAdapterV1

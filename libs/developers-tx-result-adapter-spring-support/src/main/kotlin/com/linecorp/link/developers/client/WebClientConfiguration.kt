@@ -19,7 +19,6 @@ package com.linecorp.link.developers.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.linecorp.link.developers.jackson.JacksonObjectMapperFactory
-import com.linecorp.link.developers.txresult.v1.raw.adapter.JsonRawTransactionResultAdapter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary

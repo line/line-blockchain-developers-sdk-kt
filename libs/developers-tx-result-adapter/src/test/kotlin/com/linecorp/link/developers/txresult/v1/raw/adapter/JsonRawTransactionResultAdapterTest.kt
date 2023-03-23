@@ -17,11 +17,11 @@
 package com.linecorp.link.developers.txresult.v1.raw.adapter
 
 import com.linecorp.link.developers.txresult.helper.RawTransactionLoader
+import kotlin.test.assertTrue
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-import kotlin.test.assertTrue
 
 class JsonRawTransactionResultAdapterTest {
     private lateinit var underTest: JsonRawTransactionResultAdapter
