@@ -17,8 +17,17 @@
 
 package com.linecorp.link.developers.client
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.module.SimpleModule
+import com.fasterxml.jackson.module.kotlin.kotlinModule
 import com.linecorp.link.developers.jackson.JacksonObjectMapperFactory
+import com.linecorp.link.developers.jackson.TransactionEventDeserializer
+import com.linecorp.link.developers.txresult.core.model.TransactionEvent
+import org.springframework.boot.autoconfigure.AutoConfigureBefore
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
@@ -26,23 +35,38 @@ import org.springframework.http.MediaType
 import org.springframework.http.codec.ClientCodecConfigurer
 import org.springframework.http.codec.json.Jackson2JsonDecoder
 import org.springframework.http.codec.json.Jackson2JsonEncoder
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 import org.springframework.web.reactive.function.client.ExchangeStrategies
 import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
+@AutoConfigureBefore(
+    value = [JacksonAutoConfiguration::class]
+)
 class WebClientConfiguration {
 
-    @Primary
     @Bean
+    @Primary
     fun lbdWebClient(objectMapper: ObjectMapper): WebClient {
         val strategies = buildWebClientStrategies(objectMapper)
         return WebClient.builder().exchangeStrategies(strategies).build()
     }
 
-    @Primary
     @Bean
+    @ConditionalOnMissingBean
     fun objectMapper(): ObjectMapper {
         return JacksonObjectMapperFactory().create()
+    }
+
+    @Bean
+    @Primary
+    fun jacksonObjectMapperBuilder(): Jackson2ObjectMapperBuilder {
+        val simpleModule = SimpleModule().addDeserializer(
+            TransactionEvent::class.java,
+            TransactionEventDeserializer()
+        )
+        return Jackson2ObjectMapperBuilder().modules(kotlinModule(), simpleModule)
+            .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
     }
 
     private fun buildWebClientStrategies(objectMapper: ObjectMapper): ExchangeStrategies {

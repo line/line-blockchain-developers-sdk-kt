@@ -17,9 +17,14 @@
 
 package com.linecorp.link.developers.txresult
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.linecorp.link.developers.txresult.core.model.TxResult
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
+import org.springframework.core.io.ClassPathResource
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
 
 @Suppress("EmptyClassBlock")
 @SpringBootApplication()
@@ -32,3 +37,33 @@ class TestDummyApp {
 fun main(args: Array<String>) {
     runApplication<TestDummyApp>(*args)
 }
+
+
+@RestController
+class SampleController(
+    private val objectMapper: ObjectMapper
+) {
+    @GetMapping("/test")
+    fun test(): String {
+        return objectMapper.writeValueAsString(TestData(name = "test"))
+    }
+
+    @GetMapping("/sample-tx-result/json-string")
+    fun sampleTxResultJsonString(): String {
+        val txJsonString = ClassPathResource("./txresults/burn-ft-txresult-response.json").inputStream.bufferedReader()
+            .use { it.readText() }
+        val txResult = objectMapper.readValue(txJsonString, TxResult::class.java)
+        return objectMapper.writeValueAsString(txResult)
+    }
+
+    @GetMapping("/sample-tx-result")
+    fun sampleTxResult(): TxResult {
+        val txJsonString = ClassPathResource("./txresults/burn-ft-txresult-response.json").inputStream.bufferedReader()
+            .use { it.readText() }
+        return objectMapper.readValue(txJsonString, TxResult::class.java)
+    }
+}
+
+data class TestData(
+    val name: String
+)

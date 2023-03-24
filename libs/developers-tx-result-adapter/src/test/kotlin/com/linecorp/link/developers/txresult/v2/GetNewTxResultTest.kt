@@ -24,6 +24,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.linecorp.link.developers.jackson.TransactionEventDeserializer
 import com.linecorp.link.developers.txresult.core.model.TransactionEvent
 import com.linecorp.link.developers.txresult.core.model.TxResult
+import com.linecorp.link.developers.util.TestSocketUtils
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 import okhttp3.mockwebserver.MockResponse
@@ -44,7 +45,7 @@ import org.springframework.web.reactive.function.client.WebClient
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GetNewTxResultTest {
     private lateinit var mockWebServer: MockWebServer
-    private val mockServerPort = 3000
+    private val mockServerPort = TestSocketUtils.findAvailableTcpPort()
 
     private val objectMapper = createObjectMapper()
     private val strategies = ExchangeStrategies
