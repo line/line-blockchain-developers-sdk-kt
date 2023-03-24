@@ -4,4 +4,3 @@ line:
       chain:
         is-main-net: false
         bech32-hrp: tlink
-        base-coin-denomination: tcony

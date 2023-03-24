@@ -25,7 +25,6 @@ import org.springframework.boot.context.properties.ConstructorBinding
 data class ChainProperties(
     val isMainNet: Boolean,
     val bech32Hrp: String,
-    val baseCoinDenomination: String
 ) {
     companion object {
         const val DEFAULT_HRP_PREFIX = "tlink"
