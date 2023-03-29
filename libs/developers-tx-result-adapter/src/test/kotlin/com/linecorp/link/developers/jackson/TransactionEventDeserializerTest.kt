@@ -135,15 +135,6 @@ class TransactionEventDeserializerTest {
     }
 
     @Test
-    fun `events from transferring base-coin tx-result`() {
-        val typeReference = object : TypeReference<TxResult>() {}
-        val inputStream =
-            this::class.java.classLoader.getResourceAsStream("./txresults/tranfer-base-coin-txresult.json")
-        val actual = objectMapper.readValue(inputStream, typeReference)
-        assertTrue(actual.events.any { it is EventCoinTransferred })
-    }
-
-    @Test
     fun `events from issuing service token tx-result`() {
         val typeReference = object : TypeReference<TxResult>() {}
         val inputStream =

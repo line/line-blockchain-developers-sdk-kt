@@ -19,7 +19,6 @@
 
 package com.linecorp.link.developers.client.api
 
-import com.linecorp.link.developers.client.request.BASE_COIN_TRANSFER_PATH
 import com.linecorp.link.developers.client.request.BatchTransferNonFungibleOfUserRequest
 import com.linecorp.link.developers.client.request.BatchTransferNonFungibleRequest
 import com.linecorp.link.developers.client.request.BurnFromServiceTokenRequest
@@ -35,7 +34,6 @@ import com.linecorp.link.developers.client.request.FUNGIBLE_TOKEN_UPDATE_PATH
 import com.linecorp.link.developers.client.request.FungibleTokenBurnRequest
 import com.linecorp.link.developers.client.request.FungibleTokenCreateUpdateRequest
 import com.linecorp.link.developers.client.request.FungibleTokenMintRequest
-import com.linecorp.link.developers.client.request.ISSUE_SESSION_TOKEN_FOR_BASE_COIN_PATH
 import com.linecorp.link.developers.client.request.ISSUE_SESSION_TOKEN_FOR_ITEM_TOKEN_PROXY
 import com.linecorp.link.developers.client.request.ISSUE_SESSION_TOKEN_FOR_SERVICE_TOKEN_PATH
 import com.linecorp.link.developers.client.request.ISSUE_SESSION_TOKEN_FOR_SERVICE_TOKEN_PROXY
@@ -84,13 +82,11 @@ import com.linecorp.link.developers.client.request.SERVICE_TOKEN_MINT_PATH
 import com.linecorp.link.developers.client.request.SERVICE_TOKEN_PATH
 import com.linecorp.link.developers.client.request.SERVICE_TOKEN_TRANSFER_PATH
 import com.linecorp.link.developers.client.request.TIME_API_PATH
-import com.linecorp.link.developers.client.request.TransferBaseCoinRequest
 import com.linecorp.link.developers.client.request.TransferFungibleTokenRequest
 import com.linecorp.link.developers.client.request.TransferNonFungibleOfUserRequest
 import com.linecorp.link.developers.client.request.TransferNonFungibleRequest
 import com.linecorp.link.developers.client.request.TransferServiceTokenRequest
 import com.linecorp.link.developers.client.request.TransferTokenOfUserRequest
-import com.linecorp.link.developers.client.request.USER_BASE_COIN_BALANCE_PATH
 import com.linecorp.link.developers.client.request.USER_DETAIL_PATH
 import com.linecorp.link.developers.client.request.USER_FUNGIBLE_TOKENS_BALANCE_PATH
 import com.linecorp.link.developers.client.request.USER_FUNGIBLE_TOKEN_BALANCE_PATH
@@ -110,7 +106,6 @@ import com.linecorp.link.developers.client.request.UpdateFungibleTokenResourceRe
 import com.linecorp.link.developers.client.request.UpdateNonFungibleTokenResourceRequest
 import com.linecorp.link.developers.client.request.UpdateServiceTokenRequest
 import com.linecorp.link.developers.client.request.UserAssetProxyRequest
-import com.linecorp.link.developers.client.request.UserBaseCoinTransferRequest
 import com.linecorp.link.developers.client.request.UserServiceTokenTransferRequest
 import com.linecorp.link.developers.client.request.V1_TRANSACTION_PATH
 import com.linecorp.link.developers.client.request.V1_USER_TRANSACTIONS_PATH
@@ -120,7 +115,6 @@ import com.linecorp.link.developers.client.request.V1_WALLET_TRANSACTIONS_PATH
 import com.linecorp.link.developers.client.request.V2_TRANSACTION_PATH
 import com.linecorp.link.developers.client.request.V2_USER_TRANSACTIONS_PATH
 import com.linecorp.link.developers.client.request.V2_WALLET_TRANSACTIONS_PATH
-import com.linecorp.link.developers.client.request.WALLET_BASE_COIN_BALANCE_PATH
 import com.linecorp.link.developers.client.request.WALLET_FUNGIBLE_TOKENS_BALANCE_PATH
 import com.linecorp.link.developers.client.request.WALLET_FUNGIBLE_TOKEN_BALANCE_PATH
 import com.linecorp.link.developers.client.request.WALLET_FUNGIBLE_TOKEN_TRANSFER_PATH
@@ -131,7 +125,6 @@ import com.linecorp.link.developers.client.request.WALLET_NON_FUNGIBLE_TOKEN_BAT
 import com.linecorp.link.developers.client.request.WALLET_NON_FUNGIBLE_TOKEN_TRANSFER_PATH
 import com.linecorp.link.developers.client.request.WALLET_SERVICE_TOKENS_BALANCE_PATH
 import com.linecorp.link.developers.client.request.WALLET_SERVICE_TOKEN_BALANCE_PATH
-import com.linecorp.link.developers.client.response.BaseCoinBalance
 import com.linecorp.link.developers.client.response.FungibleBalance
 import com.linecorp.link.developers.client.response.FungibleToken
 import com.linecorp.link.developers.client.response.FungibleTokenHolder
@@ -308,24 +301,6 @@ interface ApiClient {
         @Query("page") page: Int = 1,
         @Query("orderBy") orderBy: OrderBy = OrderBy.ASC,
     ): GenericResponse<Collection<TxResult>>
-
-
-    // wallet-balance
-    /**
-     * Retrieve base coin balance (service wallet)
-     * Only for Cashew
-     */
-    @GET(WALLET_BASE_COIN_BALANCE_PATH)
-    suspend fun baseCoinBalanceOfWallet(@Path("walletAddress") walletAddress: String): GenericResponse<BaseCoinBalance>
-
-    /**
-     * Transfer base coins (service wallet)
-     */
-    @POST(BASE_COIN_TRANSFER_PATH)
-    suspend fun transferBaseCoin(
-        @Path("walletAddress") walletAddress: String,
-        @Body request: TransferBaseCoinRequest,
-    ): GenericResponse<TransactionResponse>
 
     /**
      * Retrieve balance of all service tokens (service wallet)
@@ -777,14 +752,6 @@ interface ApiClient {
     ): GenericResponse<Collection<TxResult>>
 
     /**
-     * Retrieve base coin balance (user wallet)
-     */
-    @GET(USER_BASE_COIN_BALANCE_PATH)
-    suspend fun baseCoinBalanceOfUser(
-        @Path("userId") userId: String
-    ): GenericResponse<BaseCoinBalance>
-
-    /**
      * Retrieve balance of all service tokens (user wallet)
      */
     @GET(USER_SERVICE_TOKENS_BALANCE_PATH)
@@ -877,16 +844,6 @@ interface ApiClient {
     suspend fun commitRequestSession(
         @Path("requestSessionToken") requestSessionToken: String,
     ): GenericResponse<TransactionResponse>
-
-    /**
-     * Issue a session token for base coin transfer
-     */
-    @POST(ISSUE_SESSION_TOKEN_FOR_BASE_COIN_PATH)
-    suspend fun issueSessionTokenForBaseCoinTransfer(
-        @Path("userId") userId: String,
-        @Query("requestType") requestType: String,
-        @Body request: UserBaseCoinTransferRequest
-    ): GenericResponse<RequestSession>
 
     /**
      * Issue session token for service-token-proxy setting
