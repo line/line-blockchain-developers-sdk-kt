@@ -50,7 +50,6 @@ data class TxStatusResult(
 data class TxMessage(
     val msgIndex: Int,
     val requestType: String,
-    val details: Any,
 )
 
 interface TransactionEvent {
