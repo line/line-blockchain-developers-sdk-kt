@@ -20,6 +20,11 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.linecorp.link.developers.GenericResponse
 import com.linecorp.link.developers.txresult.v1.raw.model.RawTransactionResult
+import java.nio.file.Files
+import java.util.stream.Collectors
+import kotlin.io.path.toPath
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.AfterAll
@@ -30,11 +35,6 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
-import java.nio.file.Files
-import java.util.stream.Collectors
-import kotlin.io.path.toPath
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class OpenApiRawTransactionParserTest {

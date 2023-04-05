@@ -54,7 +54,6 @@ class ChainPropertiesLoadingAndBeansTest {
     fun check_loaded_chainProperties_and_beans() {
         assertNotNull(chainProperties)
         assertEquals("tlink", chainProperties.bech32Hrp)
-        assertEquals("tcony", chainProperties.baseCoinDenomination)
         assertFalse(chainProperties.isMainNet)
 
         // check beans

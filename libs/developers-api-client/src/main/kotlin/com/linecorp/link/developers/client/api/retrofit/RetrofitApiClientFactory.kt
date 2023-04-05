@@ -18,7 +18,6 @@
 package com.linecorp.link.developers.client.api.retrofit
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.linecorp.link.developers.client.api.ApiClient
 import com.linecorp.link.developers.client.api.ApiClientFactory
 import com.linecorp.link.developers.client.api.ApiKeySecret
@@ -26,6 +25,7 @@ import com.linecorp.link.developers.client.api.DefaultRequestHeadersAppender
 import com.linecorp.link.developers.client.api.DefaultRequestQueryParameterOrderer
 import com.linecorp.link.developers.client.api.RequestHeadersAppender
 import com.linecorp.link.developers.client.api.RequestQueryParameterSorter
+import com.linecorp.link.developers.jackson.JacksonObjectMapperFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -57,14 +57,14 @@ class RetrofitApiClientFactory : ApiClientFactory {
                 DefaultRequestQueryParameterOrderer.createDefaultInstance(),
                 enableLogging
             )
-        val retrofit = retrofit(baseUrl, okHttp3Client, jacksonObjectMapper())
+        val retrofit = retrofit(baseUrl, okHttp3Client, createObjectMapper())
         return retrofit.create(ApiClient::class.java)
     }
 
     private fun retrofit(
         baseUrl: String,
         okHttp3Client: OkHttpClient,
-        jacksonObjectMapper: ObjectMapper = jacksonObjectMapper(),
+        jacksonObjectMapper: ObjectMapper = createObjectMapper(),
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -89,5 +89,9 @@ class RetrofitApiClientFactory : ApiClientFactory {
             .addInterceptor(requestHeadersAppender)
             .addInterceptor(requestQueryParameterSorter)
             .addInterceptor(loggingInterceptor).build()
+    }
+
+    private fun createObjectMapper(): ObjectMapper {
+        return JacksonObjectMapperFactory().create()
     }
 }

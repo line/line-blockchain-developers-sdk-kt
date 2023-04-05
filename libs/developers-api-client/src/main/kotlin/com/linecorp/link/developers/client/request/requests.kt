@@ -19,7 +19,6 @@ package com.linecorp.link.developers.client.request
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.linecorp.link.developers.client.util.TokenUtil
-import java.math.BigInteger
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

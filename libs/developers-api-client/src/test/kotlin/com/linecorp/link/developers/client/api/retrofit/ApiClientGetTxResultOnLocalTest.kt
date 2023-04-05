@@ -18,20 +18,39 @@
 package com.linecorp.link.developers.client.api.retrofit
 
 import com.linecorp.link.developers.client.api.ApiKeySecret
+import kotlin.test.assertTrue
 import kotlinx.coroutines.runBlocking
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
 
-@Disabled
-class ApiClientServiceDetailsTest {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class ApiClientGetTxResultOnLocalTest {
+    private lateinit var mockWebServer: MockWebServer
+    private val mockServerPort = 3000
     private lateinit var retrofitApiClientFactory: RetrofitApiClientFactory
 
-    private val baseUrl = "https://test-api.blockchain.line.me/"
-    private val apiKeySecret =
-        ApiKeySecret(System.getenv("API_KEY"), System.getenv("API_SECRET"))
+    private val baseUrl = "http://localhost:$mockServerPort"
+    private val apiKeySecret = ApiKeySecret("test", "test")
+
+    @BeforeAll
+    fun setUpAll() {
+        mockWebServer = MockWebServer()
+        mockWebServer.start(mockServerPort)
+    }
+
+    @AfterAll
+    fun tearDownAll() {
+        mockWebServer.shutdown()
+    }
 
     @BeforeEach
     fun setUp() {
@@ -40,6 +59,9 @@ class ApiClientServiceDetailsTest {
 
     @Test
     fun test_get_lbd_service_details() {
+        val inputStream = this::class.java.classLoader.getResourceAsStream("txresults/burn-ft-txresult-response.json")
+        val body = inputStream.bufferedReader().use { it.readText() }
+        mockWebServer.enqueue(okResponse(body))
 
         val apiClient = retrofitApiClientFactory.buildDefaultApiClient(
             baseUrl = baseUrl,
@@ -47,8 +69,8 @@ class ApiClientServiceDetailsTest {
             apiKeySecret = apiKeySecret
         )
         val genericResponse = runBlocking {
-            apiClient.serviceDetail(
-                serviceId = "5016b367-eae8-44cb-8052-6672b498d894"
+            apiClient.transactionV2(
+                txHash = "BC66DB40C56E0EC9921B70146AA2BA377236DA81826320A9A50EA54A846F16AE"
             )
         }
 
@@ -56,5 +78,14 @@ class ApiClientServiceDetailsTest {
         assertEquals(1000, genericResponse.statusCode)
         assertEquals("Success", genericResponse.statusMessage)
         assertNotNull(genericResponse.responseData)
+        assertTrue(genericResponse.responseData?.events?.any { it.eventName == "EventCollectionFtBurned" } ?: false)
+    }
+
+    private fun okResponse(body: String): MockResponse {
+        return MockResponse()
+            .setResponseCode(200)
+            .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .setBody(body)
+
     }
 }

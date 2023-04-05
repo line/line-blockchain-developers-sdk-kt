@@ -18,10 +18,10 @@ package com.linecorp.link.developers.txresult.v1.raw.adapter
 
 import com.linecorp.link.developers.txresult.core.event.item.EventCollectionFtMinted
 import com.linecorp.link.developers.txresult.util.RawTransactionLoader
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class DomainTxEventsAdapterV1Test {
     private lateinit var underTest: DomainTxEventsAdapterV1

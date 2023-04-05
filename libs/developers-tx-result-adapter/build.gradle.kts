@@ -51,6 +51,9 @@ dependencies {
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
     testImplementation("org.springframework:spring-webflux:5.3.24")
     testImplementation("org.springframework.boot:spring-boot-starter-reactor-netty:2.7.7")
+
+    testImplementation("com.squareup.okhttp3:okhttp")
+    testImplementation("com.squareup.okhttp3:mockwebserver")
 }
 
 tasks {
