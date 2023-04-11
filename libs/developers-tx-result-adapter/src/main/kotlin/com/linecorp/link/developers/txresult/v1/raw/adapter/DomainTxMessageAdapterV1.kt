@@ -27,8 +27,7 @@ class DomainTxMessageAdapterV1: TxResultAdapter<RawTransactionResult, Set<TxMess
 
         return rawMessages.mapIndexed { index, rawMessage ->
             val type = rawMessage.type
-            @Suppress("UNCHECKED_CAST") val details = rawMessage.value as Map<String, Any>
-            TxMessage(msgIndex = index, requestType = type, details = details)
+            TxMessage(msgIndex = index, requestType = type)
         }.toSet()
     }
 }
