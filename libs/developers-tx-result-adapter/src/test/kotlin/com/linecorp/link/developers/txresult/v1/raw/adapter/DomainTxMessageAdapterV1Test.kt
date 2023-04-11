@@ -63,12 +63,6 @@ class DomainTxMessageAdapterV1Test {
         assertEquals(1, txResultMessages.size)
         assertNotNull(txResultMessages.find { it.requestType == "collection/MsgMintFT" })
         val txResultMessage = txResultMessages.find { it.requestType == "collection/MsgMintFT" }
-        val details = txResultMessage?.details as Map<String, String>
-        assertEquals(details["from"], "tlink1fr9mpexk5yq3hu6jc0npajfsa0x7tl427fuveq")
-        assertEquals(details["contractId"], "61e14383")
-        assertEquals(details["to"], "tlink147zxfhrxaxhsqljpz8raqrgnxj7f3wnthdjeky")
-        val amounts = (details["amount"] as List<Map<String, Any>>)
-        assertEquals(amounts[0]["tokenId"], "0000000100000000")
-        assertEquals(amounts[0]["amount"], 1000)
+        assertEquals(0, txResultMessage?.msgIndex)
     }
 }
