@@ -55,10 +55,10 @@ sealed class ApiResponse<out T : Any> {
 
 
 data class GenericResponse<T>(
-        val responseTime: Long,
-        val statusCode: Int,
-        val statusMessage: String,
-        val responseData: T? = null
+    val responseTime: Long,
+    val statusCode: Int,
+    val statusMessage: String,
+    val responseData: T? = null
 ) {
     companion object {
         fun unknownResponse(throwable: Throwable): GenericResponse<Unit> {
@@ -72,10 +72,10 @@ data class GenericResponse<T>(
 }
 
 data class ServiceDetail(
-        val serviceId: String,
-        val name: String,
-        val description: String?,
-        val category: String
+    val serviceId: String,
+    val name: String,
+    val description: String?,
+    val category: String
 )
 
 class UserRequestStatus(val status: RequestSessionTokenStatus)
@@ -85,86 +85,86 @@ enum class RequestSessionTokenStatus {
 }
 
 data class SimpleServiceToken(
-        val contractId: String,
-        val ownerAddress: String,
-        val createdAt: Long,
-        val serviceId: String,
-        val decimals: Int,
-        val name: String,
-        val symbol: String,
-        val meta: String,
-        val imgUri: String,
+    val contractId: String,
+    val ownerAddress: String,
+    val createdAt: Long,
+    val serviceId: String,
+    val decimals: Int,
+    val name: String,
+    val symbol: String,
+    val meta: String,
+    val imgUri: String,
 )
 
 data class ServiceToken(
-        val contractId: String,
-        val ownerAddress: String,
-        val createdAt: Long,
-        val serviceId: String,
-        val decimals: Int,
-        val name: String,
-        val symbol: String,
-        val meta: String,
-        val imgUri: String,
-        val totalSupply: String,
-        val totalMint: String,
-        val totalBurn: String
+    val contractId: String,
+    val ownerAddress: String,
+    val createdAt: Long,
+    val serviceId: String,
+    val decimals: Int,
+    val name: String,
+    val symbol: String,
+    val meta: String,
+    val imgUri: String,
+    val totalSupply: String,
+    val totalMint: String,
+    val totalBurn: String
 )
 
 data class ServiceTokenHolder(
-        val address: String,
-        val userId: String?,
-        val amount: String
+    val address: String,
+    val userId: String?,
+    val amount: String
 )
 
 data class TransactionResponse(val txHash: String)
 
 data class TxResultResponse(
-        val height: Long,
-        @JsonProperty("txhash") val txHash: String,
-        val codespace: String?,
-        val code: Int,
-        val index: Int,
-        val data: String?,
-        val logs: List<LogResponse>?,
-        val info: String?,
-        val gasWanted: Long?,
-        val gasUsed: Long,
-        val tx: TypedValueResponse<StdTxResponse>,
-        val timestamp: Date
+    val height: Long,
+    @JsonProperty("txhash") val txHash: String,
+    val codespace: String?,
+    val code: Int,
+    val index: Int,
+    val data: String?,
+    val logs: List<LogResponse>?,
+    val info: String?,
+    val gasWanted: Long?,
+    val gasUsed: Long,
+    val tx: TypedValueResponse<StdTxResponse>,
+    val timestamp: Date
 )
 
 data class LogResponse(
-        val msgIndex: Int,
-        val log: String,
-        val events: List<EventResponse>?
+    val msgIndex: Int,
+    val log: String,
+    val events: List<EventResponse>?
 )
 
 data class EventResponse(
-        val type: String,
-        val attributes: List<KeyValueResponse<String>>
+    val type: String,
+    val attributes: List<KeyValueResponse<String>>
 )
 
 data class KeyValueResponse<T>(val key: String, val value: T?)
 data class TypedValueResponse<T : Any?>(val type: String, val value: T)
 
 data class StdTxResponse(
-        val msg: List<TypedValueResponse<*>>,
-        val fee: FeeResponse,
-        val memo: String,
-        val signatures: List<SignatureResponse>
+    val msg: List<TypedValueResponse<*>>,
+    val fee: FeeResponse,
+    val memo: String,
+    val signatures: List<SignatureResponse>
 )
 
 data class FeeResponse(val gas: BigInteger, val amount: List<CoinResponse>)
 data class SignatureResponse(
-        val pubKey: TypedValueResponse<ByteArray>?,
-        val signature: ByteArray
+    val pubKey: TypedValueResponse<ByteArray>?,
+    val signature: ByteArray
 )
 
 data class BaseCoinBalance(
-        val symbol: String,
-        val decimals: Long,
-        val amount: String
+    val symbol: String,
+    val decimals: Long,
+    val amount: String
 )
 
 data class CoinResponse(val denom: String, val amount: BigInteger) {
@@ -176,137 +176,137 @@ data class CoinResponse(val denom: String, val amount: BigInteger) {
 data class Memo(val memo: String)
 
 data class WalletResponse(
-        val name: String,
-        val walletAddress: String,
-        val createdAt: Long
+    val name: String,
+    val walletAddress: String,
+    val createdAt: Long
 )
 
 data class ServiceTokenBalance(
-        val contractId: String,
-        val name: String,
-        val symbol: String,
-        val imgUri: String,
-        val decimals: Long,
-        val amount: String
+    val contractId: String,
+    val name: String,
+    val symbol: String,
+    val imgUri: String,
+    val decimals: Long,
+    val amount: String
 )
 
 data class FungibleBalance(
-        val tokenType: String,
-        val name: String,
-        val meta: String,
-        val amount: String
+    val tokenType: String,
+    val name: String,
+    val meta: String,
+    val amount: String
 )
 
 data class NonFungibleBalance(
-        val tokenType: String,
-        val name: String,
-        val meta: String,
-        val numberOfIndex: String
+    val tokenType: String,
+    val name: String,
+    val meta: String,
+    val numberOfIndex: String
 )
 
 data class TokenIndex(val tokenIndex: String, val name: String, val meta: String)
 
 data class ItemToken(
-        val contractId: String,
-        val baseImgUri: String,
-        val ownerAddress: String,
-        val serviceId: String,
-        val createdAt: Long
+    val contractId: String,
+    val baseImgUri: String,
+    val ownerAddress: String,
+    val serviceId: String,
+    val createdAt: Long
 )
 
 data class FungibleToken(
-        val name: String,
-        val meta: String,
-        val tokenType: String,
-        val totalSupply: String,
-        val totalMint: String,
-        val totalBurn: String,
-        val createdAt: Long
+    val name: String,
+    val meta: String,
+    val tokenType: String,
+    val totalSupply: String,
+    val totalMint: String,
+    val totalBurn: String,
+    val createdAt: Long
 )
 
 data class FungibleTokenHolder(
-        val userId: String?,
-        val walletAddress: String,
-        val amount: String
+    val userId: String?,
+    val walletAddress: String,
+    val amount: String
 )
 
 data class ItemTokenType(
-        val name: String,
-        val meta: String,
-        val tokenType: String,
-        val totalSupply: String,
-        val totalMint: String,
-        val totalBurn: String,
-        val createdAt: Long
+    val name: String,
+    val meta: String,
+    val tokenType: String,
+    val totalSupply: String,
+    val totalMint: String,
+    val totalBurn: String,
+    val createdAt: Long
 )
 
 data class NonFungibleTokenType(
-        val name: String,
-        val meta: String,
-        val tokenType: String,
-        val totalSupply: BigInteger,
-        val totalMint: BigInteger,
-        val totalBurn: BigInteger,
-        val createdAt: Long,
-        val tokens: List<NonFungibleIndex>
+    val name: String,
+    val meta: String,
+    val tokenType: String,
+    val totalSupply: BigInteger,
+    val totalMint: BigInteger,
+    val totalBurn: BigInteger,
+    val createdAt: Long,
+    val tokens: List<NonFungibleIndex>
 )
 
 data class NonFungibleIndex(
-        val tokenIndex: String,
-        val name: String,
-        val meta: String,
-        val createdAt: Long,
-        val burnedAt: Long?
+    val tokenIndex: String,
+    val name: String,
+    val meta: String,
+    val createdAt: Long,
+    val burnedAt: Long?
 )
 
 data class NonFungibleId(
-        val tokenId: String,
-        val name: String,
-        val meta: String,
-        val createdAt: Long,
-        val burnedAt: Long?
+    val tokenId: String,
+    val name: String,
+    val meta: String,
+    val createdAt: Long,
+    val burnedAt: Long?
 )
 
 data class NonFungibleTokenTypeHolder(
-        val userId: String?,
-        val walletAddress: String,
-        val numberOfIndex: String
+    val userId: String?,
+    val walletAddress: String,
+    val numberOfIndex: String
 )
 
 data class NonFungibleTokenHolder(
-        val tokenId: String,
-        val userId: String?,
-        val walletAddress: String,
-        val amount: String
+    val tokenId: String,
+    val userId: String?,
+    val walletAddress: String,
+    val amount: String
 )
 
 data class NonFungibleBalanceWithTypeAmount(
-        val type: ItemTokenTypeInfo,
-        val token: NonFungibleTokenInfo
+    val type: ItemTokenTypeInfo,
+    val token: NonFungibleTokenInfo
 )
 
 data class NonFungibleBalanceWithTypeAmountList(
-        val list: Collection<NonFungibleBalanceWithTypeAmount>,
-        val prePageToken: String? = null,
-        val nextPageToken: String? = null,
+    val list: Collection<NonFungibleBalanceWithTypeAmount>,
+    val prePageToken: String? = null,
+    val nextPageToken: String? = null,
 )
 
 data class ItemTokenTypeInfo(
-        val tokenType: String,
-        val name: String?,
-        val meta: String,
-        val createdAt: Long,
-        val totalSupply: String,
-        val totalMint: String,
-        val totalBurn: String
+    val tokenType: String,
+    val name: String?,
+    val meta: String,
+    val createdAt: Long,
+    val totalSupply: String,
+    val totalMint: String,
+    val totalBurn: String
 )
 
 data class NonFungibleTokenInfo(
-        val name: String,
-        val tokenId: String,
-        val meta: String,
-        val createdAt: Long,
-        val burnedAt: Long?
+    val name: String,
+    val tokenId: String,
+    val meta: String,
+    val createdAt: Long,
+    val burnedAt: Long?
 )
 
 
@@ -338,29 +338,29 @@ data class ProxyStatus(val isApproved: Boolean)
 
 // item token media resources
 data class ItemTokensMediaResourceStatus(
-        val tokenType: String,
-        val tokenIndex: String? = null,
-        val url: String?, // when status error, there is no url
-        val status: String,
-        val lastModified: String?,
-        val refreshedAt: String?,
-        val detailStatus: String? = null
+    val tokenType: String,
+    val tokenIndex: String? = null,
+    val url: String?, // when status error, there is no url
+    val status: String,
+    val lastModified: String?,
+    val refreshedAt: String?,
+    val detailStatus: String? = null
 )
 
 data class UpdateTokenMediaRefreshResponse(
-        val requestId: String
+    val requestId: String
 )
 
 
 data class TxMessageListResponse(
-        val messages: List<TxMessageWithDetailResponse>,
-        val nextPageToken: String,
-        val prevPageToken: String
+    val messages: List<TxMessageWithDetailResponse>,
+    val nextPageToken: String,
+    val prevPageToken: String
 )
 
 data class TxMessageWithDetailResponse(
-        val msgIndex: Int,
-        val requestType: String,
-        val details: Any,
+    val msgIndex: Int,
+    val requestType: String,
+    val details: Any,
 )
 
