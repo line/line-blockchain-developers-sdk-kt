@@ -203,7 +203,8 @@ class ApiListTest {
             "GET /v2/transactions/{txHash}",
             "GET /v1/transactions/{txHash}",
             "GET /v1/memos/{txHash}",
-            "POST /v1/memos"
+            "POST /v1/memos",
+            "GET /v2/transactions/{txHash}/messages",
         ).sorted()
     }
 }
