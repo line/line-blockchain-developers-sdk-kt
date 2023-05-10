@@ -25,7 +25,6 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
 import kotlin.test.assertTrue
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -70,7 +69,7 @@ class ApiClientNftHolderV2Test {
                         "walletAddress": "tlink1tqhku70z8sla9py8zf76zn9pcnrcfppv2jzgwk",
                         "userId": null,
                         "numberOfIndex": "743"
-                      },
+                        },client/response/responses.kt
                       {
                         "walletAddress": "tlink1gmw0agxluucsg2ay87ruz5sl3g9e7dtclyuh7l",
                         "userId": null,
