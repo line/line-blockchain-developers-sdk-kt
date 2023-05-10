@@ -615,7 +615,7 @@ interface ApiClient {
         @Query("limit") limit: Int = 10,
         @Query("pageToken") pageToken: String? = null,
         @Query("orderBy") orderBy: OrderBy = OrderBy.ASC,
-        ): GenericResponse<NonFungibleTokenTypeHolderList>
+    ): GenericResponse<NonFungibleTokenTypeHolderList>
 
     /**
      * Retrieve the holder of a specific non-fungible

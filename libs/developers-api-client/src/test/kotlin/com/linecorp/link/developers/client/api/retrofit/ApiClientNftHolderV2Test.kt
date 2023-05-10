@@ -16,6 +16,7 @@
  */
 
 package com.linecorp.link.developers.client.api.retrofit
+
 import com.linecorp.link.developers.client.api.ApiKeySecret
 import com.linecorp.link.developers.client.api.TestSocketUtils
 import com.linecorp.link.developers.client.request.OrderBy
@@ -48,12 +49,14 @@ class ApiClientNftHolderV2Test {
         mockWebServer.shutdown()
     }
 
+    @Suppress("MaxLineLength", "LongMethod")
     @Test
-    fun test_v2_nft_holder_query() {
+    fun `testQueryNftHoldersV2`() {
         val mockResponse = MockResponse()
             .setResponseCode(200)
             .setHeader("Content-Type", "application/json")
-            .setBody("""
+            .setBody(
+                """
             {
               "responseTime": 1683526595974,
               "statusCode": 1000,
@@ -69,7 +72,7 @@ class ApiClientNftHolderV2Test {
                         "walletAddress": "tlink1tqhku70z8sla9py8zf76zn9pcnrcfppv2jzgwk",
                         "userId": null,
                         "numberOfIndex": "743"
-                        },client/response/responses.kt
+                      },
                       {
                         "walletAddress": "tlink1gmw0agxluucsg2ay87ruz5sl3g9e7dtclyuh7l",
                         "userId": null,
@@ -90,10 +93,11 @@ class ApiClientNftHolderV2Test {
                     "nextPageToken": "eJxtjssOgjAQRf9l1iwE1AA7REyICRrtQlekaaeRgAVqIaDh363PuHBWc09mTu4NKOcKL5dQ8qiSWlGmE7OVJTKdVzIVepWXGhUEt88pBKDLXBZ20bie6nh77Tu39YtBMEb9"
                 }
               }
-            """.trimIndent())
-        
+            """.trimIndent()
+            )
+
         mockWebServer.enqueue(mockResponse)
-        
+
         val apiClient = retrofitApiClientFactory.buildDefaultApiClient(
             baseUrl = baseUrl,
             enableLogging = true,
@@ -109,9 +113,15 @@ class ApiClientNftHolderV2Test {
                 orderBy = OrderBy.ASC
             )
         }
-        
+
         assertTrue(response.responseData is NonFungibleTokenTypeHolderList)
-        assertEquals("tlink1z2y3xfvxq3xqrechtey05jea9krmkc3wd6dvx5", response.responseData!!.list.first().walletAddress)
-        assertEquals("eJxtjssOgjAQRf9l1iwE1AA7REyICRrtQlekaaeRgAVqIaDh363PuHBWc09mTu4NKOcKL5dQ8qiSWlGmE7OVJTKdVzIVepWXGhUEt88pBKDLXBZ20bie6nh77Tu39YtBMEb9", response.responseData!!.nextPageToken)
+        assertEquals(
+            "tlink1z2y3xfvxq3xqrechtey05jea9krmkc3wd6dvx5",
+            response.responseData!!.list.first().walletAddress
+        )
+        assertEquals(
+            "eJxtjssOgjAQRf9l1iwE1AA7REyICRrtQlekaaeRgAVqIaDh363PuHBWc09mTu4NKOcKL5dQ8qiSWlGmE7OVJTKdVzIVepWXGhUEt88pBKDLXBZ20bie6nh77Tu39YtBMEb9",
+            response.responseData!!.nextPageToken
+        )
     }
 }

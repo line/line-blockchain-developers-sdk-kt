@@ -53,15 +53,13 @@ object TestSocketUtils {
      * @return an available TCP port number
      * @throws IllegalStateException if no available port could be found within max attempts
      */
+    @Suppress("MaxLineLength")
     fun findAvailableTcpPort(): Int {
         var candidatePort: Int
         var searchCounter = 0
         do {
             check(searchCounter <= MAX_ATTEMPTS) {
-                String.format(
-                    "Could not find an available TCP port in the range [%d, %d] after %d attempts",
-                    PORT_RANGE_MIN, PORT_RANGE_MAX, MAX_ATTEMPTS
-                )
+                "Could not find an available TCP port in the range [$PORT_RANGE_MIN, $PORT_RANGE_MAX] after $MAX_ATTEMPTS attempts"
             }
             candidatePort = PORT_RANGE_MIN + random.nextInt(PORT_RANGE + 1)
             searchCounter++
@@ -72,6 +70,7 @@ object TestSocketUtils {
     /**
      * Determine if the specified TCP port is currently available on `localhost`.
      */
+    @Suppress("SwallowedException")
     private fun isPortAvailable(port: Int): Boolean {
         return try {
             val serverSocket = ServerSocketFactory.getDefault().createServerSocket(
