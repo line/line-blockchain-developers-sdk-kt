@@ -98,6 +98,9 @@ const val NON_FUNGIBLE_TOKEN_BURN_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}/burn"
 const val NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/holders"
+const val V2_NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH =
+    "$V2/item-tokens/{contractId}/non-fungibles/{tokenType}/holders"
+
 const val NON_FUNGIBLE_TOKEN_HOLDER_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}/holder"
 const val NON_FUNGIBLE_TOKEN_CHILDREN_PATH =
