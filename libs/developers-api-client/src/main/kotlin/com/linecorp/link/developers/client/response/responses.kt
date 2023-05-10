@@ -58,7 +58,7 @@ data class GenericResponse<T>(
     val responseTime: Long,
     val statusCode: Int,
     val statusMessage: String,
-    val responseData: T? = null
+    val responseData: T? = null,
 ) {
     companion object {
         fun unknownResponse(throwable: Throwable): GenericResponse<Unit> {
@@ -75,7 +75,7 @@ data class ServiceDetail(
     val serviceId: String,
     val name: String,
     val description: String?,
-    val category: String
+    val category: String,
 )
 
 class UserRequestStatus(val status: RequestSessionTokenStatus)
@@ -108,13 +108,13 @@ data class ServiceToken(
     val imgUri: String,
     val totalSupply: String,
     val totalMint: String,
-    val totalBurn: String
+    val totalBurn: String,
 )
 
 data class ServiceTokenHolder(
     val address: String,
     val userId: String?,
-    val amount: String
+    val amount: String,
 )
 
 data class TransactionResponse(val txHash: String)
@@ -131,18 +131,18 @@ data class TxResultResponse(
     val gasWanted: Long?,
     val gasUsed: Long,
     val tx: TypedValueResponse<StdTxResponse>,
-    val timestamp: Date
+    val timestamp: Date,
 )
 
 data class LogResponse(
     val msgIndex: Int,
     val log: String,
-    val events: List<EventResponse>?
+    val events: List<EventResponse>?,
 )
 
 data class EventResponse(
     val type: String,
-    val attributes: List<KeyValueResponse<String>>
+    val attributes: List<KeyValueResponse<String>>,
 )
 
 data class KeyValueResponse<T>(val key: String, val value: T?)
@@ -152,19 +152,19 @@ data class StdTxResponse(
     val msg: List<TypedValueResponse<*>>,
     val fee: FeeResponse,
     val memo: String,
-    val signatures: List<SignatureResponse>
+    val signatures: List<SignatureResponse>,
 )
 
 data class FeeResponse(val gas: BigInteger, val amount: List<CoinResponse>)
 data class SignatureResponse(
     val pubKey: TypedValueResponse<ByteArray>?,
-    val signature: ByteArray
+    val signature: ByteArray,
 )
 
 data class BaseCoinBalance(
     val symbol: String,
     val decimals: Long,
-    val amount: String
+    val amount: String,
 )
 
 data class CoinResponse(val denom: String, val amount: BigInteger) {
@@ -178,7 +178,7 @@ data class Memo(val memo: String)
 data class WalletResponse(
     val name: String,
     val walletAddress: String,
-    val createdAt: Long
+    val createdAt: Long,
 )
 
 data class ServiceTokenBalance(
@@ -187,31 +187,35 @@ data class ServiceTokenBalance(
     val symbol: String,
     val imgUri: String,
     val decimals: Long,
-    val amount: String
+    val amount: String,
 )
 
 data class FungibleBalance(
     val tokenType: String,
     val name: String,
     val meta: String,
-    val amount: String
+    val amount: String,
 )
 
 data class NonFungibleBalance(
     val tokenType: String,
     val name: String,
     val meta: String,
-    val numberOfIndex: String
+    val numberOfIndex: String,
 )
 
-data class TokenIndex(val tokenIndex: String, val name: String, val meta: String)
+data class TokenIndex(
+    val tokenIndex: String,
+    val name: String,
+    val meta: String,
+)
 
 data class ItemToken(
     val contractId: String,
     val baseImgUri: String,
     val ownerAddress: String,
     val serviceId: String,
-    val createdAt: Long
+    val createdAt: Long,
 )
 
 data class FungibleToken(
@@ -221,13 +225,13 @@ data class FungibleToken(
     val totalSupply: String,
     val totalMint: String,
     val totalBurn: String,
-    val createdAt: Long
+    val createdAt: Long,
 )
 
 data class FungibleTokenHolder(
     val userId: String?,
     val walletAddress: String,
-    val amount: String
+    val amount: String,
 )
 
 data class ItemTokenType(
@@ -237,7 +241,7 @@ data class ItemTokenType(
     val totalSupply: String,
     val totalMint: String,
     val totalBurn: String,
-    val createdAt: Long
+    val createdAt: Long,
 )
 
 data class NonFungibleTokenType(
@@ -248,7 +252,7 @@ data class NonFungibleTokenType(
     val totalMint: BigInteger,
     val totalBurn: BigInteger,
     val createdAt: Long,
-    val tokens: List<NonFungibleIndex>
+    val tokens: List<NonFungibleIndex>,
 )
 
 data class NonFungibleIndex(
@@ -264,25 +268,25 @@ data class NonFungibleId(
     val name: String,
     val meta: String,
     val createdAt: Long,
-    val burnedAt: Long?
+    val burnedAt: Long?,
 )
 
 data class NonFungibleTokenTypeHolder(
     val userId: String?,
     val walletAddress: String,
-    val numberOfIndex: String
+    val numberOfIndex: String,
 )
 
 data class NonFungibleTokenHolder(
     val tokenId: String,
     val userId: String?,
     val walletAddress: String,
-    val amount: String
+    val amount: String,
 )
 
 data class NonFungibleBalanceWithTypeAmount(
     val type: ItemTokenTypeInfo,
-    val token: NonFungibleTokenInfo
+    val token: NonFungibleTokenInfo,
 )
 
 data class NonFungibleBalanceWithTypeAmountList(
@@ -298,7 +302,7 @@ data class ItemTokenTypeInfo(
     val createdAt: Long,
     val totalSupply: String,
     val totalMint: String,
-    val totalBurn: String
+    val totalBurn: String,
 )
 
 data class NonFungibleTokenInfo(
@@ -318,7 +322,8 @@ enum class RequestSessionStatus {
     AUTHORIZED, UNAUTHORIZED
 }
 
-class RequestSessionStatusDeserializer : StdDeserializer<RequestSessionStatus>(RequestSessionStatus::class.java) {
+class RequestSessionStatusDeserializer :
+    StdDeserializer<RequestSessionStatus>(RequestSessionStatus::class.java) {
     override fun deserialize(jsonParser: JsonParser, ctxt: DeserializationContext): RequestSessionStatus {
         val node: JsonNode = jsonParser.codec.readTree(jsonParser)
 
@@ -344,18 +349,18 @@ data class ItemTokensMediaResourceStatus(
     val status: String,
     val lastModified: String?,
     val refreshedAt: String?,
-    val detailStatus: String? = null
+    val detailStatus: String? = null,
 )
 
 data class UpdateTokenMediaRefreshResponse(
-    val requestId: String
+    val requestId: String,
 )
 
 
 data class TxMessageListResponse(
     val messages: List<TxMessageWithDetailResponse>,
     val nextPageToken: String,
-    val prevPageToken: String
+    val prevPageToken: String,
 )
 
 data class TxMessageWithDetailResponse(
