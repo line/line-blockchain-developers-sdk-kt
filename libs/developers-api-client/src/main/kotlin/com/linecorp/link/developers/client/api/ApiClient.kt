@@ -82,6 +82,7 @@ import com.linecorp.link.developers.client.request.SERVICE_TOKEN_MINT_PATH
 import com.linecorp.link.developers.client.request.SERVICE_TOKEN_PATH
 import com.linecorp.link.developers.client.request.SERVICE_TOKEN_TRANSFER_PATH
 import com.linecorp.link.developers.client.request.TIME_API_PATH
+import com.linecorp.link.developers.client.request.TX_MESSAGES_PATH
 import com.linecorp.link.developers.client.request.TransferFungibleTokenRequest
 import com.linecorp.link.developers.client.request.TransferNonFungibleOfUserRequest
 import com.linecorp.link.developers.client.request.TransferNonFungibleRequest
@@ -149,6 +150,7 @@ import com.linecorp.link.developers.client.response.ServiceTokenHolder
 import com.linecorp.link.developers.client.response.SimpleServiceToken
 import com.linecorp.link.developers.client.response.TokenIndex
 import com.linecorp.link.developers.client.response.TransactionResponse
+import com.linecorp.link.developers.client.response.TxMessageListResponse
 import com.linecorp.link.developers.client.response.TxResultResponse
 import com.linecorp.link.developers.client.response.UpdateTokenMediaRefreshResponse
 import com.linecorp.link.developers.client.response.UserIdAddress
@@ -969,4 +971,12 @@ interface ApiClient {
         @Path("contractId") contractId: String,
         @Body request: UpdateNonFungibleTokenResourceRequest,
     ): GenericResponse<UpdateTokenMediaRefreshResponse>
+
+    @GET(TX_MESSAGES_PATH)
+    suspend fun getTxMessages(
+        @Path("txHash") txHash: String,
+        @Query("limit") limit: Int = 10,
+        @Query("pageToken") pageToken: String?,
+        @Query("orderBy") orderBy: OrderBy = OrderBy.ASC
+    ): GenericResponse<TxMessageListResponse>
 }
