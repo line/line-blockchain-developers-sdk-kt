@@ -279,8 +279,8 @@ data class NonFungibleTokenTypeHolder(
 
 data class NonFungibleTokenTypeHolderList(
     val list: List<NonFungibleTokenTypeHolder>,
-    val prePageToken: String? = null,
-    val nextPageToken: String? = null,
+    val prePageToken: String = "",
+    val nextPageToken: String = "",
 )
 
 data class NonFungibleTokenHolder(
