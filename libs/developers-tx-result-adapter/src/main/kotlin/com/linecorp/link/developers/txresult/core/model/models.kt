@@ -50,8 +50,9 @@ data class TxStatusResult(
 data class TxMessage(
     val msgIndex: Int,
     val requestType: String,
-    val details: Any,
-)
+) {
+    val details: Any = emptyMap<String, Any>() // details are always empty.
+}
 
 interface TransactionEvent {
     val eventName: String
