@@ -59,7 +59,7 @@ class ApiListTest {
             }
         }
 
-        val actualAPIs = ( postAPIs +postAPIs2 ).sorted()
+        val actualAPIs = (postAPIs + postAPIs2).sorted()
 
         val expectedPOSTAPIs = listOfAPIs.filter { it.startsWith("POST") }.sorted()
         assertEquals(expectedPOSTAPIs, actualAPIs)
@@ -85,7 +85,7 @@ class ApiListTest {
             }
         }
 
-        val actualAPIs = ( putAPIs +putAPIs2 ).sorted()
+        val actualAPIs = (putAPIs + putAPIs2).sorted()
 
         val expectedPUTAPIs = listOfAPIs.filter { it.startsWith("PUT") }.sorted()
         assertEquals(expectedPUTAPIs, actualAPIs)
@@ -110,7 +110,7 @@ class ApiListTest {
             }
         }
 
-        val actualAPIs = ( deleteAPIs +deleteAPIs2 ).sorted()
+        val actualAPIs = (deleteAPIs + deleteAPIs2).sorted()
 
         val expectedDELETEAPIs = listOfAPIs.filter { it.startsWith("DELETE") }.sorted()
         assertEquals(expectedDELETEAPIs, actualAPIs)

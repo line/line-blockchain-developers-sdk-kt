@@ -64,7 +64,6 @@ import com.linecorp.link.developers.client.request.NON_FUNGIBLE_TOKEN_MULTI_RECI
 import com.linecorp.link.developers.client.request.NON_FUNGIBLE_TOKEN_PARENT_PATH
 import com.linecorp.link.developers.client.request.NON_FUNGIBLE_TOKEN_ROOT_PATH
 import com.linecorp.link.developers.client.request.NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH
-import com.linecorp.link.developers.client.request.V2_NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH
 import com.linecorp.link.developers.client.request.NON_FUNGIBLE_TOKEN_TYPE_PATH
 import com.linecorp.link.developers.client.request.NonFungibleTokenBurnRequest
 import com.linecorp.link.developers.client.request.NonFungibleTokenCreateUpdateRequest
@@ -114,6 +113,7 @@ import com.linecorp.link.developers.client.request.V1_USER_TRANSACTIONS_PATH
 import com.linecorp.link.developers.client.request.V1_WALLET_LIST_PATH
 import com.linecorp.link.developers.client.request.V1_WALLET_PATH
 import com.linecorp.link.developers.client.request.V1_WALLET_TRANSACTIONS_PATH
+import com.linecorp.link.developers.client.request.V2_NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH
 import com.linecorp.link.developers.client.request.V2_TRANSACTION_PATH
 import com.linecorp.link.developers.client.request.V2_USER_TRANSACTIONS_PATH
 import com.linecorp.link.developers.client.request.V2_WALLET_TRANSACTIONS_PATH
