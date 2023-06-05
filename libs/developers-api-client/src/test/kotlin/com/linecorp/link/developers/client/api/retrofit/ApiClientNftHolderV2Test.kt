@@ -21,12 +21,12 @@ import com.linecorp.link.developers.client.api.ApiKeySecret
 import com.linecorp.link.developers.client.api.TestSocketUtils
 import com.linecorp.link.developers.client.request.OrderBy
 import com.linecorp.link.developers.client.response.NonFungibleTokenTypeHolderList
+import kotlin.test.assertTrue
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
-import kotlin.test.assertTrue
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ApiClientNftHolderV2Test {
