@@ -98,6 +98,9 @@ const val NON_FUNGIBLE_TOKEN_BURN_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}/burn"
 const val NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/holders"
+const val V2_NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH =
+    "$V2/item-tokens/{contractId}/non-fungibles/{tokenType}/holders"
+
 const val NON_FUNGIBLE_TOKEN_HOLDER_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}/holder"
 const val NON_FUNGIBLE_TOKEN_CHILDREN_PATH =
@@ -117,7 +120,6 @@ const val ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_STATUS_PATH =
     "$V1/item-tokens/{contractId}/non-fungibles/thumbnails/{requestId}/status"
 const val ITEM_TOKEN_FT_THUMBNAIL_REFRESH_STATUS_PATH =
     "$V1/item-tokens/{contractId}/fungibles/thumbnails/{requestId}/status"
-
 
 
 // user api path
@@ -158,9 +160,9 @@ const val USER_NON_FUNGIBLE_TOKEN_TRANSFER_PATH =
 const val USER_NON_FUNGIBLE_TOKEN_BATCH_TRANSFER_PATH =
     "$V1_USERS/{userId}/item-tokens/{contractId}/non-fungibles/batch-transfer"
 
-const val ITEM_TOKEN_FT_MEDIA_RESOURCE_REFRESH_PATH= "$V1/item-tokens/{contractId}/fungibles/media-resources"
-const val ITEM_TOKEN_FT_THUMBNAIL_REFRESH_PATH= "$V1/item-tokens/{contractId}/fungibles/thumbnails"
-const val ITEM_TOKEN_NFT_MEDIA_RESOURCE_REFRESH_PATH= "$V1/item-tokens/{contractId}/non-fungibles/media-resources"
-const val ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_PATH= "$V1/item-tokens/{contractId}/non-fungibles/thumbnails"
+const val ITEM_TOKEN_FT_MEDIA_RESOURCE_REFRESH_PATH = "$V1/item-tokens/{contractId}/fungibles/media-resources"
+const val ITEM_TOKEN_FT_THUMBNAIL_REFRESH_PATH = "$V1/item-tokens/{contractId}/fungibles/thumbnails"
+const val ITEM_TOKEN_NFT_MEDIA_RESOURCE_REFRESH_PATH = "$V1/item-tokens/{contractId}/non-fungibles/media-resources"
+const val ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_PATH = "$V1/item-tokens/{contractId}/non-fungibles/thumbnails"
 
 const val TX_MESSAGES_PATH = "$V2_TRANSACTION_PATH/messages"

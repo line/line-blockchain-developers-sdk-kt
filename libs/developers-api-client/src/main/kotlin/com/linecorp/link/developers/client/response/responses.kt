@@ -277,6 +277,12 @@ data class NonFungibleTokenTypeHolder(
     val numberOfIndex: String,
 )
 
+data class NonFungibleTokenTypeHolderList(
+    val list: List<NonFungibleTokenTypeHolder>,
+    val prePageToken: String = "",
+    val nextPageToken: String = "",
+)
+
 data class NonFungibleTokenHolder(
     val tokenId: String,
     val userId: String?,

@@ -113,6 +113,7 @@ import com.linecorp.link.developers.client.request.V1_USER_TRANSACTIONS_PATH
 import com.linecorp.link.developers.client.request.V1_WALLET_LIST_PATH
 import com.linecorp.link.developers.client.request.V1_WALLET_PATH
 import com.linecorp.link.developers.client.request.V1_WALLET_TRANSACTIONS_PATH
+import com.linecorp.link.developers.client.request.V2_NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH
 import com.linecorp.link.developers.client.request.V2_TRANSACTION_PATH
 import com.linecorp.link.developers.client.request.V2_USER_TRANSACTIONS_PATH
 import com.linecorp.link.developers.client.request.V2_WALLET_TRANSACTIONS_PATH
@@ -140,6 +141,7 @@ import com.linecorp.link.developers.client.response.NonFungibleId
 import com.linecorp.link.developers.client.response.NonFungibleTokenHolder
 import com.linecorp.link.developers.client.response.NonFungibleTokenType
 import com.linecorp.link.developers.client.response.NonFungibleTokenTypeHolder
+import com.linecorp.link.developers.client.response.NonFungibleTokenTypeHolderList
 import com.linecorp.link.developers.client.response.ProxyStatus
 import com.linecorp.link.developers.client.response.RequestSession
 import com.linecorp.link.developers.client.response.RequestSessionStatus
@@ -602,6 +604,18 @@ interface ApiClient {
         @Query("page") page: Int = 1,
         @Query("orderBy") orderBy: OrderBy = OrderBy.ASC,
     ): GenericResponse<Collection<NonFungibleTokenTypeHolder>>
+
+    /**
+     * Retrieve holders of a specific non-fungible token type
+     */
+    @GET(V2_NON_FUNGIBLE_TOKEN_TYPE_HOLDERS_PATH)
+    suspend fun nonFungibleTokenTypeHoldersV2(
+        @Path("contractId") contractId: String,
+        @Path("tokenType") tokenType: String,
+        @Query("limit") limit: Int = 10,
+        @Query("pageToken") pageToken: String? = null,
+        @Query("orderBy") orderBy: OrderBy = OrderBy.ASC,
+    ): GenericResponse<NonFungibleTokenTypeHolderList>
 
     /**
      * Retrieve the holder of a specific non-fungible
