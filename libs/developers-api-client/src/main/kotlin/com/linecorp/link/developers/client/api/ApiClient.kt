@@ -46,6 +46,7 @@ import com.linecorp.link.developers.client.request.ITEM_TOKEN_NFT_MEDIA_REFRESH_
 import com.linecorp.link.developers.client.request.ITEM_TOKEN_NFT_MEDIA_RESOURCE_REFRESH_PATH
 import com.linecorp.link.developers.client.request.ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_PATH
 import com.linecorp.link.developers.client.request.ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_STATUS_PATH
+import com.linecorp.link.developers.client.request.ITEM_TOKEN_NFT_TYPE_MEDIA_RESOURCE_REFRESH_PATH
 import com.linecorp.link.developers.client.request.ITEM_TOKEN_PATH
 import com.linecorp.link.developers.client.request.IssueServiceTokenRequest
 import com.linecorp.link.developers.client.request.MEMO_BY_TX_HASH_PATH
@@ -105,6 +106,7 @@ import com.linecorp.link.developers.client.request.USER_SERVICE_TOKEN_IS_PROXY_P
 import com.linecorp.link.developers.client.request.USER_SERVICE_TOKEN_TRANSFER_PATH
 import com.linecorp.link.developers.client.request.UpdateFungibleTokenResourceRequest
 import com.linecorp.link.developers.client.request.UpdateNonFungibleTokenResourceRequest
+import com.linecorp.link.developers.client.request.UpdateNonFungibleTypeTokenResourceRequest
 import com.linecorp.link.developers.client.request.UpdateServiceTokenRequest
 import com.linecorp.link.developers.client.request.UserAssetProxyRequest
 import com.linecorp.link.developers.client.request.UserServiceTokenTransferRequest
@@ -973,6 +975,12 @@ interface ApiClient {
     suspend fun updateNonFungibleItemTokensMediaResource(
         @Path("contractId") contractId: String,
         @Body request: UpdateNonFungibleTokenResourceRequest,
+    ): GenericResponse<UpdateTokenMediaRefreshResponse>
+
+    @PUT(ITEM_TOKEN_NFT_TYPE_MEDIA_RESOURCE_REFRESH_PATH)
+    suspend fun updateNonFungibleTypeItemTokensMediaResource(
+        @Path("contractId") contractId: String,
+        @Body request: UpdateNonFungibleTypeTokenResourceRequest,
     ): GenericResponse<UpdateTokenMediaRefreshResponse>
 
     @PUT(ITEM_TOKEN_FT_THUMBNAIL_REFRESH_PATH)
