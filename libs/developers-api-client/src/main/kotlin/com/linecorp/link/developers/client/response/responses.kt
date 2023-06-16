@@ -288,6 +288,7 @@ data class NonFungibleTokenHolder(
     val userId: String?,
     val walletAddress: String,
     val amount: String,
+    val meta: String? = null
 )
 
 data class NonFungibleBalanceWithTypeAmount(
