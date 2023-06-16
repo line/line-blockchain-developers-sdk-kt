@@ -19,21 +19,18 @@ package com.linecorp.link.developers.client.api.retrofit
 
 import com.linecorp.link.developers.client.api.ApiKeySecret
 import com.linecorp.link.developers.client.api.TestSocketUtils
-import com.linecorp.link.developers.client.request.OrderBy
 import com.linecorp.link.developers.client.request.TokenType
 import com.linecorp.link.developers.client.request.UpdateNonFungibleTypeTokenResourceRequest
-import com.linecorp.link.developers.client.response.NonFungibleTokenTypeHolderList
 import com.linecorp.link.developers.client.response.UpdateTokenMediaRefreshResponse
-import kotlin.test.assertTrue
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class ApiClientNftTokenMediaResourceUpdateByType {
+class ApiClientNftTypeTokenMediaResourceUpdate {
     private val port = TestSocketUtils.findAvailableTcpPort()
     private lateinit var mockWebServer: MockWebServer
     private lateinit var retrofitApiClientFactory: RetrofitApiClientFactory
@@ -41,7 +38,7 @@ class ApiClientNftTokenMediaResourceUpdateByType {
     private val baseUrl = "http://localhost:$port"
     private val apiKeySecret = ApiKeySecret(key = "test", secret = "test")
 
-    @BeforeEach
+    @BeforeAll
     fun setUp() {
         mockWebServer = MockWebServer()
         mockWebServer.start(port)
@@ -81,7 +78,51 @@ class ApiClientNftTokenMediaResourceUpdateByType {
         )
 
         val response = runBlocking {
-            apiClient.updateNonFungibleTypeItemTokensMediaResource(
+            apiClient.updateNonFungibleItemTokenTypesMediaResource(
+                contractId = "test1234",
+                request = UpdateNonFungibleTypeTokenResourceRequest(
+                    updateList = listOf(
+                        TokenType(
+                            tokenType = "10000001"
+                        )
+                    )
+                )
+            )
+        }
+
+        assertTrue(response.responseData is UpdateTokenMediaRefreshResponse)
+        assertNotNull(response.responseData!!.requestId)
+    }
+
+    @Suppress("MaxLineLength", "LongMethod")
+    @Test
+    fun `testUpdateNonFungibleTypeItemTokensThumbnails()`() {
+        val mockResponse = MockResponse()
+            .setResponseCode(202)
+            .setHeader("Content-Type", "application/json")
+            .setBody(
+                """
+                {
+                    "responseTime": 1585467713049,
+                    "statusCode": 1002,
+                    "statusMessage": "Accepted",
+                    "responseData": {
+                        "requestId": "test1234"
+                    }
+                } 
+            """.trimIndent()
+            )
+
+        mockWebServer.enqueue(mockResponse)
+
+        val apiClient = retrofitApiClientFactory.buildDefaultApiClient(
+            baseUrl = baseUrl,
+            enableLogging = true,
+            apiKeySecret = apiKeySecret
+        )
+
+        val response = runBlocking {
+            apiClient.updateNonFungibleItemTokenTypesThumbnail(
                 contractId = "test1234",
                 request = UpdateNonFungibleTypeTokenResourceRequest(
                     updateList = listOf(

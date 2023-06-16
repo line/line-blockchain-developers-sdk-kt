@@ -17,6 +17,7 @@
 
 package com.linecorp.link.developers.client.api
 
+import com.linecorp.link.developers.client.request.V1
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import retrofit2.http.DELETE
@@ -153,7 +154,9 @@ class ApiListTest {
             "PUT /v1/item-tokens/{contractId}/fungibles/media-resources",
             "PUT /v1/item-tokens/{contractId}/fungibles/thumbnails",
             "PUT /v1/item-tokens/{contractId}/non-fungibles/media-resources",
+            "PUT /v1/item-tokens/{contractId}/non-fungibles/types/media-resources",
             "PUT /v1/item-tokens/{contractId}/non-fungibles/thumbnails",
+            "PUT /v1/item-tokens/{contractId}/non-fungibles/types/thumbnails",
             "PUT /v1/item-tokens/{contractId}/non-fungibles/{tokenType}",
             "POST /v1/item-tokens/{contractId}/fungibles/{tokenType}/burn",
             "POST /v1/item-tokens/{contractId}/non-fungibles/{tokenType}/{tokenIndex}/burn",

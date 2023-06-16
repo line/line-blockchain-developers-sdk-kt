@@ -163,7 +163,10 @@ const val USER_NON_FUNGIBLE_TOKEN_BATCH_TRANSFER_PATH =
 const val ITEM_TOKEN_FT_MEDIA_RESOURCE_REFRESH_PATH = "$V1/item-tokens/{contractId}/fungibles/media-resources"
 const val ITEM_TOKEN_FT_THUMBNAIL_REFRESH_PATH = "$V1/item-tokens/{contractId}/fungibles/thumbnails"
 const val ITEM_TOKEN_NFT_MEDIA_RESOURCE_REFRESH_PATH = "$V1/item-tokens/{contractId}/non-fungibles/media-resources"
+
+@Suppress("MaxLineLength")
 const val ITEM_TOKEN_NFT_TYPE_MEDIA_RESOURCE_REFRESH_PATH = "$V1/item-tokens/{contractId}/non-fungibles/types/media-resources"
 const val ITEM_TOKEN_NFT_THUMBNAIL_REFRESH_PATH = "$V1/item-tokens/{contractId}/non-fungibles/thumbnails"
+const val ITEM_TOKEN_NFT_TYPE_THUMBNAIL_REFRESH_PATH = "$V1/item-tokens/{contractId}/non-fungibles/types/thumbnails"
 
 const val TX_MESSAGES_PATH = "$V2_TRANSACTION_PATH/messages"
