@@ -624,7 +624,8 @@ interface ApiClient {
     suspend fun nonFungibleTokenHolder(
         @Path("contractId") contractId: String,
         @Path("tokenType") tokenType: String,
-        @Path("tokenIndex") tokenIndex: String
+        @Path("tokenIndex") tokenIndex: String,
+        @Query("isMetaRequired") isMetaRequired: Boolean = false
     ): GenericResponse<NonFungibleTokenHolder>
 
     /**
