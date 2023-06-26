@@ -718,4 +718,13 @@ data class UpdateNonFungibleTokenResourceRequest(val updateList: List<NonFungibl
     }
 }
 
+data class UpdateNonFungibleTypeTokenResourceRequest(
+    val updateList: List<TokenType>
+) : AbstractUpdateTokenResourceRequest<TokenType>(updateList) {
+    override fun hasInvalidTokenId(): Boolean {
+        return updateList
+            .any { TokenUtil.filterInvalidItemTokenType(it.tokenType) }
+    }
+}
+
 data class NonFungibleTokenIdentifier(val tokenType: String, val tokenIndex: String)
